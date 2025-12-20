@@ -1,0 +1,20 @@
+syntax = "proto3";
+package combat_tracker;
+
+import "damage_event.proto";
+
+message Character {
+  string id = 1;
+  string name = 2;
+  int32 life = 3;
+  int32 maxLife = 4;
+  CharacterType type = 5;
+  int32 initiative = 6;
+  repeated DamageEvent damageEvents = 7;
+}
+
+enum CharacterType {
+  PlayerCharacter = 0;
+  FriendlyNPC = 1;
+  Enemy = 2;
+}

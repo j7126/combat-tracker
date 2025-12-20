@@ -1,0 +1,10 @@
+syntax = "proto3";
+package combat_tracker;
+
+import "character.proto";
+
+message Combat {
+  repeated Character characters = 1;
+  string CurrentTurn = 2;
+  string ActivePlayer = 3;
+}

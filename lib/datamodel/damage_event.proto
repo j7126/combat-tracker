@@ -1,0 +1,11 @@
+syntax = "proto3";
+package combat_tracker;
+
+import "google/protobuf/timestamp.proto";
+
+message DamageEvent {
+    int32 change = 1;
+    int32 previousLife = 2;
+    string source = 3;
+    google.protobuf.Timestamp timestamp = 4;
+}
