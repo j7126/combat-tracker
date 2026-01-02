@@ -59,7 +59,7 @@ class _CombatTableState extends State<CombatTable> {
   void changed() {
     if (_enableSort) {
       setState(() {
-        widget.combat.characters.sort((a, b) => a.initiative - b.initiative);
+        widget.combat.characters.sort((a, b) => b.initiative - a.initiative);
       });
     }
   }
