@@ -2,9 +2,12 @@ syntax = "proto3";
 package combat_tracker;
 
 import "character.proto";
+import "google/protobuf/timestamp.proto";
 
 message Combat {
   repeated Character characters = 1;
   string CurrentTurn = 2;
   string ActivePlayer = 3;
+  string Name = 4;
+  google.protobuf.Timestamp createdTimestamp = 5;
 }

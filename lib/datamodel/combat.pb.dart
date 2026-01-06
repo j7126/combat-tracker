@@ -13,6 +13,8 @@
 import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
+import 'package:protobuf/well_known_types/google/protobuf/timestamp.pb.dart'
+    as $1;
 
 import 'character.pb.dart' as $0;
 
@@ -23,11 +25,15 @@ class Combat extends $pb.GeneratedMessage {
     $core.Iterable<$0.Character>? characters,
     $core.String? currentTurn,
     $core.String? activePlayer,
+    $core.String? name,
+    $1.Timestamp? createdTimestamp,
   }) {
     final result = create();
     if (characters != null) result.characters.addAll(characters);
     if (currentTurn != null) result.currentTurn = currentTurn;
     if (activePlayer != null) result.activePlayer = activePlayer;
+    if (name != null) result.name = name;
+    if (createdTimestamp != null) result.createdTimestamp = createdTimestamp;
     return result;
   }
 
@@ -48,6 +54,9 @@ class Combat extends $pb.GeneratedMessage {
         subBuilder: $0.Character.create)
     ..aOS(2, _omitFieldNames ? '' : 'CurrentTurn', protoName: 'CurrentTurn')
     ..aOS(3, _omitFieldNames ? '' : 'ActivePlayer', protoName: 'ActivePlayer')
+    ..aOS(4, _omitFieldNames ? '' : 'Name', protoName: 'Name')
+    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdTimestamp',
+        protoName: 'createdTimestamp', subBuilder: $1.Timestamp.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -88,6 +97,26 @@ class Combat extends $pb.GeneratedMessage {
   $core.bool hasActivePlayer() => $_has(2);
   @$pb.TagNumber(3)
   void clearActivePlayer() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get name => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set name($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasName() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearName() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $1.Timestamp get createdTimestamp => $_getN(4);
+  @$pb.TagNumber(5)
+  set createdTimestamp($1.Timestamp value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasCreatedTimestamp() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCreatedTimestamp() => $_clearField(5);
+  @$pb.TagNumber(5)
+  $1.Timestamp ensureCreatedTimestamp() => $_ensure(4);
 }
 
 const $core.bool _omitFieldNames =

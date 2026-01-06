@@ -1,0 +1,7 @@
+syntax = "proto3";
+package combat_tracker;
+
+message CampaignFile {
+  string path = 1;
+  string macosBookmark = 2;
+}

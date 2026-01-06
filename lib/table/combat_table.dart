@@ -23,13 +23,11 @@ class _CombatTableState extends State<CombatTable> {
 
   @override
   void initState() {
-    //HardwareKeyboard.instance.addHandler(_keyboardCallback);
     super.initState();
   }
 
   @override
   void dispose() {
-    //HardwareKeyboard.instance.removeHandler(_keyboardCallback);
     super.dispose();
   }
 

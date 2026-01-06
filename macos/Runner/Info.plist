@@ -28,5 +28,20 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Combat Tracker Campaign</string>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>campaign</string>
+			</array>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>dev.j7126.combat_tracker.campaign</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

@@ -8,14 +8,19 @@ environment:
 
 dependencies:
   dynamic_color: ^1.8.1
+  file_picker: ^10.3.8
   fixnum: ^1.1.1
   flutter:
     sdk: flutter
   
   font_awesome_flutter: ^10.12.0
   gap: ^3.0.1
+  macos_secure_bookmarks: ^0.2.1
+  path: ^1.9.1
   protobuf: ^6.0.0
+  shared_preferences: ^2.5.4
   uuid: ^4.5.2
+  window_manager: ^0.5.1
 
 dev_dependencies:
   flutter_test:

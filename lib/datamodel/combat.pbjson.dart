@@ -29,6 +29,15 @@ const Combat$json = {
     },
     {'1': 'CurrentTurn', '3': 2, '4': 1, '5': 9, '10': 'CurrentTurn'},
     {'1': 'ActivePlayer', '3': 3, '4': 1, '5': 9, '10': 'ActivePlayer'},
+    {'1': 'Name', '3': 4, '4': 1, '5': 9, '10': 'Name'},
+    {
+      '1': 'createdTimestamp',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'createdTimestamp'
+    },
   ],
 };
 
@@ -36,4 +45,6 @@ const Combat$json = {
 final $typed_data.Uint8List combatDescriptor = $convert.base64Decode(
     'CgZDb21iYXQSOQoKY2hhcmFjdGVycxgBIAMoCzIZLmNvbWJhdF90cmFja2VyLkNoYXJhY3Rlcl'
     'IKY2hhcmFjdGVycxIgCgtDdXJyZW50VHVybhgCIAEoCVILQ3VycmVudFR1cm4SIgoMQWN0aXZl'
-    'UGxheWVyGAMgASgJUgxBY3RpdmVQbGF5ZXI=');
+    'UGxheWVyGAMgASgJUgxBY3RpdmVQbGF5ZXISEgoETmFtZRgEIAEoCVIETmFtZRJGChBjcmVhdG'
+    'VkVGltZXN0YW1wGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIQY3JlYXRlZFRp'
+    'bWVzdGFtcA==');
