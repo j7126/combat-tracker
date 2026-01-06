@@ -73,7 +73,7 @@ class _PlayerCharacterSelectorState extends State<PlayerCharacterSelector> {
                 Checkbox(
                   tristate: true,
                   value: selectedIds.isNotEmpty
-                      ? selectedIds.length == widget.combat.characters.length
+                      ? selectedIds.length == CampaignManager.instance.campaign!.characters.length
                             ? true
                             : null
                       : false,

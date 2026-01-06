@@ -22,6 +22,7 @@ class _CharacterTableState extends State<CharacterTable> {
     );
     if (mounted) {
       setState(() {});
+      CampaignManager.instance.saveCampaign();
     }
   }
 
@@ -54,6 +55,7 @@ class _CharacterTableState extends State<CharacterTable> {
       setState(() {
         CampaignManager.instance.campaign!.characters.removeWhere((x) => x.id == playerCharacter.id);
       });
+      CampaignManager.instance.saveCampaign();
     }
   }
 

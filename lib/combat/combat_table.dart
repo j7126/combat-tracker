@@ -1,3 +1,4 @@
+import 'package:combat_tracker/campaign_manager.dart';
 import 'package:combat_tracker/combat/player_character_selector.dart';
 import 'package:combat_tracker/datamodel/character.pb.dart';
 import 'package:combat_tracker/datamodel/combat.pb.dart';
@@ -68,6 +69,7 @@ class _CombatTableState extends State<CombatTable> {
       var character = CharacterExtension.createCharacter();
       character.type = CharacterType.Enemy;
       widget.combat.characters.add(character);
+      CampaignManager.instance.saveCampaign();
     });
   }
 
@@ -77,6 +79,7 @@ class _CombatTableState extends State<CombatTable> {
         widget.combat.characters.sort((a, b) => b.initiative - a.initiative);
       });
     }
+    CampaignManager.instance.saveCampaign();
   }
 
   void nextTurn({bool goBack = false}) {
@@ -103,7 +106,51 @@ class _CombatTableState extends State<CombatTable> {
       if (_enableTargetedDamage) {
         widget.combat.activePlayer = widget.combat.currentTurn;
       }
+
+      CampaignManager.instance.saveCampaign();
     });
+  }
+
+  void selectPlayers() async {
+    await showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
+            child: Container(
+              constraints: BoxConstraints(maxWidth: 500),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text("Select Characters", style: TextTheme.of(context).headlineSmall, textAlign: TextAlign.center),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(Icons.close),
+                      ),
+                    ],
+                  ),
+                  Gap(8.0),
+                  PlayerCharacterSelector(combat: widget.combat),
+                  Gap(8.0),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+    if (mounted) {
+      setState(() {});
+      changed();
+    }
   }
 
   @override
@@ -165,6 +212,7 @@ class _CombatTableState extends State<CombatTable> {
                           } else {
                             widget.combat.activePlayer = "";
                           }
+                          CampaignManager.instance.saveCampaign();
                         });
                       },
                       style: ButtonStyle(
@@ -179,46 +227,7 @@ class _CombatTableState extends State<CombatTable> {
                   Tooltip(
                     message: "Select Players",
                     child: FilledButton(
-                      onPressed: () async {
-                        await showDialog<void>(
-                          context: this.context,
-                          builder: (BuildContext context) {
-                            return Dialog(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
-                                child: Container(
-                                  constraints: BoxConstraints(maxWidth: 500),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Text("Select Characters", style: TextTheme.of(context).headlineSmall, textAlign: TextAlign.center),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            icon: Icon(Icons.close),
-                                          ),
-                                        ],
-                                      ),
-                                      Gap(8.0),
-                                      PlayerCharacterSelector(combat: widget.combat),
-                                      Gap(8.0),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                        if (mounted) {
-                          setState(() {});
-                        }
-                      },
+                      onPressed: selectPlayers,
                       style: ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(Colors.blue),
                         overlayColor: WidgetStatePropertyAll(Colors.blue.withAlpha(20)),
@@ -316,6 +325,7 @@ class _CombatTableState extends State<CombatTable> {
                           onDelete: () {
                             setState(() {
                               widget.combat.deleteCharacter(character);
+                              CampaignManager.instance.saveCampaign();
                             });
                           },
                           changed: changed,
@@ -348,6 +358,7 @@ class _CombatTableState extends State<CombatTable> {
                                 setState(() {
                                   _showAddCharacter = false;
                                 });
+                                CampaignManager.instance.saveCampaign();
                               },
                               child: Text("Done"),
                             ),
