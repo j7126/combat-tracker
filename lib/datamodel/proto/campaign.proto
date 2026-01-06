@@ -3,8 +3,10 @@ package combat_tracker;
 
 import "combat.proto";
 import "character.proto";
+import "google/protobuf/timestamp.proto";
 
 message Campaign {
   repeated Combat combats = 1;
   repeated Character characters = 2;
+  google.protobuf.Timestamp createdTimestamp = 3;
 }

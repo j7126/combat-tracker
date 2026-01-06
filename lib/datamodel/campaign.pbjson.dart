@@ -35,6 +35,14 @@ const Campaign$json = {
       '6': '.combat_tracker.Character',
       '10': 'characters'
     },
+    {
+      '1': 'createdTimestamp',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'createdTimestamp'
+    },
   ],
 };
 
@@ -42,4 +50,5 @@ const Campaign$json = {
 final $typed_data.Uint8List campaignDescriptor = $convert.base64Decode(
     'CghDYW1wYWlnbhIwCgdjb21iYXRzGAEgAygLMhYuY29tYmF0X3RyYWNrZXIuQ29tYmF0Ugdjb2'
     '1iYXRzEjkKCmNoYXJhY3RlcnMYAiADKAsyGS5jb21iYXRfdHJhY2tlci5DaGFyYWN0ZXJSCmNo'
-    'YXJhY3RlcnM=');
+    'YXJhY3RlcnMSRgoQY3JlYXRlZFRpbWVzdGFtcBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW'
+    '1lc3RhbXBSEGNyZWF0ZWRUaW1lc3RhbXA=');

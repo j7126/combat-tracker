@@ -13,6 +13,8 @@
 import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
+import 'package:protobuf/well_known_types/google/protobuf/timestamp.pb.dart'
+    as $2;
 
 import 'character.pb.dart' as $1;
 import 'combat.pb.dart' as $0;
@@ -23,10 +25,12 @@ class Campaign extends $pb.GeneratedMessage {
   factory Campaign({
     $core.Iterable<$0.Combat>? combats,
     $core.Iterable<$1.Character>? characters,
+    $2.Timestamp? createdTimestamp,
   }) {
     final result = create();
     if (combats != null) result.combats.addAll(combats);
     if (characters != null) result.characters.addAll(characters);
+    if (createdTimestamp != null) result.createdTimestamp = createdTimestamp;
     return result;
   }
 
@@ -47,6 +51,8 @@ class Campaign extends $pb.GeneratedMessage {
         subBuilder: $0.Combat.create)
     ..pPM<$1.Character>(2, _omitFieldNames ? '' : 'characters',
         subBuilder: $1.Character.create)
+    ..aOM<$2.Timestamp>(3, _omitFieldNames ? '' : 'createdTimestamp',
+        protoName: 'createdTimestamp', subBuilder: $2.Timestamp.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -72,6 +78,17 @@ class Campaign extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(2)
   $pb.PbList<$1.Character> get characters => $_getList(1);
+
+  @$pb.TagNumber(3)
+  $2.Timestamp get createdTimestamp => $_getN(2);
+  @$pb.TagNumber(3)
+  set createdTimestamp($2.Timestamp value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCreatedTimestamp() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCreatedTimestamp() => $_clearField(3);
+  @$pb.TagNumber(3)
+  $2.Timestamp ensureCreatedTimestamp() => $_ensure(2);
 }
 
 const $core.bool _omitFieldNames =
