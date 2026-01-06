@@ -32,7 +32,7 @@ const Campaign$json = {
       '3': 2,
       '4': 3,
       '5': 11,
-      '6': '.combat_tracker.Character',
+      '6': '.combat_tracker.PlayerCharacter',
       '10': 'characters'
     },
     {
@@ -49,6 +49,6 @@ const Campaign$json = {
 /// Descriptor for `Campaign`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List campaignDescriptor = $convert.base64Decode(
     'CghDYW1wYWlnbhIwCgdjb21iYXRzGAEgAygLMhYuY29tYmF0X3RyYWNrZXIuQ29tYmF0Ugdjb2'
-    '1iYXRzEjkKCmNoYXJhY3RlcnMYAiADKAsyGS5jb21iYXRfdHJhY2tlci5DaGFyYWN0ZXJSCmNo'
-    'YXJhY3RlcnMSRgoQY3JlYXRlZFRpbWVzdGFtcBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW'
-    '1lc3RhbXBSEGNyZWF0ZWRUaW1lc3RhbXA=');
+    '1iYXRzEj8KCmNoYXJhY3RlcnMYAiADKAsyHy5jb21iYXRfdHJhY2tlci5QbGF5ZXJDaGFyYWN0'
+    'ZXJSCmNoYXJhY3RlcnMSRgoQY3JlYXRlZFRpbWVzdGFtcBgDIAEoCzIaLmdvb2dsZS5wcm90b2'
+    'J1Zi5UaW1lc3RhbXBSEGNyZWF0ZWRUaW1lc3RhbXA=');

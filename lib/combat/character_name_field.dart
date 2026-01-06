@@ -28,6 +28,7 @@ class _CharacterNameFieldState extends State<CharacterNameField> {
         widget.character.name = value;
         widget.changed?.call();
       },
+      readOnly: widget.character.type == CharacterType.Player,
       decoration: InputDecoration(border: InputBorder.none, hintText: "Name"),
     );
   }

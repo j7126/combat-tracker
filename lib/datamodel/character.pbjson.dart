@@ -19,16 +19,17 @@ import 'dart:typed_data' as $typed_data;
 const CharacterType$json = {
   '1': 'CharacterType',
   '2': [
-    {'1': 'PlayerCharacter', '2': 0},
+    {'1': 'Player', '2': 0},
     {'1': 'FriendlyNPC', '2': 1},
     {'1': 'Enemy', '2': 2},
+    {'1': 'UnknownNPC', '2': 3},
   ],
 };
 
 /// Descriptor for `CharacterType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List characterTypeDescriptor = $convert.base64Decode(
-    'Cg1DaGFyYWN0ZXJUeXBlEhMKD1BsYXllckNoYXJhY3RlchAAEg8KC0ZyaWVuZGx5TlBDEAESCQ'
-    'oFRW5lbXkQAg==');
+    'Cg1DaGFyYWN0ZXJUeXBlEgoKBlBsYXllchAAEg8KC0ZyaWVuZGx5TlBDEAESCQoFRW5lbXkQAh'
+    'IOCgpVbmtub3duTlBDEAM=');
 
 @$core.Deprecated('Use characterDescriptor instead')
 const Character$json = {

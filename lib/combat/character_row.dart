@@ -1,9 +1,9 @@
 import 'package:combat_tracker/datamodel/character.pb.dart';
 import 'package:combat_tracker/datamodel/combat.pb.dart';
-import 'package:combat_tracker/table/character_initiative_field.dart';
-import 'package:combat_tracker/table/character_life_field.dart';
-import 'package:combat_tracker/table/character_name_field.dart';
-import 'package:combat_tracker/table/character_type_selector.dart';
+import 'package:combat_tracker/combat/character_initiative_field.dart';
+import 'package:combat_tracker/combat/character_life_field.dart';
+import 'package:combat_tracker/combat/character_name_field.dart';
+import 'package:combat_tracker/combat/character_type_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 

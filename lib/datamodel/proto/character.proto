@@ -14,7 +14,8 @@ message Character {
 }
 
 enum CharacterType {
-  PlayerCharacter = 0;
+  Player = 0;
   FriendlyNPC = 1;
   Enemy = 2;
+  UnknownNPC = 3;
 }

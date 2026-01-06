@@ -16,15 +16,15 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import 'package:protobuf/well_known_types/google/protobuf/timestamp.pb.dart'
     as $2;
 
-import 'character.pb.dart' as $1;
 import 'combat.pb.dart' as $0;
+import 'player_character.pb.dart' as $1;
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 class Campaign extends $pb.GeneratedMessage {
   factory Campaign({
     $core.Iterable<$0.Combat>? combats,
-    $core.Iterable<$1.Character>? characters,
+    $core.Iterable<$1.PlayerCharacter>? characters,
     $2.Timestamp? createdTimestamp,
   }) {
     final result = create();
@@ -49,8 +49,8 @@ class Campaign extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..pPM<$0.Combat>(1, _omitFieldNames ? '' : 'combats',
         subBuilder: $0.Combat.create)
-    ..pPM<$1.Character>(2, _omitFieldNames ? '' : 'characters',
-        subBuilder: $1.Character.create)
+    ..pPM<$1.PlayerCharacter>(2, _omitFieldNames ? '' : 'characters',
+        subBuilder: $1.PlayerCharacter.create)
     ..aOM<$2.Timestamp>(3, _omitFieldNames ? '' : 'createdTimestamp',
         protoName: 'createdTimestamp', subBuilder: $2.Timestamp.create)
     ..hasRequiredFields = false;
@@ -77,7 +77,7 @@ class Campaign extends $pb.GeneratedMessage {
   $pb.PbList<$0.Combat> get combats => $_getList(0);
 
   @$pb.TagNumber(2)
-  $pb.PbList<$1.Character> get characters => $_getList(1);
+  $pb.PbList<$1.PlayerCharacter> get characters => $_getList(1);
 
   @$pb.TagNumber(3)
   $2.Timestamp get createdTimestamp => $_getN(2);

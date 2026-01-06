@@ -15,21 +15,24 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class CharacterType extends $pb.ProtobufEnum {
-  static const CharacterType PlayerCharacter =
-      CharacterType._(0, _omitEnumNames ? '' : 'PlayerCharacter');
+  static const CharacterType Player =
+      CharacterType._(0, _omitEnumNames ? '' : 'Player');
   static const CharacterType FriendlyNPC =
       CharacterType._(1, _omitEnumNames ? '' : 'FriendlyNPC');
   static const CharacterType Enemy =
       CharacterType._(2, _omitEnumNames ? '' : 'Enemy');
+  static const CharacterType UnknownNPC =
+      CharacterType._(3, _omitEnumNames ? '' : 'UnknownNPC');
 
   static const $core.List<CharacterType> values = <CharacterType>[
-    PlayerCharacter,
+    Player,
     FriendlyNPC,
     Enemy,
+    UnknownNPC,
   ];
 
   static final $core.List<CharacterType?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 2);
+      $pb.ProtobufEnum.$_initByValueList(values, 3);
   static CharacterType? valueOf($core.int value) =>
       value < 0 || value >= _byValue.length ? null : _byValue[value];
 
