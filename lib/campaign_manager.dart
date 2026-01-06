@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:combat_tracker/datamodel/campaign.pb.dart';
@@ -7,6 +8,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:macos_secure_bookmarks/macos_secure_bookmarks.dart';
 import 'package:path/path.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:xxh3/xxh3.dart';
 
 class CampaignManager {
   static const String campaignFileExtension = "campaign";
@@ -16,12 +18,31 @@ class CampaignManager {
   bool get isOpen => campaign != null && file != null;
   Campaign? campaign;
   File? file;
+  int lastFileHash = 0;
+
+  late Timer autoSaveTimer;
+
+  CampaignManager() {
+    autoSaveTimer = Timer(Duration(milliseconds: 60000), autosaveCallback);
+  }
+
+  void autosaveCallback() {
+    if (isOpen) {
+      saveCampaign();
+    }
+  }
 
   Future saveCampaign() async {
     if (!isOpen) {
       return;
     }
-    await file!.writeAsBytes(campaign!.writeToBuffer());
+    var buffer = campaign!.writeToBuffer();
+    var bufferHash = xxh3(buffer);
+    if (bufferHash == lastFileHash) {
+      return;
+    }
+    lastFileHash = bufferHash;
+    await file!.writeAsBytes(buffer);
   }
 
   Future closeCampaign() async {
@@ -50,7 +71,10 @@ class CampaignManager {
 
     file = File(filePath);
     campaign = Campaign(combats: [], characters: [], createdTimestamp: TimestampExtension.now());
-    await file!.writeAsBytes(campaign!.writeToBuffer());
+    var buffer = campaign!.writeToBuffer();
+    var bufferHash = xxh3(buffer);
+    lastFileHash = bufferHash;
+    await file!.writeAsBytes(buffer);
     var campaignFile = CampaignFile(path: file!.path);
     if (Platform.isMacOS) {
       campaignFile.macosBookmark = await SecureBookmarks().bookmark(file!);
@@ -88,6 +112,8 @@ class CampaignManager {
         if (await file.exists() && !file.path.contains("/.Trash/")) {
           campaignFile.path = file.path;
           var data = await file.readAsBytes();
+          var bufferHash = xxh3(data);
+          lastFileHash = bufferHash;
           try {
             campaign = Campaign.fromBuffer(data);
             this.file = file;
