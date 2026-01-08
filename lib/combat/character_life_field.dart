@@ -107,6 +107,17 @@ class _CharacterLifeFieldState extends State<CharacterLifeField> {
 
   @override
   Widget build(BuildContext context) {
+    var lifeCurrent = int.tryParse(lifeString);
+    if (lifeCurrent != null && lifeCurrent != widget.character.life) {
+      lifeString = widget.character.life.toString();
+      lifeController.text = widget.character.life.toString();
+    }
+    var maxLifeCurrent = int.tryParse(maxLifeString);
+    if (maxLifeCurrent != null && maxLifeCurrent != widget.character.maxLife) {
+      maxLifeString = widget.character.maxLife.toString();
+      maxLifeController.text = widget.character.maxLife.toString();
+    }
+
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
