@@ -28,7 +28,7 @@ class _PlayerCharacterSelectorState extends State<PlayerCharacterSelector> {
             id: playerCharacter.id,
             type: CharacterType.Player,
             damageEvents: [],
-            life: playerCharacter.life,
+            life: playerCharacter.maxLife,
             maxLife: playerCharacter.maxLife,
             name: playerCharacter.name,
           );

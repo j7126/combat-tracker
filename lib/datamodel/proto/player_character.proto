@@ -4,7 +4,6 @@ package combat_tracker;
 message PlayerCharacter {
   string id = 1;
   string name = 2;
-  int32 life = 3;
   int32 maxLife = 4;
   string notes = 5;
   bool active = 6;

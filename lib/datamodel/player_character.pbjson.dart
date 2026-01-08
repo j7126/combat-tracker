@@ -21,7 +21,6 @@ const PlayerCharacter$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'life', '3': 3, '4': 1, '5': 5, '10': 'life'},
     {'1': 'maxLife', '3': 4, '4': 1, '5': 5, '10': 'maxLife'},
     {'1': 'notes', '3': 5, '4': 1, '5': 9, '10': 'notes'},
     {'1': 'active', '3': 6, '4': 1, '5': 8, '10': 'active'},
@@ -30,6 +29,6 @@ const PlayerCharacter$json = {
 
 /// Descriptor for `PlayerCharacter`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List playerCharacterDescriptor = $convert.base64Decode(
-    'Cg9QbGF5ZXJDaGFyYWN0ZXISDgoCaWQYASABKAlSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSEg'
-    'oEbGlmZRgDIAEoBVIEbGlmZRIYCgdtYXhMaWZlGAQgASgFUgdtYXhMaWZlEhQKBW5vdGVzGAUg'
-    'ASgJUgVub3RlcxIWCgZhY3RpdmUYBiABKAhSBmFjdGl2ZQ==');
+    'Cg9QbGF5ZXJDaGFyYWN0ZXISDgoCaWQYASABKAlSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSGA'
+    'oHbWF4TGlmZRgEIAEoBVIHbWF4TGlmZRIUCgVub3RlcxgFIAEoCVIFbm90ZXMSFgoGYWN0aXZl'
+    'GAYgASgIUgZhY3RpdmU=');

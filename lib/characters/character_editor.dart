@@ -17,26 +17,10 @@ class _CharacterEditorState extends State<CharacterEditor> {
   late TextEditingController lifeController;
   late TextEditingController maxLifeController;
 
-  FocusNode maxLifeFocusNode = FocusNode();
-
-  void maxLifeEditingComplete() {
-    if (widget.character.life == 0) {
-      widget.character.life = widget.character.maxLife;
-      lifeController.text = widget.character.maxLife.toString();
-    }
-  }
-
   @override
   void initState() {
     nameController = TextEditingController(text: widget.character.name);
-    lifeController = TextEditingController(text: widget.character.life.toString());
     maxLifeController = TextEditingController(text: widget.character.maxLife.toString());
-
-    maxLifeFocusNode.addListener(() {
-      if (!maxLifeFocusNode.hasFocus) {
-        maxLifeEditingComplete();
-      }
-    });
 
     super.initState();
   }
@@ -74,42 +58,18 @@ class _CharacterEditorState extends State<CharacterEditor> {
                 decoration: InputDecoration(labelText: "Name"),
               ),
               Gap(8.0),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: lifeController,
-                      onChanged: (value) {
-                        var intValue = int.tryParse(value);
-                        if (intValue != null) {
-                          widget.character.life = intValue;
-                        }
-                      },
-                      keyboardType: TextInputType.numberWithOptions(signed: true, decimal: false),
-                      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9\-+]'))],
-                      decoration: InputDecoration(labelText: "Life"),
-                      onTap: () => lifeController.selection = TextSelection(baseOffset: 0, extentOffset: lifeController.value.text.length),
-                    ),
-                  ),
-                  Gap(8.0),
-                  Expanded(
-                    child: TextField(
-                      controller: maxLifeController,
-                      onChanged: (value) {
-                        var intValue = int.tryParse(value);
-                        if (intValue != null) {
-                          widget.character.maxLife = intValue;
-                        }
-                      },
-                      focusNode: maxLifeFocusNode,
-                      onEditingComplete: maxLifeEditingComplete,
-                      keyboardType: TextInputType.numberWithOptions(signed: true, decimal: false),
-                      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9\-+]'))],
-                      decoration: InputDecoration(labelText: "Max Life"),
-                      onTap: () => maxLifeController.selection = TextSelection(baseOffset: 0, extentOffset: maxLifeController.value.text.length),
-                    ),
-                  ),
-                ],
+              TextField(
+                controller: maxLifeController,
+                onChanged: (value) {
+                  var intValue = int.tryParse(value);
+                  if (intValue != null) {
+                    widget.character.maxLife = intValue;
+                  }
+                },
+                keyboardType: TextInputType.numberWithOptions(signed: true, decimal: false),
+                inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9\-+]'))],
+                decoration: InputDecoration(labelText: "Max Life"),
+                onTap: () => maxLifeController.selection = TextSelection(baseOffset: 0, extentOffset: maxLifeController.value.text.length),
               ),
               Gap(8.0),
               TextField(

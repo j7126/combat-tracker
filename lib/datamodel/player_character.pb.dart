@@ -20,7 +20,6 @@ class PlayerCharacter extends $pb.GeneratedMessage {
   factory PlayerCharacter({
     $core.String? id,
     $core.String? name,
-    $core.int? life,
     $core.int? maxLife,
     $core.String? notes,
     $core.bool? active,
@@ -28,7 +27,6 @@ class PlayerCharacter extends $pb.GeneratedMessage {
     final result = create();
     if (id != null) result.id = id;
     if (name != null) result.name = name;
-    if (life != null) result.life = life;
     if (maxLife != null) result.maxLife = maxLife;
     if (notes != null) result.notes = notes;
     if (active != null) result.active = active;
@@ -50,7 +48,6 @@ class PlayerCharacter extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aI(3, _omitFieldNames ? '' : 'life')
     ..aI(4, _omitFieldNames ? '' : 'maxLife', protoName: 'maxLife')
     ..aOS(5, _omitFieldNames ? '' : 'notes')
     ..aOB(6, _omitFieldNames ? '' : 'active')
@@ -93,39 +90,30 @@ class PlayerCharacter extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearName() => $_clearField(2);
 
-  @$pb.TagNumber(3)
-  $core.int get life => $_getIZ(2);
-  @$pb.TagNumber(3)
-  set life($core.int value) => $_setSignedInt32(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasLife() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearLife() => $_clearField(3);
-
   @$pb.TagNumber(4)
-  $core.int get maxLife => $_getIZ(3);
+  $core.int get maxLife => $_getIZ(2);
   @$pb.TagNumber(4)
-  set maxLife($core.int value) => $_setSignedInt32(3, value);
+  set maxLife($core.int value) => $_setSignedInt32(2, value);
   @$pb.TagNumber(4)
-  $core.bool hasMaxLife() => $_has(3);
+  $core.bool hasMaxLife() => $_has(2);
   @$pb.TagNumber(4)
   void clearMaxLife() => $_clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get notes => $_getSZ(4);
+  $core.String get notes => $_getSZ(3);
   @$pb.TagNumber(5)
-  set notes($core.String value) => $_setString(4, value);
+  set notes($core.String value) => $_setString(3, value);
   @$pb.TagNumber(5)
-  $core.bool hasNotes() => $_has(4);
+  $core.bool hasNotes() => $_has(3);
   @$pb.TagNumber(5)
   void clearNotes() => $_clearField(5);
 
   @$pb.TagNumber(6)
-  $core.bool get active => $_getBF(5);
+  $core.bool get active => $_getBF(4);
   @$pb.TagNumber(6)
-  set active($core.bool value) => $_setBool(5, value);
+  set active($core.bool value) => $_setBool(4, value);
   @$pb.TagNumber(6)
-  $core.bool hasActive() => $_has(5);
+  $core.bool hasActive() => $_has(4);
   @$pb.TagNumber(6)
   void clearActive() => $_clearField(6);
 }
