@@ -10,4 +10,5 @@ message Combat {
   string ActivePlayer = 3;
   string Name = 4;
   google.protobuf.Timestamp createdTimestamp = 5;
+  string Id = 6;
 }

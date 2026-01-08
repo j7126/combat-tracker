@@ -27,6 +27,7 @@ class Combat extends $pb.GeneratedMessage {
     $core.String? activePlayer,
     $core.String? name,
     $1.Timestamp? createdTimestamp,
+    $core.String? id,
   }) {
     final result = create();
     if (characters != null) result.characters.addAll(characters);
@@ -34,6 +35,7 @@ class Combat extends $pb.GeneratedMessage {
     if (activePlayer != null) result.activePlayer = activePlayer;
     if (name != null) result.name = name;
     if (createdTimestamp != null) result.createdTimestamp = createdTimestamp;
+    if (id != null) result.id = id;
     return result;
   }
 
@@ -57,6 +59,7 @@ class Combat extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'Name', protoName: 'Name')
     ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdTimestamp',
         protoName: 'createdTimestamp', subBuilder: $1.Timestamp.create)
+    ..aOS(6, _omitFieldNames ? '' : 'Id', protoName: 'Id')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -117,6 +120,15 @@ class Combat extends $pb.GeneratedMessage {
   void clearCreatedTimestamp() => $_clearField(5);
   @$pb.TagNumber(5)
   $1.Timestamp ensureCreatedTimestamp() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  $core.String get id => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set id($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasId() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearId() => $_clearField(6);
 }
 
 const $core.bool _omitFieldNames =

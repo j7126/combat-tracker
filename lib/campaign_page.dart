@@ -22,11 +22,9 @@ class _CampaignPageState extends State<CampaignPage> {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Row(
           children: [
-            // combat sessions
-            Expanded(child: CombatSessions()),
-            VerticalDivider(),
-            // characters
             Expanded(child: CharacterTable()),
+            VerticalDivider(),
+            Expanded(child: CombatSessions()),
           ],
         ),
       ),
