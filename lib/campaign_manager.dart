@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:combat_tracker/datamodel/campaign.pb.dart';
 import 'package:combat_tracker/datamodel/campaign_file.pb.dart';
 import 'package:combat_tracker/datamodel/extension/timestamp_extension.dart';
+import 'package:combat_tracker/file_format.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:macos_secure_bookmarks/macos_secure_bookmarks.dart';
 import 'package:path/path.dart';
@@ -42,7 +43,7 @@ class CampaignManager {
       return;
     }
     lastFileHash = bufferHash;
-    await file!.writeAsBytes(buffer);
+    await CampaignFileFormat.writeFile(file: file!, protobufPayload: buffer);
   }
 
   Future closeCampaign() async {
@@ -74,7 +75,7 @@ class CampaignManager {
     var buffer = campaign!.writeToBuffer();
     var bufferHash = xxh3(buffer);
     lastFileHash = bufferHash;
-    await file!.writeAsBytes(buffer);
+    await CampaignFileFormat.writeFile(file: file!, protobufPayload: buffer);
     var campaignFile = CampaignFile(path: file!.path);
     if (Platform.isMacOS) {
       campaignFile.macosBookmark = await SecureBookmarks().bookmark(file!);
@@ -111,10 +112,11 @@ class CampaignManager {
       if (file != null) {
         if (await file.exists() && !file.path.contains("/.Trash/")) {
           campaignFile.path = file.path;
-          var data = await file.readAsBytes();
-          var bufferHash = xxh3(data);
-          lastFileHash = bufferHash;
           try {
+            var readResult = await CampaignFileFormat.readFile(file);
+            var data = readResult.payload;
+            var bufferHash = xxh3(data);
+            lastFileHash = bufferHash;
             campaign = Campaign.fromBuffer(data);
             this.file = file;
           } catch (e) {

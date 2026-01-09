@@ -7,6 +7,7 @@ environment:
   sdk: ^3.10.1
 
 dependencies:
+  crypto: ^3.0.7
   dynamic_color: ^1.8.1
   file_picker: ^10.3.8
   fixnum: ^1.1.1
