@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class CharacterTypeSelector extends StatefulWidget {
-  const CharacterTypeSelector({super.key, required this.character, this.changed});
+  const CharacterTypeSelector({super.key, required this.character, this.changed, this.readOnly = false});
 
   final Character character;
   final Function()? changed;
+  final bool readOnly;
 
   @override
   State<CharacterTypeSelector> createState() => _CharacterTypeSelectorState();
@@ -44,7 +45,7 @@ class _CharacterTypeSelectorState extends State<CharacterTypeSelector> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.character.type == CharacterType.Player
+    return widget.character.type == CharacterType.Player || widget.readOnly
         ? _icon(widget.character.type)
         : MenuAnchor(
             menuChildren: [_menuEntry(CharacterType.Enemy), _menuEntry(CharacterType.FriendlyNPC), _menuEntry(CharacterType.UnknownNPC)],

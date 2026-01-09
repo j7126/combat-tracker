@@ -1,3 +1,4 @@
+import 'package:combat_tracker/combat/damage_stats.dart/damage_stats_dialog.dart';
 import 'package:combat_tracker/datamodel/character.pb.dart';
 import 'package:combat_tracker/datamodel/combat.pb.dart';
 import 'package:combat_tracker/combat/character_initiative_field.dart';
@@ -8,14 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class CharacterRow extends StatefulWidget {
-  const CharacterRow({
-    super.key,
-    required this.combat,
-    required this.character,
-    this.showDelete = false,
-    this.onDelete,
-    this.changed,
-  });
+  const CharacterRow({super.key, required this.combat, required this.character, this.showDelete = false, this.onDelete, this.changed});
 
   final Combat combat;
   final Character character;
@@ -43,44 +37,30 @@ class _CharacterRowState extends State<CharacterRow> {
           _hovering = false;
         });
       },
-      child: Container(
-        decoration: BoxDecoration(
-          color: _hovering
-              ? ColorScheme.of(context).surfaceContainer
-              : Colors.transparent,
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: SizedBox(
-          height: 48,
+      child: SizedBox(
+        height: 48,
+        child: Container(
+          decoration: BoxDecoration(color: _hovering ? ColorScheme.of(context).surfaceContainer : Colors.transparent, borderRadius: BorderRadius.circular(8.0)),
           child: Row(
             children: [
               Gap(4.0),
               SizedBox(
                 width: 40,
-                child: CharacterTypeSelector(
-                  character: widget.character,
-                  changed: widget.changed,
-                ),
+                child: CharacterTypeSelector(character: widget.character, changed: widget.changed),
               ),
               VerticalDivider(),
               SizedBox(
                 width: 48,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: CharacterInitiativeField(
-                    character: widget.character,
-                    changed: widget.changed,
-                  ),
+                  child: CharacterInitiativeField(character: widget.character, changed: widget.changed),
                 ),
               ),
               VerticalDivider(),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: CharacterNameField(
-                    character: widget.character,
-                    changed: widget.changed,
-                  ),
+                  child: CharacterNameField(character: widget.character, changed: widget.changed),
                 ),
               ),
               VerticalDivider(),
@@ -88,25 +68,25 @@ class _CharacterRowState extends State<CharacterRow> {
                 width: 100,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: CharacterLifeField(
-                    combat: widget.combat,
-                    character: widget.character,
-                    changed: widget.changed,
-                  ),
+                  child: CharacterLifeField(combat: widget.combat, character: widget.character, changed: widget.changed),
                 ),
+              ),
+              VerticalDivider(),
+              IconButton(
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => DamageStatsDialog(combat: widget.combat, character: widget.character),
+                ),
+                icon: Icon(Icons.history),
               ),
               if (widget.showDelete) VerticalDivider(),
               AnimatedSize(
                 duration: Duration(milliseconds: 120),
                 child: SizedBox(
-                  width: widget.showDelete ? 64 : 0,
+                  width: widget.showDelete ? 40 : 0,
                   child: Opacity(
                     opacity: widget.showDelete ? 1 : 0,
-                    child: IconButton(
-                      onPressed: widget.onDelete,
-                      icon: Icon(Icons.delete_outline),
-                      color: ColorScheme.of(context).error,
-                    ),
+                    child: IconButton(onPressed: widget.onDelete, icon: Icon(Icons.delete_outline), color: ColorScheme.of(context).error),
                   ),
                 ),
               ),

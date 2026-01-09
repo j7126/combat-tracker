@@ -273,11 +273,13 @@ class _CombatTableState extends State<CombatTable> {
                   Expanded(child: Text("Name", textAlign: TextAlign.center)),
                   VerticalDivider(),
                   SizedBox(width: 100, child: Text("Life", textAlign: TextAlign.center)),
+                  VerticalDivider(),
+                  SizedBox(width: 40),
                   if (_showDelete) VerticalDivider(),
                   AnimatedSize(
                     duration: Duration(milliseconds: 120),
                     child: SizedBox(
-                      width: _showDelete ? 64 : 0,
+                      width: _showDelete ? 40 : 0,
                       child: Text("", textAlign: TextAlign.center),
                     ),
                   ),
