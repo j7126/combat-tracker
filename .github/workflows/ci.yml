@@ -40,6 +40,26 @@ jobs:
           name: windows-build
           path: build\windows\x64\runner\Release
   
+  build_windows_installer:
+    name: Build Installer (Windows)
+    runs-on: windows-latest
+    needs: [build_windows]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v5
+        with:
+          name: windows-build
+          path: D:\combat-tracker\ReleaseFiles\
+      - name: Compile .ISS to .EXE Installer
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        with:
+          path: windows/installer/installer.iss
+          options: /O+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: D:\combat-tracker\Installer\Combat Tracker Setup.exe
+  
   build_macos:
     name: Build App (macos)
     runs-on: macos-latest
