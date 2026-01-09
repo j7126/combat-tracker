@@ -34,6 +34,9 @@ class _CombatTableState extends State<CombatTable> {
         _isShiftDown = false;
       }
     });
+
+    _enableTargetedDamage = widget.combat.currentTurn.isEmpty || widget.combat.activePlayer.isNotEmpty;
+
     super.initState();
   }
 
@@ -184,29 +187,27 @@ class _CombatTableState extends State<CombatTable> {
                   ),
                   Gap(16.0),
                   Tooltip(
-                    message: _enableSort ? "Sorting Enabled" : "Sorting Disabled",
-                    child: OutlinedButton(
-                      onPressed: () {
+                    message: "Enable Sorting",
+                    child: Switch(
+                      value: _enableSort,
+                      onChanged: (val) {
                         setState(() {
-                          _enableSort = !_enableSort;
+                          _enableSort = val;
                           changed();
                         });
                       },
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(_enableSort ? ColorScheme.of(context).tertiary : null),
-                        foregroundColor: WidgetStatePropertyAll(_enableSort ? ColorScheme.of(context).onTertiary : ColorScheme.of(context).tertiary),
-                        overlayColor: WidgetStatePropertyAll(ColorScheme.of(context).tertiary.withAlpha(20)),
-                      ),
-                      child: Icon(Icons.arrow_downward),
+                      thumbIcon: WidgetStatePropertyAll(Icon(Icons.arrow_downward, color: ColorScheme.of(context).onTertiary)),
+                      activeThumbColor: ColorScheme.of(context).tertiary,
                     ),
                   ),
                   Gap(16.0),
                   Tooltip(
-                    message: _enableTargetedDamage ? "Damage Source Tracked" : "Damage Source Not Tracked",
-                    child: OutlinedButton(
-                      onPressed: () {
+                    message: "Track Damage Source",
+                    child: Switch(
+                      value: _enableTargetedDamage,
+                      onChanged: (val) {
                         setState(() {
-                          _enableTargetedDamage = !_enableTargetedDamage;
+                          _enableTargetedDamage = val;
                           if (_enableTargetedDamage) {
                             widget.combat.activePlayer = widget.combat.currentTurn;
                           } else {
@@ -215,12 +216,8 @@ class _CombatTableState extends State<CombatTable> {
                           CampaignManager.instance.saveCampaign();
                         });
                       },
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(_enableTargetedDamage ? ColorScheme.of(context).error : null),
-                        foregroundColor: WidgetStatePropertyAll(_enableTargetedDamage ? ColorScheme.of(context).onError : ColorScheme.of(context).error),
-                        overlayColor: WidgetStatePropertyAll(ColorScheme.of(context).error.withAlpha(20)),
-                      ),
-                      child: Icon(Icons.track_changes),
+                      thumbIcon: WidgetStatePropertyAll(Icon(Icons.track_changes, color: ColorScheme.of(context).onError)),
+                      activeThumbColor: ColorScheme.of(context).error,
                     ),
                   ),
                   Spacer(),
