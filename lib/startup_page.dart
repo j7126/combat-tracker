@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:combat_tracker/about/about_page.dart';
 import 'package:combat_tracker/campaign_manager.dart';
 import 'package:combat_tracker/campaign_page.dart';
 import 'package:combat_tracker/datamodel/campaign_file.pb.dart';
@@ -144,6 +145,21 @@ class _StartupPageState extends State<StartupPage> {
               mainAxisSize: MainAxisSize.min,
               children: [Icon(Icons.file_open), Text("Open Campaign")],
             ),
+          ),
+          Gap(8.0),
+          PopupMenuButton(
+            itemBuilder: (BuildContext context) => [
+              PopupMenuItem(
+                child: const Text('About'),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const AboutPage(),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
           Gap(16.0),
         ],
