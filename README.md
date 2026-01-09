@@ -1,3 +1,3 @@
-# combat_tracker
+# Combat Tracker
 
-A new Flutter project.
+A simple combat tracker app for ttrpg games.
