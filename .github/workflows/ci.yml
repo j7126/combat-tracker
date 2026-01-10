@@ -107,11 +107,9 @@ jobs:
         # Write body to file and to step output for convenience
         printf "%s" "$BODY" > release-body.md
 
-        echo "::group::Release tag and body"
         echo "Tag: $TAG"
         echo "Body:"
-        printf '%s\n' "$BODY"
-        echo "::endgroup::
+        echo $BODY
     - uses: actions/download-artifact@v5
       with:
         name: windows-installer
