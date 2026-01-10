@@ -1,4 +1,4 @@
-import 'package:combat_tracker/combat/damage_stats.dart/damage_recieved_stats.dart';
+import 'package:combat_tracker/combat/damage_stats/damage_recieved_stats.dart';
 import 'package:combat_tracker/datamodel/character.pb.dart';
 import 'package:combat_tracker/datamodel/combat.pb.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:combat_tracker/combat/damage_stats.dart/damage_stats_dialog.dart';
+import 'package:combat_tracker/combat/damage_stats/damage_stats_dialog.dart';
 import 'package:combat_tracker/datamodel/character.pb.dart';
 import 'package:combat_tracker/datamodel/combat.pb.dart';
 import 'package:combat_tracker/combat/character_initiative_field.dart';
