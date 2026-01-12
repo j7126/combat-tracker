@@ -1,3 +1,4 @@
+import 'package:combat_tracker/combat/damage_stats/damage_dealt_stats.dart';
 import 'package:combat_tracker/combat/damage_stats/damage_recieved_stats.dart';
 import 'package:combat_tracker/datamodel/character.pb.dart';
 import 'package:combat_tracker/datamodel/combat.pb.dart';
@@ -52,7 +53,10 @@ class _DamageStatsDialogDialogState extends State<DamageStatsDialog> {
                       padding: const EdgeInsets.only(bottom: 16.0, top: 8.0),
                       child: DamageRecievedStats(combat: widget.combat, character: widget.character),
                     ),
-                    Icon(Icons.directions_transit),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0, top: 8.0),
+                      child: DamageDealtStats(combat: widget.combat, character: widget.character),
+                    ),
                   ],
                 ),
               ),
