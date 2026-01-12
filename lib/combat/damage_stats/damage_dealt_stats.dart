@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:combat_tracker/combat/character_type_selector.dart';
+import 'package:combat_tracker/combat/table/fields/character_type_selector.dart';
 import 'package:combat_tracker/datamodel/character.pb.dart';
 import 'package:combat_tracker/datamodel/combat.pb.dart';
 import 'package:combat_tracker/datamodel/damage_event.pb.dart';

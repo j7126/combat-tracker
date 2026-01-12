@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:combat_tracker/datamodel/campaign.pb.dart';
 import 'package:combat_tracker/datamodel/campaign_file.pb.dart';
+import 'package:combat_tracker/datamodel/extension/campaign_extension.dart';
 import 'package:combat_tracker/datamodel/extension/timestamp_extension.dart';
 import 'package:combat_tracker/file_format.dart';
 import 'package:file_picker/file_picker.dart';
@@ -138,6 +139,7 @@ class CampaignManager {
 
   void _campaignOpened() async {
     if (isOpen) {
+      campaign!.validate();
       await windowManager.setTitle("Combat Tracker: ${basenameWithoutExtension(file!.path)}");
     }
   }

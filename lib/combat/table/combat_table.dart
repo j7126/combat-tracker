@@ -4,7 +4,7 @@ import 'package:combat_tracker/datamodel/character.pb.dart';
 import 'package:combat_tracker/datamodel/combat.pb.dart';
 import 'package:combat_tracker/datamodel/extension/character_extension.dart';
 import 'package:combat_tracker/datamodel/extension/combat_extension.dart';
-import 'package:combat_tracker/combat/character_row.dart';
+import 'package:combat_tracker/combat/table/character_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';

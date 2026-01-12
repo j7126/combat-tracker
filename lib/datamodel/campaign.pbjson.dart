@@ -43,6 +43,14 @@ const Campaign$json = {
       '6': '.google.protobuf.Timestamp',
       '10': 'createdTimestamp'
     },
+    {
+      '1': 'options',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.combat_tracker.Options',
+      '10': 'options'
+    },
   ],
 };
 
@@ -51,4 +59,5 @@ final $typed_data.Uint8List campaignDescriptor = $convert.base64Decode(
     'CghDYW1wYWlnbhIwCgdjb21iYXRzGAEgAygLMhYuY29tYmF0X3RyYWNrZXIuQ29tYmF0Ugdjb2'
     '1iYXRzEj8KCmNoYXJhY3RlcnMYAiADKAsyHy5jb21iYXRfdHJhY2tlci5QbGF5ZXJDaGFyYWN0'
     'ZXJSCmNoYXJhY3RlcnMSRgoQY3JlYXRlZFRpbWVzdGFtcBgDIAEoCzIaLmdvb2dsZS5wcm90b2'
-    'J1Zi5UaW1lc3RhbXBSEGNyZWF0ZWRUaW1lc3RhbXA=');
+    'J1Zi5UaW1lc3RhbXBSEGNyZWF0ZWRUaW1lc3RhbXASMQoHb3B0aW9ucxgEIAEoCzIXLmNvbWJh'
+    'dF90cmFja2VyLk9wdGlvbnNSB29wdGlvbnM=');

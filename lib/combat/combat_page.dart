@@ -1,5 +1,5 @@
 import 'package:combat_tracker/campaign_manager.dart';
-import 'package:combat_tracker/combat/combat_table.dart';
+import 'package:combat_tracker/combat/table/combat_table.dart';
 import 'package:combat_tracker/datamodel/combat.pb.dart';
 import 'package:flutter/material.dart';
 

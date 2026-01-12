@@ -1,0 +1,8 @@
+syntax = "proto3";
+package combat_tracker;
+
+import "character.proto";
+
+message Options {
+  repeated CharacterType initiativePriority = 1;
+}

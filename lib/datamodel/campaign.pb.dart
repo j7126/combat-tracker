@@ -17,6 +17,7 @@ import 'package:protobuf/well_known_types/google/protobuf/timestamp.pb.dart'
     as $2;
 
 import 'combat.pb.dart' as $0;
+import 'options.pb.dart' as $3;
 import 'player_character.pb.dart' as $1;
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -26,11 +27,13 @@ class Campaign extends $pb.GeneratedMessage {
     $core.Iterable<$0.Combat>? combats,
     $core.Iterable<$1.PlayerCharacter>? characters,
     $2.Timestamp? createdTimestamp,
+    $3.Options? options,
   }) {
     final result = create();
     if (combats != null) result.combats.addAll(combats);
     if (characters != null) result.characters.addAll(characters);
     if (createdTimestamp != null) result.createdTimestamp = createdTimestamp;
+    if (options != null) result.options = options;
     return result;
   }
 
@@ -53,6 +56,8 @@ class Campaign extends $pb.GeneratedMessage {
         subBuilder: $1.PlayerCharacter.create)
     ..aOM<$2.Timestamp>(3, _omitFieldNames ? '' : 'createdTimestamp',
         protoName: 'createdTimestamp', subBuilder: $2.Timestamp.create)
+    ..aOM<$3.Options>(4, _omitFieldNames ? '' : 'options',
+        subBuilder: $3.Options.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -89,6 +94,17 @@ class Campaign extends $pb.GeneratedMessage {
   void clearCreatedTimestamp() => $_clearField(3);
   @$pb.TagNumber(3)
   $2.Timestamp ensureCreatedTimestamp() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $3.Options get options => $_getN(3);
+  @$pb.TagNumber(4)
+  set options($3.Options value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasOptions() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearOptions() => $_clearField(4);
+  @$pb.TagNumber(4)
+  $3.Options ensureOptions() => $_ensure(3);
 }
 
 const $core.bool _omitFieldNames =

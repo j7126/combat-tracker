@@ -1,6 +1,6 @@
 import 'package:combat_tracker/campaign_manager.dart';
-import 'package:combat_tracker/combat_page.dart';
-import 'package:combat_tracker/create_combat_dialog.dart';
+import 'package:combat_tracker/combat/combat_page.dart';
+import 'package:combat_tracker/combat/create_combat_dialog.dart';
 import 'package:combat_tracker/datamodel/combat.pb.dart';
 import 'package:combat_tracker/datamodel/extension/timestamp_extension.dart';
 import 'package:flutter/material.dart';
