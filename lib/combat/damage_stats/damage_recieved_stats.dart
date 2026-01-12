@@ -65,22 +65,6 @@ class _DamageRecievedStatsState extends State<DamageRecievedStats> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                      bottom: 12.0,
-                      top: 16.0,
-                      left: 12.0,
-                      right: 12.0,
-                    ),
-                    child: Text(
-                      "Total Damage",
-                      style: const TextStyle(
-                        fontSize: 26,
-                        height: 1,
-                        color: Color.fromARGB(255, 178, 178, 178),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
                       bottom: 16.0,
                       top: 16.0,
                       left: 12.0,
@@ -226,7 +210,7 @@ class _DamageRecievedStatsState extends State<DamageRecievedStats> {
                       right: 12.0,
                     ),
                     child: Text(
-                      "Damage Events",
+                      "Recieved Damage History",
                       style: const TextStyle(
                         fontSize: 26,
                         height: 1,
