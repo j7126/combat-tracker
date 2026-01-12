@@ -1,7 +1,7 @@
 import 'package:combat_tracker/combat/damage_stats/damage_dealt_stats.dart';
 import 'package:combat_tracker/combat/damage_stats/damage_recieved_stats.dart';
-import 'package:combat_tracker/datamodel/character.pb.dart';
-import 'package:combat_tracker/datamodel/combat.pb.dart';
+import 'package:combat_tracker/datamodel/generated/character.pb.dart';
+import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
 import 'package:flutter/material.dart';
 
 class DamageStatsDialog extends StatefulWidget {

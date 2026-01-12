@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:combat_tracker/datamodel/campaign.pb.dart';
-import 'package:combat_tracker/datamodel/campaign_file.pb.dart';
+import 'package:combat_tracker/datamodel/generated/campaign.pb.dart';
+import 'package:combat_tracker/datamodel/generated/campaign_file.pb.dart';
 import 'package:combat_tracker/datamodel/extension/campaign_extension.dart';
 import 'package:combat_tracker/datamodel/extension/timestamp_extension.dart';
 import 'package:combat_tracker/file_format.dart';

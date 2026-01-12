@@ -1,4 +1,4 @@
-import 'package:combat_tracker/datamodel/player_character.pb.dart';
+import 'package:combat_tracker/datamodel/generated/player_character.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';

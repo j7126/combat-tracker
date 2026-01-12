@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:combat_tracker/combat/table/fields/character_type_selector.dart';
-import 'package:combat_tracker/datamodel/character.pb.dart';
-import 'package:combat_tracker/datamodel/combat.pb.dart';
-import 'package:combat_tracker/datamodel/damage_event.pb.dart';
+import 'package:combat_tracker/datamodel/generated/character.pb.dart';
+import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
+import 'package:combat_tracker/datamodel/generated/damage_event.pb.dart';
 import 'package:combat_tracker/util/time_util.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';

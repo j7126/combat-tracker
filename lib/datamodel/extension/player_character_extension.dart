@@ -1,4 +1,4 @@
-import 'package:combat_tracker/datamodel/player_character.pb.dart';
+import 'package:combat_tracker/datamodel/generated/player_character.pb.dart';
 import 'package:uuid/uuid.dart';
 
 extension PlayerCharacterExtension on PlayerCharacter {

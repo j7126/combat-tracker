@@ -1,7 +1,7 @@
 import 'package:combat_tracker/campaign_manager.dart';
 import 'package:combat_tracker/combat/player_character_selector.dart';
-import 'package:combat_tracker/datamodel/character.pb.dart';
-import 'package:combat_tracker/datamodel/combat.pb.dart';
+import 'package:combat_tracker/datamodel/generated/character.pb.dart';
+import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
 import 'package:combat_tracker/datamodel/extension/character_extension.dart';
 import 'package:combat_tracker/datamodel/extension/combat_extension.dart';
 import 'package:combat_tracker/combat/table/character_row.dart';

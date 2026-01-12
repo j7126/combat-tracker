@@ -1,5 +1,5 @@
-import 'package:combat_tracker/datamodel/character.pb.dart';
-import 'package:combat_tracker/datamodel/damage_event.pb.dart';
+import 'package:combat_tracker/datamodel/generated/character.pb.dart';
+import 'package:combat_tracker/datamodel/generated/damage_event.pb.dart';
 import 'package:combat_tracker/datamodel/extension/timestamp_extension.dart';
 import 'package:uuid/uuid.dart';
 

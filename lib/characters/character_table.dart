@@ -1,7 +1,7 @@
 import 'package:combat_tracker/campaign_manager.dart';
 import 'package:combat_tracker/characters/character_editor.dart';
 import 'package:combat_tracker/datamodel/extension/player_character_extension.dart';
-import 'package:combat_tracker/datamodel/player_character.pb.dart';
+import 'package:combat_tracker/datamodel/generated/player_character.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 

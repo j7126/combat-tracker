@@ -1,6 +1,6 @@
 import 'package:combat_tracker/combat/damage_stats/damage_stats_dialog.dart';
-import 'package:combat_tracker/datamodel/character.pb.dart';
-import 'package:combat_tracker/datamodel/combat.pb.dart';
+import 'package:combat_tracker/datamodel/generated/character.pb.dart';
+import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
 import 'package:combat_tracker/combat/table/fields/character_initiative_field.dart';
 import 'package:combat_tracker/combat/table/fields/character_life_field.dart';
 import 'package:combat_tracker/combat/table/fields/character_name_field.dart';

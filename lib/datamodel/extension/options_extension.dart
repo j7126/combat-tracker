@@ -1,5 +1,5 @@
-import 'package:combat_tracker/datamodel/character.pb.dart';
-import 'package:combat_tracker/datamodel/options.pb.dart';
+import 'package:combat_tracker/datamodel/generated/character.pb.dart';
+import 'package:combat_tracker/datamodel/generated/options.pb.dart';
 
 extension OptionsExtension on Options {
   static List<CharacterType> defaultInitiativePriority = [
