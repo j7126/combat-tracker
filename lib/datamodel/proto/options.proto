@@ -7,4 +7,5 @@ import "custom_field.proto";
 message Options {
   repeated CharacterType initiativePriority = 1;
   repeated CustomField customFields = 2;
+  bool disableColorCodeLife = 3;
 }

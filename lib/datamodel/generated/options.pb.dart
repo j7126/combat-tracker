@@ -23,11 +23,14 @@ class Options extends $pb.GeneratedMessage {
   factory Options({
     $core.Iterable<$1.CharacterType>? initiativePriority,
     $core.Iterable<$0.CustomField>? customFields,
+    $core.bool? disableColorCodeLife,
   }) {
     final result = create();
     if (initiativePriority != null)
       result.initiativePriority.addAll(initiativePriority);
     if (customFields != null) result.customFields.addAll(customFields);
+    if (disableColorCodeLife != null)
+      result.disableColorCodeLife = disableColorCodeLife;
     return result;
   }
 
@@ -52,6 +55,8 @@ class Options extends $pb.GeneratedMessage {
         defaultEnumValue: $1.CharacterType.Player)
     ..pPM<$0.CustomField>(2, _omitFieldNames ? '' : 'customFields',
         protoName: 'customFields', subBuilder: $0.CustomField.create)
+    ..aOB(3, _omitFieldNames ? '' : 'disableColorCodeLife',
+        protoName: 'disableColorCodeLife')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -77,6 +82,15 @@ class Options extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(2)
   $pb.PbList<$0.CustomField> get customFields => $_getList(1);
+
+  @$pb.TagNumber(3)
+  $core.bool get disableColorCodeLife => $_getBF(2);
+  @$pb.TagNumber(3)
+  set disableColorCodeLife($core.bool value) => $_setBool(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasDisableColorCodeLife() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearDisableColorCodeLife() => $_clearField(3);
 }
 
 const $core.bool _omitFieldNames =

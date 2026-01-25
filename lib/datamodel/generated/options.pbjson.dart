@@ -35,6 +35,13 @@ const Options$json = {
       '6': '.combat_tracker.CustomField',
       '10': 'customFields'
     },
+    {
+      '1': 'disableColorCodeLife',
+      '3': 3,
+      '4': 1,
+      '5': 8,
+      '10': 'disableColorCodeLife'
+    },
   ],
 };
 
@@ -42,4 +49,5 @@ const Options$json = {
 final $typed_data.Uint8List optionsDescriptor = $convert.base64Decode(
     'CgdPcHRpb25zEk0KEmluaXRpYXRpdmVQcmlvcml0eRgBIAMoDjIdLmNvbWJhdF90cmFja2VyLk'
     'NoYXJhY3RlclR5cGVSEmluaXRpYXRpdmVQcmlvcml0eRI/CgxjdXN0b21GaWVsZHMYAiADKAsy'
-    'Gy5jb21iYXRfdHJhY2tlci5DdXN0b21GaWVsZFIMY3VzdG9tRmllbGRz');
+    'Gy5jb21iYXRfdHJhY2tlci5DdXN0b21GaWVsZFIMY3VzdG9tRmllbGRzEjIKFGRpc2FibGVDb2'
+    'xvckNvZGVMaWZlGAMgASgIUhRkaXNhYmxlQ29sb3JDb2RlTGlmZQ==');

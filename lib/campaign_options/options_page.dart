@@ -1,3 +1,4 @@
+import 'package:combat_tracker/campaign/campaign_manager.dart';
 import 'package:combat_tracker/campaign_options/custom_field_table.dart';
 import 'package:combat_tracker/campaign_options/initiative_priority_selector.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,43 @@ class _OptionsPageState extends State<OptionsPage> {
             constraints: BoxConstraints(maxWidth: 700),
             child: Column(
               children: [
+                Row(
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Color Code Life",
+                          style: TextTheme.of(context).titleLarge,
+                        ),
+                        Text(
+                          "Whether the current life should be color coded.",
+                          style: TextTheme.of(context).bodyMedium,
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    Switch(
+                      value: !CampaignManager
+                          .instance
+                          .campaign!
+                          .options
+                          .disableColorCodeLife,
+                      onChanged: (value) {
+                        setState(() {
+                          CampaignManager
+                                  .instance
+                                  .campaign!
+                                  .options
+                                  .disableColorCodeLife =
+                              !value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                Gap(16.0),
                 InitiativePrioritySelector(),
                 Gap(16.0),
                 CustomFieldTable(),

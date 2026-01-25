@@ -1,3 +1,4 @@
+import 'package:combat_tracker/campaign/campaign_manager.dart';
 import 'package:combat_tracker/datamodel/generated/character.pb.dart';
 import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
 import 'package:combat_tracker/datamodel/extension/character_extension.dart';
@@ -118,6 +119,17 @@ class _CombatLifeFieldState extends State<CombatLifeField> {
       maxLifeController.text = widget.character.maxLife.toString();
     }
 
+    Color? color;
+    if (!CampaignManager.instance.campaign!.options.disableColorCodeLife) {
+      if (widget.character.life / widget.character.maxLife > 0.5) {
+        color = Colors.green;
+      } else if (widget.character.life > 0) {
+        color = Colors.amber;
+      } else {
+        color = Colors.red;
+      }
+    }
+
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
@@ -142,6 +154,7 @@ class _CombatLifeFieldState extends State<CombatLifeField> {
               baseOffset: 0,
               extentOffset: lifeController.value.text.length,
             ),
+            style: TextStyle(color: color),
           ),
         ),
         Padding(
@@ -167,6 +180,17 @@ class _CombatLifeFieldState extends State<CombatLifeField> {
             onTap: () => maxLifeController.selection = TextSelection(
               baseOffset: 0,
               extentOffset: maxLifeController.value.text.length,
+            ),
+            style: TextStyle(
+              color:
+                  !CampaignManager
+                          .instance
+                          .campaign!
+                          .options
+                          .disableColorCodeLife &&
+                      widget.character.maxLife == 0
+                  ? Colors.red
+                  : null,
             ),
           ),
         ),
