@@ -1,0 +1,14 @@
+syntax = "proto3";
+package combat_tracker;
+
+import "character.proto";
+
+message CustomField {
+  string id = 1;
+  string name = 2;
+  bool enabledCharacter = 3;
+  bool enabledCombat = 4;
+  repeated CharacterType enabledCharacterTypes = 5;
+  string shortName = 6;
+  bool builtIn = 7;
+}

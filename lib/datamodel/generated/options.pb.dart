@@ -14,17 +14,20 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'character.pbenum.dart' as $0;
+import 'character.pbenum.dart' as $1;
+import 'custom_field.pb.dart' as $0;
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 class Options extends $pb.GeneratedMessage {
   factory Options({
-    $core.Iterable<$0.CharacterType>? initiativePriority,
+    $core.Iterable<$1.CharacterType>? initiativePriority,
+    $core.Iterable<$0.CustomField>? customFields,
   }) {
     final result = create();
     if (initiativePriority != null)
       result.initiativePriority.addAll(initiativePriority);
+    if (customFields != null) result.customFields.addAll(customFields);
     return result;
   }
 
@@ -41,12 +44,14 @@ class Options extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'Options',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'combat_tracker'),
       createEmptyInstance: create)
-    ..pc<$0.CharacterType>(
+    ..pc<$1.CharacterType>(
         1, _omitFieldNames ? '' : 'initiativePriority', $pb.PbFieldType.KE,
         protoName: 'initiativePriority',
-        valueOf: $0.CharacterType.valueOf,
-        enumValues: $0.CharacterType.values,
-        defaultEnumValue: $0.CharacterType.Player)
+        valueOf: $1.CharacterType.valueOf,
+        enumValues: $1.CharacterType.values,
+        defaultEnumValue: $1.CharacterType.Player)
+    ..pPM<$0.CustomField>(2, _omitFieldNames ? '' : 'customFields',
+        protoName: 'customFields', subBuilder: $0.CustomField.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -68,7 +73,10 @@ class Options extends $pb.GeneratedMessage {
   static Options? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $pb.PbList<$0.CharacterType> get initiativePriority => $_getList(0);
+  $pb.PbList<$1.CharacterType> get initiativePriority => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $pb.PbList<$0.CustomField> get customFields => $_getList(1);
 }
 
 const $core.bool _omitFieldNames =

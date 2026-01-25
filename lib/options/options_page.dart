@@ -1,5 +1,7 @@
+import 'package:combat_tracker/options/custom_field_table.dart';
 import 'package:combat_tracker/options/initiative_priority_selector.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class OptionsPage extends StatefulWidget {
   const OptionsPage({super.key});
@@ -20,6 +22,8 @@ class _OptionsPageState extends State<OptionsPage> {
             child: Column(
               children: [
                 InitiativePrioritySelector(),
+                Gap(16.0),
+                CustomFieldTable(),
               ],
             ),
           ),

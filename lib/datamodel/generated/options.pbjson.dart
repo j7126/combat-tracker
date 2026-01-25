@@ -27,10 +27,19 @@ const Options$json = {
       '6': '.combat_tracker.CharacterType',
       '10': 'initiativePriority'
     },
+    {
+      '1': 'customFields',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.combat_tracker.CustomField',
+      '10': 'customFields'
+    },
   ],
 };
 
 /// Descriptor for `Options`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List optionsDescriptor = $convert.base64Decode(
     'CgdPcHRpb25zEk0KEmluaXRpYXRpdmVQcmlvcml0eRgBIAMoDjIdLmNvbWJhdF90cmFja2VyLk'
-    'NoYXJhY3RlclR5cGVSEmluaXRpYXRpdmVQcmlvcml0eQ==');
+    'NoYXJhY3RlclR5cGVSEmluaXRpYXRpdmVQcmlvcml0eRI/CgxjdXN0b21GaWVsZHMYAiADKAsy'
+    'Gy5jb21iYXRfdHJhY2tlci5DdXN0b21GaWVsZFIMY3VzdG9tRmllbGRz');

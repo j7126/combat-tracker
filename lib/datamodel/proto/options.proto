@@ -2,7 +2,9 @@ syntax = "proto3";
 package combat_tracker;
 
 import "character.proto";
+import "custom_field.proto";
 
 message Options {
   repeated CharacterType initiativePriority = 1;
+  repeated CustomField customFields = 2;
 }
