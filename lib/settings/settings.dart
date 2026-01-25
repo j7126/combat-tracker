@@ -27,7 +27,7 @@ class SettingsService {
   List<String> _conf_recentFiles = [];
   List<String> get conf_recentFiles => _conf_recentFiles;
   set conf_recentFiles(List<String> val) {
-      _conf_recentFiles = val;
-      prefs.setStringList('recentFiles', val);
+    _conf_recentFiles = val;
+    prefs.setStringList('recentFiles', val);
   }
 }

@@ -3,7 +3,12 @@ import 'package:combat_tracker/datamodel/generated/custom_field.pb.dart';
 import 'package:flutter/material.dart';
 
 class CombatCustomField extends StatefulWidget {
-  const CombatCustomField({super.key, required this.character, required this.field, this.changed});
+  const CombatCustomField({
+    super.key,
+    required this.character,
+    required this.field,
+    this.changed,
+  });
 
   final Character character;
   final CustomField field;
@@ -21,7 +26,9 @@ class _CombatCustomFieldState extends State<CombatCustomField> {
     if (!widget.character.customFieldValues.containsKey(widget.field.id)) {
       widget.character.customFieldValues[widget.field.id] = "";
     }
-    controller = TextEditingController(text: widget.character.customFieldValues[widget.field.id]);
+    controller = TextEditingController(
+      text: widget.character.customFieldValues[widget.field.id],
+    );
     super.initState();
   }
 
@@ -33,7 +40,10 @@ class _CombatCustomFieldState extends State<CombatCustomField> {
         widget.character.customFieldValues[widget.field.id] = value;
         widget.changed?.call();
       },
-      decoration: InputDecoration(border: InputBorder.none, hintText: widget.field.shortName),
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        hintText: widget.field.shortName,
+      ),
     );
   }
 }

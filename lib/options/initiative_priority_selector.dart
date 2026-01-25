@@ -64,7 +64,10 @@ class _InitiativePrioritySelectorState
                   final double scale = lerpDouble(1, 1.02, animValue)!;
                   return Transform.scale(
                     scale: scale,
-                    child: Card(elevation: elevation, child: cards[index].child),
+                    child: Card(
+                      elevation: elevation,
+                      child: cards[index].child,
+                    ),
                   );
                 },
                 child: child,

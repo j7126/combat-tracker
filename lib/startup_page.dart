@@ -153,9 +153,7 @@ class _StartupPageState extends State<StartupPage> {
                 child: const Text('About'),
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const AboutPage(),
-                    ),
+                    MaterialPageRoute(builder: (context) => const AboutPage()),
                   );
                 },
               ),

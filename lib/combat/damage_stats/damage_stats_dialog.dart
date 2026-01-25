@@ -5,7 +5,11 @@ import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
 import 'package:flutter/material.dart';
 
 class DamageStatsDialog extends StatefulWidget {
-  const DamageStatsDialog({super.key, required this.combat, required this.character});
+  const DamageStatsDialog({
+    super.key,
+    required this.combat,
+    required this.character,
+  });
 
   final Character character;
   final Combat combat;
@@ -18,7 +22,10 @@ class _DamageStatsDialogDialogState extends State<DamageStatsDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      insetPadding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 64.0),
+      insetPadding: const EdgeInsets.symmetric(
+        horizontal: 40.0,
+        vertical: 64.0,
+      ),
       titlePadding: const EdgeInsets.only(top: 12.0, left: 18.0, right: 16.0),
       contentPadding: EdgeInsets.zero,
       title: Row(
@@ -42,8 +49,8 @@ class _DamageStatsDialogDialogState extends State<DamageStatsDialog> {
             children: [
               TabBar(
                 tabs: [
-                  Tab(child: Text("Damage Recieved"),),
-                  Tab(child: Text("Damage Dealt"),),
+                  Tab(child: Text("Damage Recieved")),
+                  Tab(child: Text("Damage Dealt")),
                 ],
               ),
               Expanded(
@@ -51,11 +58,17 @@ class _DamageStatsDialogDialogState extends State<DamageStatsDialog> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16.0, top: 8.0),
-                      child: DamageRecievedStats(combat: widget.combat, character: widget.character),
+                      child: DamageRecievedStats(
+                        combat: widget.combat,
+                        character: widget.character,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16.0, top: 8.0),
-                      child: DamageDealtStats(combat: widget.combat, character: widget.character),
+                      child: DamageDealtStats(
+                        combat: widget.combat,
+                        character: widget.character,
+                      ),
                     ),
                   ],
                 ),

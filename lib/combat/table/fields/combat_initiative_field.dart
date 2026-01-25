@@ -14,8 +14,7 @@ class CombatInitiativeField extends StatefulWidget {
   final Function()? changed;
 
   @override
-  State<CombatInitiativeField> createState() =>
-      _CombatInitiativeFieldState();
+  State<CombatInitiativeField> createState() => _CombatInitiativeFieldState();
 }
 
 class _CombatInitiativeFieldState extends State<CombatInitiativeField> {

@@ -12,7 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class CombatRow extends StatefulWidget {
-  const CombatRow({super.key, required this.combat, required this.character, this.showDelete = false, this.onDelete, this.changed});
+  const CombatRow({
+    super.key,
+    required this.combat,
+    required this.character,
+    this.showDelete = false,
+    this.onDelete,
+    this.changed,
+  });
 
   final Combat combat;
   final Character character;
@@ -43,36 +50,56 @@ class _CombatRowState extends State<CombatRow> {
       child: SizedBox(
         height: 48,
         child: Container(
-          decoration: BoxDecoration(color: _hovering ? ColorScheme.of(context).surfaceContainer : Colors.transparent, borderRadius: BorderRadius.circular(8.0)),
+          decoration: BoxDecoration(
+            color: _hovering
+                ? ColorScheme.of(context).surfaceContainer
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(8.0),
+          ),
           child: Row(
             children: [
               Gap(4.0),
               SizedBox(
                 width: 40,
-                child: CombatTypeSelector(character: widget.character, changed: widget.changed),
+                child: CombatTypeSelector(
+                  character: widget.character,
+                  changed: widget.changed,
+                ),
               ),
               VerticalDivider(),
               SizedBox(
                 width: 48,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: CombatInitiativeField(character: widget.character, changed: widget.changed),
+                  child: CombatInitiativeField(
+                    character: widget.character,
+                    changed: widget.changed,
+                  ),
                 ),
               ),
               VerticalDivider(),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: CombatNameField(character: widget.character, changed: widget.changed),
+                  child: CombatNameField(
+                    character: widget.character,
+                    changed: widget.changed,
+                  ),
                 ),
               ),
               VerticalDivider(),
-              for (var field in CampaignManager.instance.campaign!.options.customFields.where((x) => x.enabledCombat && x.isValid)) ...[
+              for (var field
+                  in CampaignManager.instance.campaign!.options.customFields
+                      .where((x) => x.enabledCombat && x.isValid)) ...[
                 SizedBox(
                   width: 80,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: CombatCustomField(character: widget.character, field: field, changed: widget.changed),
+                    child: CombatCustomField(
+                      character: widget.character,
+                      field: field,
+                      changed: widget.changed,
+                    ),
                   ),
                 ),
                 VerticalDivider(),
@@ -81,14 +108,21 @@ class _CombatRowState extends State<CombatRow> {
                 width: 100,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: CombatLifeField(combat: widget.combat, character: widget.character, changed: widget.changed),
+                  child: CombatLifeField(
+                    combat: widget.combat,
+                    character: widget.character,
+                    changed: widget.changed,
+                  ),
                 ),
               ),
               VerticalDivider(),
               IconButton(
                 onPressed: () => showDialog(
                   context: context,
-                  builder: (context) => DamageStatsDialog(combat: widget.combat, character: widget.character),
+                  builder: (context) => DamageStatsDialog(
+                    combat: widget.combat,
+                    character: widget.character,
+                  ),
                 ),
                 icon: Icon(Icons.history),
               ),
@@ -99,7 +133,11 @@ class _CombatRowState extends State<CombatRow> {
                   width: widget.showDelete ? 40 : 0,
                   child: Opacity(
                     opacity: widget.showDelete ? 1 : 0,
-                    child: IconButton(onPressed: widget.onDelete, icon: Icon(Icons.delete_outline), color: ColorScheme.of(context).error),
+                    child: IconButton(
+                      onPressed: widget.onDelete,
+                      icon: Icon(Icons.delete_outline),
+                      color: ColorScheme.of(context).error,
+                    ),
                   ),
                 ),
               ),

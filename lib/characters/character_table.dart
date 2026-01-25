@@ -32,8 +32,12 @@ class _CharacterTableState extends State<CharacterTable> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: playerCharacter.name.isEmpty
-              ? Text('Are you sure you want to delete unnamed character?\nThis cannot be undone.')
-              : Text('Are you sure you want to delete character "${playerCharacter.name}"?\nThis cannot be undone.'),
+              ? Text(
+                  'Are you sure you want to delete unnamed character?\nThis cannot be undone.',
+                )
+              : Text(
+                  'Are you sure you want to delete character "${playerCharacter.name}"?\nThis cannot be undone.',
+                ),
           actions: <Widget>[
             TextButton(
               child: const Text('Cancel'),
@@ -42,7 +46,10 @@ class _CharacterTableState extends State<CharacterTable> {
               },
             ),
             TextButton(
-              child: const Text('Delete', style: TextStyle(color: Colors.redAccent)),
+              child: const Text(
+                'Delete',
+                style: TextStyle(color: Colors.redAccent),
+              ),
               onPressed: () {
                 Navigator.of(context).pop(true);
               },
@@ -53,7 +60,9 @@ class _CharacterTableState extends State<CharacterTable> {
     );
     if (mounted && shouldDelete == true) {
       setState(() {
-        CampaignManager.instance.campaign!.characters.removeWhere((x) => x.id == playerCharacter.id);
+        CampaignManager.instance.campaign!.characters.removeWhere(
+          (x) => x.id == playerCharacter.id,
+        );
       });
       CampaignManager.instance.saveCampaign();
     }
@@ -75,7 +84,9 @@ class _CharacterTableState extends State<CharacterTable> {
                 onPressed: () {
                   var character = PlayerCharacterExtension.createCharacter();
                   setState(() {
-                    CampaignManager.instance.campaign!.characters.add(character);
+                    CampaignManager.instance.campaign!.characters.add(
+                      character,
+                    );
                   });
                   editCharacter(character);
                 },
@@ -89,7 +100,8 @@ class _CharacterTableState extends State<CharacterTable> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                for (var playerCharacter in CampaignManager.instance.campaign!.characters)
+                for (var playerCharacter
+                    in CampaignManager.instance.campaign!.characters)
                   Card(
                     clipBehavior: Clip.hardEdge,
                     child: InkWell(
@@ -102,11 +114,21 @@ class _CharacterTableState extends State<CharacterTable> {
                             padding: const EdgeInsets.all(12.0),
                             child: Icon(Icons.person, color: Colors.blue),
                           ),
-                          Expanded(child: Text(playerCharacter.name, style: TextTheme.of(context).bodyMedium?.copyWith(fontSize: 18))),
+                          Expanded(
+                            child: Text(
+                              playerCharacter.name,
+                              style: TextTheme.of(
+                                context,
+                              ).bodyMedium?.copyWith(fontSize: 18),
+                            ),
+                          ),
                           Gap(4.0),
                           IconButton(
                             onPressed: () => deleteCharacter(playerCharacter),
-                            icon: Icon(Icons.delete_outline, color: Colors.redAccent),
+                            icon: Icon(
+                              Icons.delete_outline,
+                              color: Colors.redAccent,
+                            ),
                           ),
                           Gap(8.0),
                         ],

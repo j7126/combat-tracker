@@ -23,7 +23,9 @@ class _CharacterEditorState extends State<CharacterEditor> {
   @override
   void initState() {
     nameController = TextEditingController(text: widget.character.name);
-    maxLifeController = TextEditingController(text: widget.character.maxLife.toString());
+    maxLifeController = TextEditingController(
+      text: widget.character.maxLife.toString(),
+    );
     notesController = TextEditingController(text: widget.character.notes);
     super.initState();
   }
@@ -50,7 +52,11 @@ class _CharacterEditorState extends State<CharacterEditor> {
               Row(
                 children: [
                   Expanded(
-                    child: Text("Edit Character", style: TextTheme.of(context).headlineSmall, textAlign: TextAlign.center),
+                    child: Text(
+                      "Edit Character",
+                      style: TextTheme.of(context).headlineSmall,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   IconButton(
                     onPressed: () {
@@ -81,14 +87,34 @@ class _CharacterEditorState extends State<CharacterEditor> {
                             widget.character.maxLife = intValue;
                           }
                         },
-                        keyboardType: TextInputType.numberWithOptions(signed: true, decimal: false),
-                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9\-+]'))],
+                        keyboardType: TextInputType.numberWithOptions(
+                          signed: true,
+                          decimal: false,
+                        ),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                            RegExp(r'[0-9\-+]'),
+                          ),
+                        ],
                         decoration: InputDecoration(labelText: "Max Life"),
-                        onTap: () => maxLifeController.selection = TextSelection(baseOffset: 0, extentOffset: maxLifeController.value.text.length),
+                        onTap: () =>
+                            maxLifeController.selection = TextSelection(
+                              baseOffset: 0,
+                              extentOffset: maxLifeController.value.text.length,
+                            ),
                       ),
                       Gap(8.0),
-                      for (var field in CampaignManager.instance.campaign!.options.customFields.where((x) => x.enabledCharacter && x.isValid))
-                        CharacterCustomField(character: widget.character, field: field),
+                      for (var field
+                          in CampaignManager
+                              .instance
+                              .campaign!
+                              .options
+                              .customFields
+                              .where((x) => x.enabledCharacter && x.isValid))
+                        CharacterCustomField(
+                          character: widget.character,
+                          field: field,
+                        ),
                       Gap(8.0),
                       TextField(
                         controller: notesController,

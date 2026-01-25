@@ -3,7 +3,11 @@ import 'package:combat_tracker/datamodel/generated/player_character.pb.dart';
 import 'package:flutter/material.dart';
 
 class CharacterCustomField extends StatefulWidget {
-  const CharacterCustomField({super.key, required this.character, required this.field});
+  const CharacterCustomField({
+    super.key,
+    required this.character,
+    required this.field,
+  });
 
   final PlayerCharacter character;
   final CustomField field;
@@ -20,7 +24,9 @@ class _CharacterCustomFieldState extends State<CharacterCustomField> {
     if (!widget.character.customFieldValues.containsKey(widget.field.id)) {
       widget.character.customFieldValues[widget.field.id] = "";
     }
-    controller = TextEditingController(text: widget.character.customFieldValues[widget.field.id]);
+    controller = TextEditingController(
+      text: widget.character.customFieldValues[widget.field.id],
+    );
     super.initState();
   }
 

@@ -13,7 +13,8 @@ class PlayerCharacterSelector extends StatefulWidget {
   final Combat combat;
 
   @override
-  State<PlayerCharacterSelector> createState() => _PlayerCharacterSelectorState();
+  State<PlayerCharacterSelector> createState() =>
+      _PlayerCharacterSelectorState();
 }
 
 class _PlayerCharacterSelectorState extends State<PlayerCharacterSelector> {
@@ -62,7 +63,8 @@ class _PlayerCharacterSelectorState extends State<PlayerCharacterSelector> {
           GestureDetector(
             onTap: () {
               var val = selectedIds.isEmpty;
-              for (var playerCharacter in CampaignManager.instance.campaign!.characters) {
+              for (var playerCharacter
+                  in CampaignManager.instance.campaign!.characters) {
                 checkedChanged(playerCharacter, val);
               }
             },
@@ -74,36 +76,64 @@ class _PlayerCharacterSelectorState extends State<PlayerCharacterSelector> {
                 Checkbox(
                   tristate: true,
                   value: selectedIds.isNotEmpty
-                      ? selectedIds.length == CampaignManager.instance.campaign!.characters.length
+                      ? selectedIds.length ==
+                                CampaignManager
+                                    .instance
+                                    .campaign!
+                                    .characters
+                                    .length
                             ? true
                             : null
                       : false,
                   onChanged: (value) {
-                    for (var playerCharacter in CampaignManager.instance.campaign!.characters) {
+                    for (var playerCharacter
+                        in CampaignManager.instance.campaign!.characters) {
                       checkedChanged(playerCharacter, value == true);
                     }
                   },
                 ),
                 Gap(16.0),
-                Expanded(child: Text("Select All", style: TextTheme.of(context).bodyMedium?.copyWith(fontSize: 18))),
+                Expanded(
+                  child: Text(
+                    "Select All",
+                    style: TextTheme.of(
+                      context,
+                    ).bodyMedium?.copyWith(fontSize: 18),
+                  ),
+                ),
                 Gap(4.0),
               ],
             ),
           ),
-          for (var playerCharacter in CampaignManager.instance.campaign!.characters)
+          for (var playerCharacter
+              in CampaignManager.instance.campaign!.characters)
             GestureDetector(
-              onTap: () => checkedChanged(playerCharacter, !selectedIds.contains(playerCharacter.id)),
+              onTap: () => checkedChanged(
+                playerCharacter,
+                !selectedIds.contains(playerCharacter.id),
+              ),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Gap(4.0),
-                  Checkbox(value: selectedIds.contains(playerCharacter.id), onChanged: (value) => checkedChanged(playerCharacter, value ?? false)),
+                  Checkbox(
+                    value: selectedIds.contains(playerCharacter.id),
+                    onChanged: (value) =>
+                        checkedChanged(playerCharacter, value ?? false),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Icon(Icons.person, color: Colors.blue),
                   ),
-                  Expanded(child: Text(playerCharacter.name, style: TextTheme.of(context).bodyMedium?.copyWith(fontSize: 18))),
+                  Expanded(
+                    child: Text(
+                      playerCharacter.name,
+                      style: TextTheme.of(
+                        context,
+                      ).bodyMedium?.copyWith(fontSize: 18),
+                    ),
+                  ),
                   Gap(4.0),
                 ],
               ),

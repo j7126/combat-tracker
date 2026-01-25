@@ -1,6 +1,7 @@
 class TimeUtil {
   static String timeDiffString(DateTime dt) {
-    var diff = DateTime.now().millisecondsSinceEpoch - dt.millisecondsSinceEpoch;
+    var diff =
+        DateTime.now().millisecondsSinceEpoch - dt.millisecondsSinceEpoch;
     diff ~/= 1000;
     var s = diff % 60;
     diff ~/= 60;

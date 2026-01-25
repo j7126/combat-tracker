@@ -72,7 +72,11 @@ class CampaignManager {
     }
 
     file = File(filePath);
-    campaign = Campaign(combats: [], characters: [], createdTimestamp: TimestampExtension.now());
+    campaign = Campaign(
+      combats: [],
+      characters: [],
+      createdTimestamp: TimestampExtension.now(),
+    );
     var buffer = campaign!.writeToBuffer();
     var bufferHash = xxh3(buffer);
     lastFileHash = bufferHash;
@@ -89,7 +93,11 @@ class CampaignManager {
     closeCampaign();
 
     if (campaignFile == null) {
-      var result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: [campaignFileExtension]);
+      var result = await FilePicker.platform.pickFiles(
+        allowMultiple: false,
+        type: FileType.custom,
+        allowedExtensions: [campaignFileExtension],
+      );
       if (result != null && result.files.length == 1) {
         campaignFile = CampaignFile(path: result.files.single.path);
       }
@@ -98,7 +106,9 @@ class CampaignManager {
       File? file;
       if (Platform.isMacOS) {
         if (campaignFile.macosBookmark.isNotEmpty) {
-          var entity = await SecureBookmarks().resolveBookmark(campaignFile.macosBookmark);
+          var entity = await SecureBookmarks().resolveBookmark(
+            campaignFile.macosBookmark,
+          );
           if (entity is File) {
             file = entity;
             await SecureBookmarks().startAccessingSecurityScopedResource(file);
@@ -140,7 +150,9 @@ class CampaignManager {
   void _campaignOpened() async {
     if (isOpen) {
       campaign!.validate();
-      await windowManager.setTitle("Combat Tracker: ${basenameWithoutExtension(file!.path)}");
+      await windowManager.setTitle(
+        "Combat Tracker: ${basenameWithoutExtension(file!.path)}",
+      );
     }
   }
 }

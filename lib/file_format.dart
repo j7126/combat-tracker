@@ -27,12 +27,17 @@ class CampaignFileFormat {
   static const int versionLen = 1; // header version
   static const int flagsLen = 4; // flags - currently unused
   static const int payloadSizeLen = 4; // content length
-  static const int headerSize = magicLen + versionLen + flagsLen + payloadSizeLen;
+  static const int headerSize =
+      magicLen + versionLen + flagsLen + payloadSizeLen;
 
   // footer structure
   static const int hashLen = 32;
 
-  static Future writeFile({required File file, required Uint8List protobufPayload, int flags = 0}) async {
+  static Future writeFile({
+    required File file,
+    required Uint8List protobufPayload,
+    int flags = 0,
+  }) async {
     if (protobufPayload.length > 0xFFFFFFFF) {
       throw ArgumentError('Payload too large');
     }
@@ -53,7 +58,8 @@ class CampaignFileFormat {
   }
 
   static Future<CampaignFileResult> readFile(File file) async {
-    if (!await file.exists()) throw FileSystemException('File not found', file.path);
+    if (!await file.exists())
+      throw FileSystemException('File not found', file.path);
 
     final bytes = await file.readAsBytes();
     if (bytes.length < headerSize) {
@@ -80,7 +86,9 @@ class CampaignFileFormat {
     final flags = _bytesToU32(data.sublist(offset, offset += flagsLen));
 
     // read header - payload size
-    final payloadSize = _bytesToU32(data.sublist(offset, offset += payloadSizeLen));
+    final payloadSize = _bytesToU32(
+      data.sublist(offset, offset += payloadSizeLen),
+    );
 
     // check remaining size is correct
     final remaining = data.length - offset;
@@ -97,7 +105,8 @@ class CampaignFileFormat {
 
     // verify payload hash
     var payloadDigest = sha256.convert(payload).bytes;
-    if (!_listEquals(payloadDigest, footerPayloadHash)) throw FileFormatException('Payload hash mismatch');
+    if (!_listEquals(payloadDigest, footerPayloadHash))
+      throw FileFormatException('Payload hash mismatch');
 
     return CampaignFileResult(payload: payload, flags: flags);
   }

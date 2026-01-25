@@ -227,9 +227,7 @@ class _DamageDealtStatsState extends State<DamageDealtStats> {
                                     var targetCharacter = widget
                                         .combat
                                         .characters
-                                        .firstWhere(
-                                          (x) => x.id == event.$2,
-                                        );
+                                        .firstWhere((x) => x.id == event.$2);
                                     return Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [

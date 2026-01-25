@@ -131,7 +131,9 @@ class _CombatSessionsState extends State<CombatSessions> {
                                     ),
                                     Text(
                                       DateFormat.yMd().add_jm().format(
-                                        combat.createdTimestamp.toDateTime().toLocal(),
+                                        combat.createdTimestamp
+                                            .toDateTime()
+                                            .toLocal(),
                                       ),
                                       style: TextTheme.of(context).bodySmall
                                           ?.copyWith(
