@@ -1,5 +1,5 @@
-import 'package:combat_tracker/options/custom_field_table.dart';
-import 'package:combat_tracker/options/initiative_priority_selector.dart';
+import 'package:combat_tracker/campaign_options/custom_field_table.dart';
+import 'package:combat_tracker/campaign_options/initiative_priority_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 

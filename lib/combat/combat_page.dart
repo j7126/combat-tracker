@@ -1,4 +1,4 @@
-import 'package:combat_tracker/campaign_manager.dart';
+import 'package:combat_tracker/campaign/campaign_manager.dart';
 import 'package:combat_tracker/combat/table/combat_table.dart';
 import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
 import 'package:flutter/material.dart';

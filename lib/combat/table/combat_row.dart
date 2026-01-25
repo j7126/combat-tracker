@@ -1,4 +1,4 @@
-import 'package:combat_tracker/campaign_manager.dart';
+import 'package:combat_tracker/campaign/campaign_manager.dart';
 import 'package:combat_tracker/combat/damage_stats/damage_stats_dialog.dart';
 import 'package:combat_tracker/combat/table/fields/combat_custom_field.dart';
 import 'package:combat_tracker/datamodel/extension/custom_field_extension.dart';

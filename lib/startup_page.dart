@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:combat_tracker/about/about_page.dart';
-import 'package:combat_tracker/campaign_manager.dart';
+import 'package:combat_tracker/campaign/campaign_manager.dart';
 import 'package:combat_tracker/campaign/campaign_page.dart';
 import 'package:combat_tracker/datamodel/generated/campaign_file.pb.dart';
 import 'package:combat_tracker/settings/settings.dart';

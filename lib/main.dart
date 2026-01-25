@@ -1,4 +1,4 @@
-import 'package:combat_tracker/campaign_manager.dart';
+import 'package:combat_tracker/campaign/campaign_manager.dart';
 import 'package:combat_tracker/settings/settings.dart';
 import 'package:combat_tracker/startup_page.dart';
 import 'package:dynamic_color/dynamic_color.dart';

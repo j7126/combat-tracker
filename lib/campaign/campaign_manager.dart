@@ -5,7 +5,7 @@ import 'package:combat_tracker/datamodel/generated/campaign.pb.dart';
 import 'package:combat_tracker/datamodel/generated/campaign_file.pb.dart';
 import 'package:combat_tracker/datamodel/extension/campaign_extension.dart';
 import 'package:combat_tracker/datamodel/extension/timestamp_extension.dart';
-import 'package:combat_tracker/file_format.dart';
+import 'package:combat_tracker/campaign/file_format.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:macos_secure_bookmarks/macos_secure_bookmarks.dart';
 import 'package:path/path.dart';

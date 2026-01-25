@@ -1,4 +1,4 @@
-import 'package:combat_tracker/campaign_manager.dart';
+import 'package:combat_tracker/campaign/campaign_manager.dart';
 import 'package:combat_tracker/combat/combat_page.dart';
 import 'package:combat_tracker/combat/create_combat_dialog.dart';
 import 'package:combat_tracker/datamodel/generated/combat.pb.dart';

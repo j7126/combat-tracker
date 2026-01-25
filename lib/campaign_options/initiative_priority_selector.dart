@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:combat_tracker/campaign_manager.dart';
+import 'package:combat_tracker/campaign/campaign_manager.dart';
 import 'package:combat_tracker/datamodel/extension/character_type_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';

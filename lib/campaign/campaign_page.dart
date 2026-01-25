@@ -1,7 +1,7 @@
-import 'package:combat_tracker/campaign_manager.dart';
+import 'package:combat_tracker/campaign/campaign_manager.dart';
 import 'package:combat_tracker/characters/character_table.dart';
 import 'package:combat_tracker/combat/combat_sessions.dart';
-import 'package:combat_tracker/options/options_page.dart';
+import 'package:combat_tracker/campaign_options/options_page.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 

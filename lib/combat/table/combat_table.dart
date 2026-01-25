@@ -1,4 +1,4 @@
-import 'package:combat_tracker/campaign_manager.dart';
+import 'package:combat_tracker/campaign/campaign_manager.dart';
 import 'package:combat_tracker/combat/player_character_selector.dart';
 import 'package:combat_tracker/datamodel/extension/custom_field_extension.dart';
 import 'package:combat_tracker/datamodel/generated/character.pb.dart';
