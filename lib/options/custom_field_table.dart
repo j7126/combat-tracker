@@ -97,7 +97,11 @@ class _CustomFieldTableState extends State<CustomFieldTable> {
               in CampaignManager.instance.campaign!.options.customFields.where(
                 (x) => !x.builtIn,
               ))
-            CustomFieldRow(field: field, onDelete: () => deleteField(field)),
+            CustomFieldRow(
+              key: Key(field.id),
+              field: field,
+              onDelete: () => deleteField(field),
+            ),
         ],
       ),
     );
