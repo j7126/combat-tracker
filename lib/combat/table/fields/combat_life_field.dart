@@ -4,8 +4,8 @@ import 'package:combat_tracker/datamodel/extension/character_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class CharacterLifeField extends StatefulWidget {
-  const CharacterLifeField({
+class CombatLifeField extends StatefulWidget {
+  const CombatLifeField({
     super.key,
     required this.combat,
     required this.character,
@@ -17,10 +17,10 @@ class CharacterLifeField extends StatefulWidget {
   final Function()? changed;
 
   @override
-  State<CharacterLifeField> createState() => _CharacterLifeFieldState();
+  State<CombatLifeField> createState() => _CombatLifeFieldState();
 }
 
-class _CharacterLifeFieldState extends State<CharacterLifeField> {
+class _CombatLifeFieldState extends State<CombatLifeField> {
   late TextEditingController lifeController;
   late String lifeString;
   late TextEditingController maxLifeController;

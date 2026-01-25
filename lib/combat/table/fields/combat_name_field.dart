@@ -1,17 +1,17 @@
 import 'package:combat_tracker/datamodel/generated/character.pb.dart';
 import 'package:flutter/material.dart';
 
-class CharacterNameField extends StatefulWidget {
-  const CharacterNameField({super.key, required this.character, this.changed});
+class CombatNameField extends StatefulWidget {
+  const CombatNameField({super.key, required this.character, this.changed});
 
   final Character character;
   final Function()? changed;
 
   @override
-  State<CharacterNameField> createState() => _CharacterNameFieldState();
+  State<CombatNameField> createState() => _CombatNameFieldState();
 }
 
-class _CharacterNameFieldState extends State<CharacterNameField> {
+class _CombatNameFieldState extends State<CombatNameField> {
   late TextEditingController controller;
 
   @override

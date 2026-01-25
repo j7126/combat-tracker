@@ -3,8 +3,8 @@ import 'package:combat_tracker/datamodel/generated/character.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-class CharacterTypeSelector extends StatefulWidget {
-  const CharacterTypeSelector({
+class CombatTypeSelector extends StatefulWidget {
+  const CombatTypeSelector({
     super.key,
     required this.character,
     this.changed,
@@ -16,10 +16,10 @@ class CharacterTypeSelector extends StatefulWidget {
   final bool readOnly;
 
   @override
-  State<CharacterTypeSelector> createState() => _CharacterTypeSelectorState();
+  State<CombatTypeSelector> createState() => _CombatTypeSelectorState();
 }
 
-class _CharacterTypeSelectorState extends State<CharacterTypeSelector> {
+class _CombatTypeSelectorState extends State<CombatTypeSelector> {
   Widget _menuEntry(CharacterType type) => MenuItemButton(
     onPressed: () {
       setState(() {

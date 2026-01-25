@@ -3,8 +3,8 @@ import 'package:combat_tracker/datamodel/extension/character_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class CharacterInitiativeField extends StatefulWidget {
-  const CharacterInitiativeField({
+class CombatInitiativeField extends StatefulWidget {
+  const CombatInitiativeField({
     super.key,
     required this.character,
     this.changed,
@@ -14,11 +14,11 @@ class CharacterInitiativeField extends StatefulWidget {
   final Function()? changed;
 
   @override
-  State<CharacterInitiativeField> createState() =>
-      _CharacterInitiativeFieldState();
+  State<CombatInitiativeField> createState() =>
+      _CombatInitiativeFieldState();
 }
 
-class _CharacterInitiativeFieldState extends State<CharacterInitiativeField> {
+class _CombatInitiativeFieldState extends State<CombatInitiativeField> {
   late TextEditingController controller;
   late String textValue;
   FocusNode focusNode = FocusNode();

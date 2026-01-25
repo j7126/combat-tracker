@@ -4,7 +4,7 @@ import 'package:combat_tracker/datamodel/generated/character.pb.dart';
 import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
 import 'package:combat_tracker/datamodel/extension/character_extension.dart';
 import 'package:combat_tracker/datamodel/extension/combat_extension.dart';
-import 'package:combat_tracker/combat/table/character_row.dart';
+import 'package:combat_tracker/combat/table/combat_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
@@ -395,7 +395,7 @@ class _CombatTableState extends State<CombatTable> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       for (var character in widget.combat.characters)
-                        CharacterRow(
+                        CombatRow(
                           key: ValueKey(character.id),
                           combat: widget.combat,
                           character: character,

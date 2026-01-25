@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:combat_tracker/combat/table/fields/character_type_selector.dart';
+import 'package:combat_tracker/combat/table/fields/combat_type_selector.dart';
 import 'package:combat_tracker/datamodel/generated/character.pb.dart';
 import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
 import 'package:combat_tracker/util/time_util.dart';
@@ -179,7 +179,7 @@ class _DamageRecievedStatsState extends State<DamageRecievedStats> {
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    CharacterTypeSelector(
+                                    CombatTypeSelector(
                                       character: sourceCharacter,
                                       readOnly: true,
                                     ),
@@ -319,7 +319,7 @@ class _DamageRecievedStatsState extends State<DamageRecievedStats> {
                                               Row(
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
-                                                  CharacterTypeSelector(
+                                                  CombatTypeSelector(
                                                     character: sourceCharacter,
                                                     readOnly: true,
                                                   ),

@@ -1,15 +1,15 @@
 import 'package:combat_tracker/combat/damage_stats/damage_stats_dialog.dart';
 import 'package:combat_tracker/datamodel/generated/character.pb.dart';
 import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
-import 'package:combat_tracker/combat/table/fields/character_initiative_field.dart';
-import 'package:combat_tracker/combat/table/fields/character_life_field.dart';
-import 'package:combat_tracker/combat/table/fields/character_name_field.dart';
-import 'package:combat_tracker/combat/table/fields/character_type_selector.dart';
+import 'package:combat_tracker/combat/table/fields/combat_initiative_field.dart';
+import 'package:combat_tracker/combat/table/fields/combat_life_field.dart';
+import 'package:combat_tracker/combat/table/fields/combat_name_field.dart';
+import 'package:combat_tracker/combat/table/fields/combat_type_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-class CharacterRow extends StatefulWidget {
-  const CharacterRow({super.key, required this.combat, required this.character, this.showDelete = false, this.onDelete, this.changed});
+class CombatRow extends StatefulWidget {
+  const CombatRow({super.key, required this.combat, required this.character, this.showDelete = false, this.onDelete, this.changed});
 
   final Combat combat;
   final Character character;
@@ -18,10 +18,10 @@ class CharacterRow extends StatefulWidget {
   final Function()? changed;
 
   @override
-  State<CharacterRow> createState() => _CharacterRowState();
+  State<CombatRow> createState() => _CombatRowState();
 }
 
-class _CharacterRowState extends State<CharacterRow> {
+class _CombatRowState extends State<CombatRow> {
   bool _hovering = false;
 
   @override
@@ -46,21 +46,21 @@ class _CharacterRowState extends State<CharacterRow> {
               Gap(4.0),
               SizedBox(
                 width: 40,
-                child: CharacterTypeSelector(character: widget.character, changed: widget.changed),
+                child: CombatTypeSelector(character: widget.character, changed: widget.changed),
               ),
               VerticalDivider(),
               SizedBox(
                 width: 48,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: CharacterInitiativeField(character: widget.character, changed: widget.changed),
+                  child: CombatInitiativeField(character: widget.character, changed: widget.changed),
                 ),
               ),
               VerticalDivider(),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: CharacterNameField(character: widget.character, changed: widget.changed),
+                  child: CombatNameField(character: widget.character, changed: widget.changed),
                 ),
               ),
               VerticalDivider(),
@@ -68,7 +68,7 @@ class _CharacterRowState extends State<CharacterRow> {
                 width: 100,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: CharacterLifeField(combat: widget.combat, character: widget.character, changed: widget.changed),
+                  child: CombatLifeField(combat: widget.combat, character: widget.character, changed: widget.changed),
                 ),
               ),
               VerticalDivider(),
