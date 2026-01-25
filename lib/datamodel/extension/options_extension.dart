@@ -18,6 +18,7 @@ extension OptionsExtension on Options {
       shortName: "AC",
       enabledCharacter: true,
       enabledCombat: true,
+      type: CustomFieldType.Numeric,
     ),
   ];
 

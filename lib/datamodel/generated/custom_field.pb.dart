@@ -15,8 +15,11 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'character.pbenum.dart' as $0;
+import 'custom_field.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
+
+export 'custom_field.pbenum.dart';
 
 class CustomField extends $pb.GeneratedMessage {
   factory CustomField({
@@ -27,6 +30,7 @@ class CustomField extends $pb.GeneratedMessage {
     $core.Iterable<$0.CharacterType>? enabledCharacterTypes,
     $core.String? shortName,
     $core.bool? builtIn,
+    CustomFieldType? type,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -37,6 +41,7 @@ class CustomField extends $pb.GeneratedMessage {
       result.enabledCharacterTypes.addAll(enabledCharacterTypes);
     if (shortName != null) result.shortName = shortName;
     if (builtIn != null) result.builtIn = builtIn;
+    if (type != null) result.type = type;
     return result;
   }
 
@@ -66,6 +71,8 @@ class CustomField extends $pb.GeneratedMessage {
         defaultEnumValue: $0.CharacterType.Player)
     ..aOS(6, _omitFieldNames ? '' : 'shortName', protoName: 'shortName')
     ..aOB(7, _omitFieldNames ? '' : 'builtIn', protoName: 'builtIn')
+    ..aE<CustomFieldType>(8, _omitFieldNames ? '' : 'type',
+        enumValues: CustomFieldType.values)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -143,6 +150,15 @@ class CustomField extends $pb.GeneratedMessage {
   $core.bool hasBuiltIn() => $_has(6);
   @$pb.TagNumber(7)
   void clearBuiltIn() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  CustomFieldType get type => $_getN(7);
+  @$pb.TagNumber(8)
+  set type(CustomFieldType value) => $_setField(8, value);
+  @$pb.TagNumber(8)
+  $core.bool hasType() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearType() => $_clearField(8);
 }
 
 const $core.bool _omitFieldNames =

@@ -1,8 +1,10 @@
 import 'package:combat_tracker/datamodel/extension/custom_field_extension.dart';
+import 'package:combat_tracker/datamodel/extension/custom_field_type_extension.dart';
 import 'package:combat_tracker/datamodel/generated/custom_field.pb.dart';
 import 'package:combat_tracker/util/always_disabled_focus_node.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gap/gap.dart';
 
 class CustomFieldRow extends StatefulWidget {
   const CustomFieldRow({
@@ -22,6 +24,24 @@ class _CustomFieldRowState extends State<CustomFieldRow> {
   late TextEditingController nameController;
   late TextEditingController shortNameController;
   FocusNode menuFocusNode = FocusNode();
+
+  Widget _typeMenuEntry(CustomFieldType type) => MenuItemButton(
+    onPressed: () {
+      if (widget.field.builtIn) {
+        return;
+      }
+      setState(() {
+        widget.field.type = type;
+      });
+    },
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [type.getIcon(), Gap(8.0), Text(type.getName())],
+      ),
+    ),
+  );
 
   @override
   void initState() {
@@ -48,6 +68,27 @@ class _CustomFieldRowState extends State<CustomFieldRow> {
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
+              MenuAnchor(
+                menuChildren: [
+                  _typeMenuEntry(CustomFieldType.Text),
+                  _typeMenuEntry(CustomFieldType.Numeric),
+                ],
+                builder: (_, MenuController controller, Widget? child) {
+                  return IconButton(
+                    onPressed: widget.field.builtIn
+                        ? null
+                        : () {
+                            if (controller.isOpen) {
+                              controller.close();
+                            } else {
+                              controller.open();
+                            }
+                          },
+                    icon: widget.field.type.getIcon(),
+                  );
+                },
+              ),
+              VerticalDivider(),
               SizedBox(
                 width: 100,
                 child: TextField(

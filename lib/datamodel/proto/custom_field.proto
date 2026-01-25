@@ -11,4 +11,10 @@ message CustomField {
   repeated CharacterType enabledCharacterTypes = 5;
   string shortName = 6;
   bool builtIn = 7;
+  CustomFieldType type = 8;
+}
+
+enum CustomFieldType {
+  Text = 0;
+  Numeric = 1;
 }

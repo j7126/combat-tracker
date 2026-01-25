@@ -1,6 +1,7 @@
 import 'package:combat_tracker/datamodel/generated/custom_field.pb.dart';
 import 'package:combat_tracker/datamodel/generated/player_character.pb.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CharacterCustomField extends StatefulWidget {
   const CharacterCustomField({
@@ -41,9 +42,19 @@ class _CharacterCustomFieldState extends State<CharacterCustomField> {
     return TextField(
       controller: controller,
       onChanged: (value) {
+        if (widget.field.type == CustomFieldType.Numeric) {
+          var intValue = int.tryParse(value) ?? 0;
+          value = intValue.toString();
+        }
         widget.character.customFieldValues[widget.field.id] = value;
       },
       decoration: InputDecoration(labelText: widget.field.name),
+      keyboardType: widget.field.type == CustomFieldType.Numeric
+          ? TextInputType.numberWithOptions(signed: true, decimal: false)
+          : null,
+      inputFormatters: widget.field.type == CustomFieldType.Numeric
+          ? [FilteringTextInputFormatter.allow(RegExp(r'[0-9\-+]'))]
+          : null,
     );
   }
 }

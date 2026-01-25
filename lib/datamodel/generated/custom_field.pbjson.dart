@@ -15,6 +15,19 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use customFieldTypeDescriptor instead')
+const CustomFieldType$json = {
+  '1': 'CustomFieldType',
+  '2': [
+    {'1': 'Text', '2': 0},
+    {'1': 'Numeric', '2': 1},
+  ],
+};
+
+/// Descriptor for `CustomFieldType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List customFieldTypeDescriptor = $convert
+    .base64Decode('Cg9DdXN0b21GaWVsZFR5cGUSCAoEVGV4dBAAEgsKB051bWVyaWMQAQ==');
+
 @$core.Deprecated('Use customFieldDescriptor instead')
 const CustomField$json = {
   '1': 'CustomField',
@@ -33,6 +46,14 @@ const CustomField$json = {
     },
     {'1': 'shortName', '3': 6, '4': 1, '5': 9, '10': 'shortName'},
     {'1': 'builtIn', '3': 7, '4': 1, '5': 8, '10': 'builtIn'},
+    {
+      '1': 'type',
+      '3': 8,
+      '4': 1,
+      '5': 14,
+      '6': '.combat_tracker.CustomFieldType',
+      '10': 'type'
+    },
   ],
 };
 
@@ -42,4 +63,5 @@ final $typed_data.Uint8List customFieldDescriptor = $convert.base64Decode(
     'FibGVkQ2hhcmFjdGVyGAMgASgIUhBlbmFibGVkQ2hhcmFjdGVyEiQKDWVuYWJsZWRDb21iYXQY'
     'BCABKAhSDWVuYWJsZWRDb21iYXQSUwoVZW5hYmxlZENoYXJhY3RlclR5cGVzGAUgAygOMh0uY2'
     '9tYmF0X3RyYWNrZXIuQ2hhcmFjdGVyVHlwZVIVZW5hYmxlZENoYXJhY3RlclR5cGVzEhwKCXNo'
-    'b3J0TmFtZRgGIAEoCVIJc2hvcnROYW1lEhgKB2J1aWx0SW4YByABKAhSB2J1aWx0SW4=');
+    'b3J0TmFtZRgGIAEoCVIJc2hvcnROYW1lEhgKB2J1aWx0SW4YByABKAhSB2J1aWx0SW4SMwoEdH'
+    'lwZRgIIAEoDjIfLmNvbWJhdF90cmFja2VyLkN1c3RvbUZpZWxkVHlwZVIEdHlwZQ==');
