@@ -17,15 +17,23 @@ class CharacterEditor extends StatefulWidget {
 
 class _CharacterEditorState extends State<CharacterEditor> {
   late TextEditingController nameController;
-  late TextEditingController lifeController;
   late TextEditingController maxLifeController;
+  late TextEditingController notesController;
 
   @override
   void initState() {
     nameController = TextEditingController(text: widget.character.name);
     maxLifeController = TextEditingController(text: widget.character.maxLife.toString());
-
+    notesController = TextEditingController(text: widget.character.notes);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    maxLifeController.dispose();
+    notesController.dispose();
+    super.dispose();
   }
 
   @override
@@ -34,7 +42,7 @@ class _CharacterEditorState extends State<CharacterEditor> {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
         child: Container(
-          constraints: BoxConstraints(maxWidth: 500),
+          constraints: BoxConstraints(maxWidth: 600),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -53,35 +61,45 @@ class _CharacterEditorState extends State<CharacterEditor> {
                 ],
               ),
               Gap(8.0),
-              TextField(
-                controller: nameController,
-                onChanged: (value) {
-                  widget.character.name = value;
-                },
-                decoration: InputDecoration(labelText: "Name"),
-              ),
-              Gap(8.0),
-              TextField(
-                controller: maxLifeController,
-                onChanged: (value) {
-                  var intValue = int.tryParse(value);
-                  if (intValue != null) {
-                    widget.character.maxLife = intValue;
-                  }
-                },
-                keyboardType: TextInputType.numberWithOptions(signed: true, decimal: false),
-                inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9\-+]'))],
-                decoration: InputDecoration(labelText: "Max Life"),
-                onTap: () => maxLifeController.selection = TextSelection(baseOffset: 0, extentOffset: maxLifeController.value.text.length),
-              ),
-              Gap(8.0),
-              for (var field in CampaignManager.instance.campaign!.options.customFields.where((x) => x.enabledCharacter && x.isValid))
-                CharacterCustomField(character: widget.character, field: field),
-              Gap(8.0),
-              TextField(
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: InputDecoration(labelText: "Notes"),
+              Flexible(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      TextField(
+                        controller: nameController,
+                        onChanged: (value) {
+                          widget.character.name = value;
+                        },
+                        decoration: InputDecoration(labelText: "Name"),
+                      ),
+                      Gap(8.0),
+                      TextField(
+                        controller: maxLifeController,
+                        onChanged: (value) {
+                          var intValue = int.tryParse(value);
+                          if (intValue != null) {
+                            widget.character.maxLife = intValue;
+                          }
+                        },
+                        keyboardType: TextInputType.numberWithOptions(signed: true, decimal: false),
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9\-+]'))],
+                        decoration: InputDecoration(labelText: "Max Life"),
+                        onTap: () => maxLifeController.selection = TextSelection(baseOffset: 0, extentOffset: maxLifeController.value.text.length),
+                      ),
+                      Gap(8.0),
+                      for (var field in CampaignManager.instance.campaign!.options.customFields.where((x) => x.enabledCharacter && x.isValid))
+                        CharacterCustomField(character: widget.character, field: field),
+                      Gap(8.0),
+                      TextField(
+                        controller: notesController,
+                        onChanged: (val) => widget.character.notes = val,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: InputDecoration(labelText: "Notes"),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               Gap(8.0),
             ],
