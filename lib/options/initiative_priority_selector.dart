@@ -52,38 +52,40 @@ class _InitiativePrioritySelectorState
         Gap(8.0),
         SizedBox(
           height: (itemHeight + 8) * cards.length,
-          child: ReorderableListView(
-            proxyDecorator: (child, index, animation) => AnimatedBuilder(
-              animation: animation,
-              builder: (BuildContext context, Widget? child) {
-                final double animValue = Curves.easeInOut.transform(
-                  animation.value,
-                );
-                final double elevation = lerpDouble(1, 6, animValue)!;
-                final double scale = lerpDouble(1, 1.02, animValue)!;
-                return Transform.scale(
-                  scale: scale,
-                  child: Card(elevation: elevation, child: cards[index].child),
-                );
+          child: DragBoundary(
+            child: ReorderableListView(
+              proxyDecorator: (child, index, animation) => AnimatedBuilder(
+                animation: animation,
+                builder: (BuildContext context, Widget? child) {
+                  final double animValue = Curves.easeInOut.transform(
+                    animation.value,
+                  );
+                  final double elevation = lerpDouble(1, 6, animValue)!;
+                  final double scale = lerpDouble(1, 1.02, animValue)!;
+                  return Transform.scale(
+                    scale: scale,
+                    child: Card(elevation: elevation, child: cards[index].child),
+                  );
+                },
+                child: child,
+              ),
+              onReorder: (int oldIndex, int newIndex) {
+                setState(() {
+                  if (oldIndex < newIndex) {
+                    newIndex -= 1;
+                  }
+                  final item = CampaignManager
+                      .instance
+                      .campaign!
+                      .options
+                      .initiativePriority
+                      .removeAt(oldIndex);
+                  CampaignManager.instance.campaign!.options.initiativePriority
+                      .insert(newIndex, item);
+                });
               },
-              child: child,
+              children: cards,
             ),
-            onReorder: (int oldIndex, int newIndex) {
-              setState(() {
-                if (oldIndex < newIndex) {
-                  newIndex -= 1;
-                }
-                final item = CampaignManager
-                    .instance
-                    .campaign!
-                    .options
-                    .initiativePriority
-                    .removeAt(oldIndex);
-                CampaignManager.instance.campaign!.options.initiativePriority
-                    .insert(newIndex, item);
-              });
-            },
-            children: cards,
           ),
         ),
       ],
