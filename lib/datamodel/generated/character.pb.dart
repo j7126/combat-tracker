@@ -30,6 +30,8 @@ class Character extends $pb.GeneratedMessage {
     CharacterType? type,
     $core.int? initiative,
     $core.Iterable<$0.DamageEvent>? damageEvents,
+    $core.Iterable<$core.MapEntry<$core.String, $core.String>>?
+        customFieldValues,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -39,6 +41,8 @@ class Character extends $pb.GeneratedMessage {
     if (type != null) result.type = type;
     if (initiative != null) result.initiative = initiative;
     if (damageEvents != null) result.damageEvents.addAll(damageEvents);
+    if (customFieldValues != null)
+      result.customFieldValues.addEntries(customFieldValues);
     return result;
   }
 
@@ -64,6 +68,13 @@ class Character extends $pb.GeneratedMessage {
     ..aI(6, _omitFieldNames ? '' : 'initiative')
     ..pPM<$0.DamageEvent>(7, _omitFieldNames ? '' : 'damageEvents',
         protoName: 'damageEvents', subBuilder: $0.DamageEvent.create)
+    ..m<$core.String, $core.String>(
+        8, _omitFieldNames ? '' : 'customFieldValues',
+        protoName: 'customFieldValues',
+        entryClassName: 'Character.CustomFieldValuesEntry',
+        keyFieldType: $pb.PbFieldType.OS,
+        valueFieldType: $pb.PbFieldType.OS,
+        packageName: const $pb.PackageName('combat_tracker'))
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -140,6 +151,9 @@ class Character extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(7)
   $pb.PbList<$0.DamageEvent> get damageEvents => $_getList(6);
+
+  @$pb.TagNumber(8)
+  $pb.PbMap<$core.String, $core.String> get customFieldValues => $_getMap(7);
 }
 
 const $core.bool _omitFieldNames =

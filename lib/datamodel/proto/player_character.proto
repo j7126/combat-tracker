@@ -7,4 +7,5 @@ message PlayerCharacter {
   int32 maxLife = 4;
   string notes = 5;
   bool active = 6;
+  map<string, string> customFieldValues = 7;
 }

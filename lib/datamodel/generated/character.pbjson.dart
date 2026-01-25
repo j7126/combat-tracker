@@ -56,7 +56,26 @@ const Character$json = {
       '6': '.combat_tracker.DamageEvent',
       '10': 'damageEvents'
     },
+    {
+      '1': 'customFieldValues',
+      '3': 8,
+      '4': 3,
+      '5': 11,
+      '6': '.combat_tracker.Character.CustomFieldValuesEntry',
+      '10': 'customFieldValues'
+    },
   ],
+  '3': [Character_CustomFieldValuesEntry$json],
+};
+
+@$core.Deprecated('Use characterDescriptor instead')
+const Character_CustomFieldValuesEntry$json = {
+  '1': 'CustomFieldValuesEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
+  ],
+  '7': {'7': true},
 };
 
 /// Descriptor for `Character`. Decode as a `google.protobuf.DescriptorProto`.
@@ -65,4 +84,7 @@ final $typed_data.Uint8List characterDescriptor = $convert.base64Decode(
     'gDIAEoBVIEbGlmZRIYCgdtYXhMaWZlGAQgASgFUgdtYXhMaWZlEjEKBHR5cGUYBSABKA4yHS5j'
     'b21iYXRfdHJhY2tlci5DaGFyYWN0ZXJUeXBlUgR0eXBlEh4KCmluaXRpYXRpdmUYBiABKAVSCm'
     'luaXRpYXRpdmUSPwoMZGFtYWdlRXZlbnRzGAcgAygLMhsuY29tYmF0X3RyYWNrZXIuRGFtYWdl'
-    'RXZlbnRSDGRhbWFnZUV2ZW50cw==');
+    'RXZlbnRSDGRhbWFnZUV2ZW50cxJeChFjdXN0b21GaWVsZFZhbHVlcxgIIAMoCzIwLmNvbWJhdF'
+    '90cmFja2VyLkNoYXJhY3Rlci5DdXN0b21GaWVsZFZhbHVlc0VudHJ5UhFjdXN0b21GaWVsZFZh'
+    'bHVlcxpEChZDdXN0b21GaWVsZFZhbHVlc0VudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbH'
+    'VlGAIgASgJUgV2YWx1ZToCOAE=');

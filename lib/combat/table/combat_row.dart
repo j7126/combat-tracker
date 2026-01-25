@@ -1,4 +1,7 @@
+import 'package:combat_tracker/campaign_manager.dart';
 import 'package:combat_tracker/combat/damage_stats/damage_stats_dialog.dart';
+import 'package:combat_tracker/combat/table/fields/combat_custom_field.dart';
+import 'package:combat_tracker/datamodel/extension/custom_field_extension.dart';
 import 'package:combat_tracker/datamodel/generated/character.pb.dart';
 import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
 import 'package:combat_tracker/combat/table/fields/combat_initiative_field.dart';
@@ -64,6 +67,16 @@ class _CombatRowState extends State<CombatRow> {
                 ),
               ),
               VerticalDivider(),
+              for (var field in CampaignManager.instance.campaign!.options.customFields.where((x) => x.enabledCombat && x.isValid)) ...[
+                SizedBox(
+                  width: 80,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: CombatCustomField(character: widget.character, field: field, changed: widget.changed),
+                  ),
+                ),
+                VerticalDivider(),
+              ],
               SizedBox(
                 width: 100,
                 child: Padding(

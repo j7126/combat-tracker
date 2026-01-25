@@ -24,11 +24,33 @@ const PlayerCharacter$json = {
     {'1': 'maxLife', '3': 4, '4': 1, '5': 5, '10': 'maxLife'},
     {'1': 'notes', '3': 5, '4': 1, '5': 9, '10': 'notes'},
     {'1': 'active', '3': 6, '4': 1, '5': 8, '10': 'active'},
+    {
+      '1': 'customFieldValues',
+      '3': 7,
+      '4': 3,
+      '5': 11,
+      '6': '.combat_tracker.PlayerCharacter.CustomFieldValuesEntry',
+      '10': 'customFieldValues'
+    },
   ],
+  '3': [PlayerCharacter_CustomFieldValuesEntry$json],
+};
+
+@$core.Deprecated('Use playerCharacterDescriptor instead')
+const PlayerCharacter_CustomFieldValuesEntry$json = {
+  '1': 'CustomFieldValuesEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
+  ],
+  '7': {'7': true},
 };
 
 /// Descriptor for `PlayerCharacter`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List playerCharacterDescriptor = $convert.base64Decode(
     'Cg9QbGF5ZXJDaGFyYWN0ZXISDgoCaWQYASABKAlSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSGA'
     'oHbWF4TGlmZRgEIAEoBVIHbWF4TGlmZRIUCgVub3RlcxgFIAEoCVIFbm90ZXMSFgoGYWN0aXZl'
-    'GAYgASgIUgZhY3RpdmU=');
+    'GAYgASgIUgZhY3RpdmUSZAoRY3VzdG9tRmllbGRWYWx1ZXMYByADKAsyNi5jb21iYXRfdHJhY2'
+    'tlci5QbGF5ZXJDaGFyYWN0ZXIuQ3VzdG9tRmllbGRWYWx1ZXNFbnRyeVIRY3VzdG9tRmllbGRW'
+    'YWx1ZXMaRAoWQ3VzdG9tRmllbGRWYWx1ZXNFbnRyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2YW'
+    'x1ZRgCIAEoCVIFdmFsdWU6AjgB');

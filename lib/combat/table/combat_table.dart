@@ -1,5 +1,6 @@
 import 'package:combat_tracker/campaign_manager.dart';
 import 'package:combat_tracker/combat/player_character_selector.dart';
+import 'package:combat_tracker/datamodel/extension/custom_field_extension.dart';
 import 'package:combat_tracker/datamodel/generated/character.pb.dart';
 import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
 import 'package:combat_tracker/datamodel/extension/character_extension.dart';
@@ -35,9 +36,7 @@ class _CombatTableState extends State<CombatTable> {
       }
     });
 
-    _enableTargetedDamage =
-        widget.combat.currentTurn.isEmpty ||
-        widget.combat.activePlayer.isNotEmpty;
+    _enableTargetedDamage = widget.combat.currentTurn.isEmpty || widget.combat.activePlayer.isNotEmpty;
 
     super.initState();
   }
@@ -54,16 +53,14 @@ class _CombatTableState extends State<CombatTable> {
     }
 
     if (keyEvent is KeyDownEvent) {
-      if (keyEvent.logicalKey == LogicalKeyboardKey.shiftLeft ||
-          keyEvent.logicalKey == LogicalKeyboardKey.shiftRight) {
+      if (keyEvent.logicalKey == LogicalKeyboardKey.shiftLeft || keyEvent.logicalKey == LogicalKeyboardKey.shiftRight) {
         _isShiftDown = true;
       } else if (keyEvent.logicalKey == LogicalKeyboardKey.keyN) {
         nextTurn(goBack: _isShiftDown);
         return KeyEventResult.handled;
       }
     } else if (keyEvent is KeyUpEvent) {
-      if (keyEvent.logicalKey == LogicalKeyboardKey.shiftLeft ||
-          keyEvent.logicalKey == LogicalKeyboardKey.shiftRight) {
+      if (keyEvent.logicalKey == LogicalKeyboardKey.shiftLeft || keyEvent.logicalKey == LogicalKeyboardKey.shiftRight) {
         _isShiftDown = false;
       }
     }
@@ -87,18 +84,11 @@ class _CombatTableState extends State<CombatTable> {
           // prioritise by initiative
           var priority = character.initiative * 10;
           // prioritise by character type
-          priority -= CampaignManager
-              .instance
-              .campaign!
-              .options
-              .initiativePriority
-              .indexOf(character.type);
+          priority -= CampaignManager.instance.campaign!.options.initiativePriority.indexOf(character.type);
           return priority;
         }
 
-        widget.combat.characters.sort(
-          (a, b) => sortPriority(b) - sortPriority(a),
-        );
+        widget.combat.characters.sort((a, b) => sortPriority(b) - sortPriority(a));
       });
     }
     CampaignManager.instance.saveCampaign();
@@ -110,9 +100,7 @@ class _CombatTableState extends State<CombatTable> {
     }
 
     setState(() {
-      var currentIndex = widget.combat.characters.indexWhere(
-        (x) => x.id == widget.combat.currentTurn,
-      );
+      var currentIndex = widget.combat.characters.indexWhere((x) => x.id == widget.combat.currentTurn);
       if (currentIndex < 0) {
         currentIndex = 0;
       } else {
@@ -151,11 +139,7 @@ class _CombatTableState extends State<CombatTable> {
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                          "Select Characters",
-                          style: TextTheme.of(context).headlineSmall,
-                          textAlign: TextAlign.center,
-                        ),
+                        child: Text("Select Characters", style: TextTheme.of(context).headlineSmall, textAlign: TextAlign.center),
                       ),
                       IconButton(
                         onPressed: () {
@@ -199,20 +183,12 @@ class _CombatTableState extends State<CombatTable> {
                   Tooltip(
                     message: "Next Turn (n)",
                     child: OutlinedButton(
-                      onPressed: widget.combat.characters.isNotEmpty
-                          ? nextTurn
-                          : null,
+                      onPressed: widget.combat.characters.isNotEmpty ? nextTurn : null,
                       style: widget.combat.characters.isNotEmpty
                           ? ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll(
-                                ColorScheme.of(context).primary,
-                              ),
-                              foregroundColor: WidgetStatePropertyAll(
-                                ColorScheme.of(context).onPrimary,
-                              ),
-                              overlayColor: WidgetStatePropertyAll(
-                                ColorScheme.of(context).onPrimary.withAlpha(20),
-                              ),
+                              backgroundColor: WidgetStatePropertyAll(ColorScheme.of(context).primary),
+                              foregroundColor: WidgetStatePropertyAll(ColorScheme.of(context).onPrimary),
+                              overlayColor: WidgetStatePropertyAll(ColorScheme.of(context).onPrimary.withAlpha(20)),
                             )
                           : null,
                       child: Icon(Icons.arrow_forward),
@@ -229,12 +205,7 @@ class _CombatTableState extends State<CombatTable> {
                           changed();
                         });
                       },
-                      thumbIcon: WidgetStatePropertyAll(
-                        Icon(
-                          Icons.arrow_downward,
-                          color: ColorScheme.of(context).onTertiary,
-                        ),
-                      ),
+                      thumbIcon: WidgetStatePropertyAll(Icon(Icons.arrow_downward, color: ColorScheme.of(context).onTertiary)),
                       activeThumbColor: ColorScheme.of(context).tertiary,
                     ),
                   ),
@@ -247,20 +218,14 @@ class _CombatTableState extends State<CombatTable> {
                         setState(() {
                           _enableTargetedDamage = val;
                           if (_enableTargetedDamage) {
-                            widget.combat.activePlayer =
-                                widget.combat.currentTurn;
+                            widget.combat.activePlayer = widget.combat.currentTurn;
                           } else {
                             widget.combat.activePlayer = "";
                           }
                           CampaignManager.instance.saveCampaign();
                         });
                       },
-                      thumbIcon: WidgetStatePropertyAll(
-                        Icon(
-                          Icons.track_changes,
-                          color: ColorScheme.of(context).onError,
-                        ),
-                      ),
+                      thumbIcon: WidgetStatePropertyAll(Icon(Icons.track_changes, color: ColorScheme.of(context).onError)),
                       activeThumbColor: ColorScheme.of(context).error,
                     ),
                   ),
@@ -271,9 +236,7 @@ class _CombatTableState extends State<CombatTable> {
                       onPressed: selectPlayers,
                       style: ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(Colors.blue),
-                        overlayColor: WidgetStatePropertyAll(
-                          Colors.blue.withAlpha(20),
-                        ),
+                        overlayColor: WidgetStatePropertyAll(Colors.blue.withAlpha(20)),
                         foregroundColor: WidgetStatePropertyAll(Colors.white),
                       ),
                       child: Icon(Icons.person),
@@ -282,10 +245,7 @@ class _CombatTableState extends State<CombatTable> {
                   Gap(16.0),
                   Tooltip(
                     message: "Add NPC / Enemy",
-                    child: FilledButton(
-                      onPressed: addCharacter,
-                      child: Icon(Icons.add),
-                    ),
+                    child: FilledButton(onPressed: addCharacter, child: Icon(Icons.add)),
                   ),
                   Gap(16.0),
                   Tooltip(
@@ -297,17 +257,9 @@ class _CombatTableState extends State<CombatTable> {
                         });
                       },
                       style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(
-                          _showDelete ? ColorScheme.of(context).error : null,
-                        ),
-                        overlayColor: WidgetStatePropertyAll(
-                          ColorScheme.of(context).error.withAlpha(20),
-                        ),
-                        foregroundColor: WidgetStatePropertyAll(
-                          _showDelete
-                              ? ColorScheme.of(context).onError
-                              : ColorScheme.of(context).error,
-                        ),
+                        backgroundColor: WidgetStatePropertyAll(_showDelete ? ColorScheme.of(context).error : null),
+                        overlayColor: WidgetStatePropertyAll(ColorScheme.of(context).error.withAlpha(20)),
+                        foregroundColor: WidgetStatePropertyAll(_showDelete ? ColorScheme.of(context).onError : ColorScheme.of(context).error),
                       ),
                       child: Icon(_showDelete ? Icons.check : Icons.delete),
                     ),
@@ -324,18 +276,16 @@ class _CombatTableState extends State<CombatTable> {
                   VerticalDivider(),
                   SizedBox(
                     width: 48,
-                    child: Tooltip(
-                      message: "Initiative",
-                      child: Icon(Icons.numbers, size: 16),
-                    ),
+                    child: Tooltip(message: "Initiative", child: Icon(Icons.numbers, size: 16)),
                   ),
                   VerticalDivider(),
                   Expanded(child: Text("Name", textAlign: TextAlign.center)),
                   VerticalDivider(),
-                  SizedBox(
-                    width: 100,
-                    child: Text("Life", textAlign: TextAlign.center),
-                  ),
+                  for (var field in CampaignManager.instance.campaign!.options.customFields.where((x) => x.enabledCombat && x.isValid)) ...[
+                    SizedBox(width: 80, child: Text(field.shortName, textAlign: TextAlign.center)),
+                    VerticalDivider(),
+                  ],
+                  SizedBox(width: 100, child: Text("Life", textAlign: TextAlign.center)),
                   VerticalDivider(),
                   SizedBox(width: 40),
                   if (_showDelete) VerticalDivider(),
@@ -368,24 +318,8 @@ class _CombatTableState extends State<CombatTable> {
                             });
                           },
                           icon: character.id == widget.combat.currentTurn
-                              ? Icon(
-                                  Icons.arrow_forward,
-                                  color:
-                                      character.id == widget.combat.activePlayer
-                                      ? Colors.red
-                                      : Colors.lightGreen,
-                                )
-                              : Text(
-                                  (i + 1).toString(),
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.color
-                                        ?.withAlpha(100),
-                                  ),
-                                ),
+                              ? Icon(Icons.arrow_forward, color: character.id == widget.combat.activePlayer ? Colors.red : Colors.lightGreen)
+                              : Text((i + 1).toString(), style: TextStyle(fontSize: 20, color: Theme.of(context).textTheme.bodyMedium?.color?.withAlpha(100))),
                         ),
                       ),
                   ],
@@ -425,18 +359,11 @@ class _CombatTableState extends State<CombatTable> {
                         child: Column(
                           children: [
                             Gap(12.0),
-                            Text(
-                              "Add a character to get started.",
-                              style: TextTheme.of(context).titleMedium,
-                            ),
+                            Text("Add a character to get started.", style: TextTheme.of(context).titleMedium),
                             Gap(8.0),
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0,
-                              ),
-                              child: PlayerCharacterSelector(
-                                combat: widget.combat,
-                              ),
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: PlayerCharacterSelector(combat: widget.combat),
                             ),
                             FilledButton(
                               onPressed: () {

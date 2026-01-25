@@ -31,6 +31,7 @@ class _PlayerCharacterSelectorState extends State<PlayerCharacterSelector> {
             life: playerCharacter.maxLife,
             maxLife: playerCharacter.maxLife,
             name: playerCharacter.name,
+            customFieldValues: playerCharacter.customFieldValues.entries,
           );
           widget.combat.characters.add(character);
         }

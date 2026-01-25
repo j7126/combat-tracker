@@ -1,3 +1,6 @@
+import 'package:combat_tracker/campaign_manager.dart';
+import 'package:combat_tracker/characters/character_custom_field.dart';
+import 'package:combat_tracker/datamodel/extension/custom_field_extension.dart';
 import 'package:combat_tracker/datamodel/generated/player_character.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -71,6 +74,9 @@ class _CharacterEditorState extends State<CharacterEditor> {
                 decoration: InputDecoration(labelText: "Max Life"),
                 onTap: () => maxLifeController.selection = TextSelection(baseOffset: 0, extentOffset: maxLifeController.value.text.length),
               ),
+              Gap(8.0),
+              for (var field in CampaignManager.instance.campaign!.options.customFields.where((x) => x.enabledCharacter && x.isValid))
+                CharacterCustomField(character: widget.character, field: field),
               Gap(8.0),
               TextField(
                 keyboardType: TextInputType.multiline,

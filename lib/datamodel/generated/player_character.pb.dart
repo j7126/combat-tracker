@@ -23,6 +23,8 @@ class PlayerCharacter extends $pb.GeneratedMessage {
     $core.int? maxLife,
     $core.String? notes,
     $core.bool? active,
+    $core.Iterable<$core.MapEntry<$core.String, $core.String>>?
+        customFieldValues,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -30,6 +32,8 @@ class PlayerCharacter extends $pb.GeneratedMessage {
     if (maxLife != null) result.maxLife = maxLife;
     if (notes != null) result.notes = notes;
     if (active != null) result.active = active;
+    if (customFieldValues != null)
+      result.customFieldValues.addEntries(customFieldValues);
     return result;
   }
 
@@ -51,6 +55,13 @@ class PlayerCharacter extends $pb.GeneratedMessage {
     ..aI(4, _omitFieldNames ? '' : 'maxLife', protoName: 'maxLife')
     ..aOS(5, _omitFieldNames ? '' : 'notes')
     ..aOB(6, _omitFieldNames ? '' : 'active')
+    ..m<$core.String, $core.String>(
+        7, _omitFieldNames ? '' : 'customFieldValues',
+        protoName: 'customFieldValues',
+        entryClassName: 'PlayerCharacter.CustomFieldValuesEntry',
+        keyFieldType: $pb.PbFieldType.OS,
+        valueFieldType: $pb.PbFieldType.OS,
+        packageName: const $pb.PackageName('combat_tracker'))
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -116,6 +127,9 @@ class PlayerCharacter extends $pb.GeneratedMessage {
   $core.bool hasActive() => $_has(4);
   @$pb.TagNumber(6)
   void clearActive() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $pb.PbMap<$core.String, $core.String> get customFieldValues => $_getMap(5);
 }
 
 const $core.bool _omitFieldNames =
