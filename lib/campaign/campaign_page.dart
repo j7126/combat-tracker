@@ -28,10 +28,11 @@ class _CampaignPageState extends State<CampaignPage> {
             child: Tooltip(
               message: "Campaign Options",
               child: IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(
+                onPressed: () async {
+                  await Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => OptionsPage()),
                   );
+                  CampaignManager.instance.saveCampaign();
                 },
                 icon: Icon(Icons.settings),
               ),
