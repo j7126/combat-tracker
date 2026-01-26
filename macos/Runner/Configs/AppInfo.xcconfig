@@ -8,7 +8,7 @@
 PRODUCT_NAME = combat_tracker
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.combatTracker
+PRODUCT_BUNDLE_IDENTIFIER = dev.j7126.combatTracker
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2025 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2025 dev.j7126. All rights reserved.
