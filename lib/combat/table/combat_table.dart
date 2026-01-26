@@ -1,5 +1,6 @@
 import 'package:combat_tracker/campaign/campaign_manager.dart';
 import 'package:combat_tracker/combat/player_character_selector.dart';
+import 'package:combat_tracker/combat/table/round_tracker.dart';
 import 'package:combat_tracker/datamodel/extension/custom_field_extension.dart';
 import 'package:combat_tracker/datamodel/generated/character.pb.dart';
 import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
@@ -122,8 +123,16 @@ class _CombatTableState extends State<CombatTable> {
 
       if (currentIndex < 0) {
         currentIndex = widget.combat.characters.length - 1;
+        widget.combat.round--;
+        if (widget.combat.round < 0) {
+          widget.combat.round = 0;
+        }
       } else if (currentIndex >= widget.combat.characters.length) {
         currentIndex = 0;
+        widget.combat.round++;
+        if (widget.combat.round > 98) {
+          widget.combat.round = 98;
+        }
       }
 
       widget.combat.currentTurn = widget.combat.characters[currentIndex].id;
@@ -265,6 +274,7 @@ class _CombatTableState extends State<CombatTable> {
                       activeThumbColor: ColorScheme.of(context).error,
                     ),
                   ),
+                  RoundTracker(combat: widget.combat),
                   Spacer(),
                   Tooltip(
                     message: "Select Players",

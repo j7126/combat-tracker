@@ -39,6 +39,7 @@ const Combat$json = {
       '10': 'createdTimestamp'
     },
     {'1': 'Id', '3': 6, '4': 1, '5': 9, '10': 'Id'},
+    {'1': 'round', '3': 7, '4': 1, '5': 5, '10': 'round'},
   ],
 };
 
@@ -48,4 +49,4 @@ final $typed_data.Uint8List combatDescriptor = $convert.base64Decode(
     'IKY2hhcmFjdGVycxIgCgtDdXJyZW50VHVybhgCIAEoCVILQ3VycmVudFR1cm4SIgoMQWN0aXZl'
     'UGxheWVyGAMgASgJUgxBY3RpdmVQbGF5ZXISEgoETmFtZRgEIAEoCVIETmFtZRJGChBjcmVhdG'
     'VkVGltZXN0YW1wGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIQY3JlYXRlZFRp'
-    'bWVzdGFtcBIOCgJJZBgGIAEoCVICSWQ=');
+    'bWVzdGFtcBIOCgJJZBgGIAEoCVICSWQSFAoFcm91bmQYByABKAVSBXJvdW5k');

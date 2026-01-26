@@ -28,6 +28,7 @@ class Combat extends $pb.GeneratedMessage {
     $core.String? name,
     $1.Timestamp? createdTimestamp,
     $core.String? id,
+    $core.int? round,
   }) {
     final result = create();
     if (characters != null) result.characters.addAll(characters);
@@ -36,6 +37,7 @@ class Combat extends $pb.GeneratedMessage {
     if (name != null) result.name = name;
     if (createdTimestamp != null) result.createdTimestamp = createdTimestamp;
     if (id != null) result.id = id;
+    if (round != null) result.round = round;
     return result;
   }
 
@@ -60,6 +62,7 @@ class Combat extends $pb.GeneratedMessage {
     ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdTimestamp',
         protoName: 'createdTimestamp', subBuilder: $1.Timestamp.create)
     ..aOS(6, _omitFieldNames ? '' : 'Id', protoName: 'Id')
+    ..aI(7, _omitFieldNames ? '' : 'round')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -129,6 +132,15 @@ class Combat extends $pb.GeneratedMessage {
   $core.bool hasId() => $_has(5);
   @$pb.TagNumber(6)
   void clearId() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.int get round => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set round($core.int value) => $_setSignedInt32(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasRound() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearRound() => $_clearField(7);
 }
 
 const $core.bool _omitFieldNames =
