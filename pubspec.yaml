@@ -1,7 +1,7 @@
 name: combat_tracker
 description: "A simple combat tracker for ttrpg games."
 publish_to: 'none'
-version: 0.5.0+7
+version: 0.6.0+8
 
 environment:
   sdk: ^3.10.1
