@@ -29,6 +29,9 @@ class _CombatNameFieldState extends State<CombatNameField> {
         widget.changed?.call();
       },
       readOnly: widget.character.type == CharacterType.Player,
+      mouseCursor: widget.character.type == CharacterType.Player
+          ? MouseCursor.defer
+          : null,
       decoration: InputDecoration(border: InputBorder.none, hintText: "Name"),
     );
   }
