@@ -68,47 +68,55 @@ class _RoundTrackerState extends State<RoundTracker> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: ColorScheme.of(context).surfaceBright,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        margin: EdgeInsets.zero,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
-          child: SizedBox(
-            width: 70,
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text("Round ", style: TextStyle(fontSize: 15)),
-                Expanded(
-                  child: TextField(
-                    controller: controller,
-                    focusNode: node,
-                    onEditingComplete: () {
-                      node.unfocus();
-                      valueChanged();
-                    },
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      isDense: true,
-                    ),
-                    keyboardType: TextInputType.numberWithOptions(
-                      signed: true,
-                      decimal: false,
-                    ),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                      LengthLimitingTextInputFormatter(2),
-                    ],
-                    onTap: () => controller.selection = TextSelection(
-                      baseOffset: 0,
-                      extentOffset: controller.value.text.length,
+      child: GestureDetector(
+        onTap: () {
+          node.requestFocus();
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorScheme.of(context).surfaceBright,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          margin: EdgeInsets.zero,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 6.0,
+              horizontal: 12.0,
+            ),
+            child: SizedBox(
+              width: 70,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text("Round ", style: TextStyle(fontSize: 15)),
+                  Expanded(
+                    child: TextField(
+                      controller: controller,
+                      focusNode: node,
+                      onEditingComplete: () {
+                        node.unfocus();
+                        valueChanged();
+                      },
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        isDense: true,
+                      ),
+                      keyboardType: TextInputType.numberWithOptions(
+                        signed: true,
+                        decimal: false,
+                      ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        LengthLimitingTextInputFormatter(2),
+                      ],
+                      onTap: () => controller.selection = TextSelection(
+                        baseOffset: 0,
+                        extentOffset: controller.value.text.length,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
