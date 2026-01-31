@@ -370,68 +370,73 @@ class _CombatTableState extends State<CombatTable> {
                 ],
               ),
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
                   children: [
-                    for (var (i, character) in widget.combat.characters.indexed)
-                      SizedBox(
-                        width: 48,
-                        height: 48,
-                        child: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              widget.combat.currentTurn = character.id;
-                              widget.combat.activePlayer = character.id;
-                            });
-                          },
-                          icon: character.id == widget.combat.currentTurn
-                              ? Icon(
-                                  Icons.arrow_forward,
-                                  color:
-                                      character.id == widget.combat.activePlayer
-                                      ? Colors.red
-                                      : Colors.lightGreen,
-                                )
-                              : Text(
-                                  (i + 1).toString(),
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.color
-                                        ?.withAlpha(100),
-                                  ),
-                                ),
-                        ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        for (var (i, character) in widget.combat.characters.indexed)
+                          SizedBox(
+                            width: 48,
+                            height: 48,
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  widget.combat.currentTurn = character.id;
+                                  widget.combat.activePlayer = character.id;
+                                });
+                              },
+                              icon: character.id == widget.combat.currentTurn
+                                  ? Icon(
+                                      Icons.arrow_forward,
+                                      color:
+                                          character.id == widget.combat.activePlayer
+                                          ? Colors.red
+                                          : Colors.lightGreen,
+                                    )
+                                  : Text(
+                                      (i + 1).toString(),
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.color
+                                            ?.withAlpha(100),
+                                      ),
+                                    ),
+                            ),
+                          ),
+                      ],
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          for (var character in widget.combat.characters)
+                            CombatRow(
+                              key: ValueKey(character.id),
+                              combat: widget.combat,
+                              character: character,
+                              showDelete: _showDelete,
+                              onDelete: () {
+                                setState(() {
+                                  widget.combat.deleteCharacter(character);
+                                  CampaignManager.instance.saveCampaign();
+                                });
+                              },
+                              changed: changed,
+                            ),
+                        ],
                       ),
+                    ),
                   ],
                 ),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      for (var character in widget.combat.characters)
-                        CombatRow(
-                          key: ValueKey(character.id),
-                          combat: widget.combat,
-                          character: character,
-                          showDelete: _showDelete,
-                          onDelete: () {
-                            setState(() {
-                              widget.combat.deleteCharacter(character);
-                              CampaignManager.instance.saveCampaign();
-                            });
-                          },
-                          changed: changed,
-                        ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
             if (widget.combat.characters.isEmpty && _showAddCharacter)
               Column(
