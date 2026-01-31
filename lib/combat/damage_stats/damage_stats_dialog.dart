@@ -1,8 +1,10 @@
 import 'package:combat_tracker/combat/damage_stats/damage_dealt_stats.dart';
 import 'package:combat_tracker/combat/damage_stats/damage_recieved_stats.dart';
+import 'package:combat_tracker/datamodel/extension/character_type_extension.dart';
 import 'package:combat_tracker/datamodel/generated/character.pb.dart';
 import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class DamageStatsDialog extends StatefulWidget {
   const DamageStatsDialog({
@@ -31,6 +33,10 @@ class _DamageStatsDialogDialogState extends State<DamageStatsDialog> {
       title: Row(
         children: [
           const Text("Damage Statistics"),
+          Gap(12),
+          widget.character.type.getIcon(),
+          Gap(4),
+          Text(widget.character.name),
           const Spacer(),
           IconButton(
             icon: const Icon(Icons.close),

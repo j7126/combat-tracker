@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:combat_tracker/combat/table/fields/combat_type_selector.dart';
+import 'package:combat_tracker/datamodel/extension/character_type_extension.dart';
 import 'package:combat_tracker/datamodel/generated/character.pb.dart';
 import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
 import 'package:combat_tracker/datamodel/generated/damage_event.pb.dart';
@@ -109,20 +109,28 @@ class _DamageDealtStatsState extends State<DamageDealtStats> {
                                   style: const TextStyle(fontSize: 22),
                                 ),
                                 Text(
-                                  " total damage to",
+                                  " total damage to ",
                                   style: const TextStyle(fontSize: 18),
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    CombatTypeSelector(
-                                      character: sourceCharacter,
-                                      readOnly: true,
-                                    ),
+                                    sourceCharacter.type.getIcon(),
                                     Text(
                                       sourceCharacter.name,
                                       style: const TextStyle(fontSize: 20),
                                     ),
+                                    if (sourceCharacter.id ==
+                                        widget.character.id)
+                                      Text(
+                                        " (self)",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: TextTheme.of(
+                                            context,
+                                          ).bodyMedium?.color?.withAlpha(80),
+                                        ),
+                                      ),
                                   ],
                                 ),
                               ],
@@ -238,16 +246,25 @@ class _DamageDealtStatsState extends State<DamageDealtStats> {
                                         Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            CombatTypeSelector(
-                                              character: targetCharacter,
-                                              readOnly: true,
-                                            ),
+                                            targetCharacter.type.getIcon(),
                                             Text(
                                               targetCharacter.name,
                                               style: const TextStyle(
                                                 fontSize: 20,
                                               ),
                                             ),
+                                            if (targetCharacter.id ==
+                                                widget.character.id)
+                                              Text(
+                                                " (self)",
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: TextTheme.of(context)
+                                                      .bodyMedium
+                                                      ?.color
+                                                      ?.withAlpha(80),
+                                                ),
+                                              ),
                                           ],
                                         ),
                                       ],

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:combat_tracker/combat/table/fields/combat_type_selector.dart';
+import 'package:combat_tracker/datamodel/extension/character_type_extension.dart';
 import 'package:combat_tracker/datamodel/generated/character.pb.dart';
 import 'package:combat_tracker/datamodel/generated/combat.pb.dart';
 import 'package:combat_tracker/util/time_util.dart';
@@ -179,14 +179,22 @@ class _DamageRecievedStatsState extends State<DamageRecievedStats> {
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    CombatTypeSelector(
-                                      character: sourceCharacter,
-                                      readOnly: true,
-                                    ),
+                                    sourceCharacter.type.getIcon(),
                                     Text(
                                       sourceCharacter.name,
                                       style: const TextStyle(fontSize: 20),
                                     ),
+                                    if (sourceCharacter.id ==
+                                        widget.character.id)
+                                      Text(
+                                        " (self)",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: TextTheme.of(
+                                            context,
+                                          ).bodyMedium?.color?.withAlpha(80),
+                                        ),
+                                      ),
                                   ],
                                 ),
                               ],
@@ -319,16 +327,29 @@ class _DamageRecievedStatsState extends State<DamageRecievedStats> {
                                               Row(
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
-                                                  CombatTypeSelector(
-                                                    character: sourceCharacter,
-                                                    readOnly: true,
-                                                  ),
+                                                  sourceCharacter.type
+                                                      .getIcon(),
                                                   Text(
                                                     sourceCharacter.name,
                                                     style: const TextStyle(
                                                       fontSize: 20,
                                                     ),
                                                   ),
+                                                  if (sourceCharacter.id ==
+                                                      widget.character.id)
+                                                    Text(
+                                                      " (self)",
+                                                      style: TextStyle(
+                                                        fontSize: 18,
+                                                        color:
+                                                            TextTheme.of(
+                                                                  context,
+                                                                )
+                                                                .bodyMedium
+                                                                ?.color
+                                                                ?.withAlpha(80),
+                                                      ),
+                                                    ),
                                                 ],
                                               ),
                                             ],
