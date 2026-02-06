@@ -1,7 +1,7 @@
 [Setup]
 AppId=b185e47c-2e2c-4338-97fe-5be0ff22962f
 AppName=Combat Tracker
-AppVersion=0.4.0
+AppVersion=0.6.1
 DefaultDirName={pf}\Combat Tracker
 DefaultGroupName=Combat Tracker
 OutputDir=D:\combat-tracker\Installer
