@@ -10,6 +10,7 @@ import 'package:combat_tracker/datamodel/extension/combat_extension.dart';
 import 'package:combat_tracker/combat/table/combat_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 
 class CombatTable extends StatefulWidget {
@@ -113,6 +114,16 @@ class _CombatTableState extends State<CombatTable> {
               .options
               .initiativePriority
               .indexOf(character.type);
+          // lower priority if dead
+          if (character.isDead &&
+              character.enableDead &&
+              !CampaignManager
+                  .instance
+                  .campaign!
+                  .options
+                  .disableRemoveFromInitiativeWhenDead) {
+            priority -= 10000;
+          }
           return priority;
         }
 
@@ -139,13 +150,24 @@ class _CombatTableState extends State<CombatTable> {
         currentIndex += goBack ? -1 : 1;
       }
 
+      var disableRemoveWhenDead = CampaignManager
+          .instance
+          .campaign!
+          .options
+          .disableRemoveFromInitiativeWhenDead;
+      var length = disableRemoveWhenDead
+          ? widget.combat.characters.length
+          : widget.combat.characters
+                .where((x) => !x.enableDead || !x.isDead)
+                .length;
+
       if (currentIndex < 0) {
-        currentIndex = widget.combat.characters.length - 1;
+        currentIndex = length - 1;
         widget.combat.round--;
         if (widget.combat.round < 0) {
           widget.combat.round = 0;
         }
-      } else if (currentIndex >= widget.combat.characters.length) {
+      } else if (currentIndex >= length) {
         currentIndex = 0;
         widget.combat.round++;
         if (widget.combat.round > 98) {
@@ -297,6 +319,35 @@ class _CombatTableState extends State<CombatTable> {
   Widget build(BuildContext context) {
     var disableNextTurn =
         widget.combat.characters.isEmpty || _multiDamageMode != 0;
+    var disableRemoveWhenDead = CampaignManager
+        .instance
+        .campaign!
+        .options
+        .disableRemoveFromInitiativeWhenDead;
+
+    Widget buildCombatRow(Character character) => CombatRow(
+      key: ValueKey(character.id),
+      combat: widget.combat,
+      character: character,
+      showDelete: _showDelete,
+      onDelete: () {
+        setState(() {
+          widget.combat.deleteCharacter(character);
+          CampaignManager.instance.saveCampaign();
+        });
+      },
+      changed: changed,
+      onClick: _multiDamageMode != 0
+          ? () => multiDamageCharacterClick(character)
+          : null,
+      selected:
+          _multiDamageMode == 2 && _multiDamageTargets.contains(character.id),
+      hoverColor: switch (_multiDamageMode) {
+        1 => ColorScheme.of(context).primaryContainer.withAlpha(120),
+        2 => Colors.yellow.withAlpha(120),
+        _ => null,
+      },
+    );
 
     return FocusScope(
       autofocus: true,
@@ -524,7 +575,7 @@ class _CombatTableState extends State<CombatTable> {
                     child: Text("Life", textAlign: TextAlign.center),
                   ),
                   VerticalDivider(),
-                  SizedBox(width: 40),
+                  SizedBox(width: 80),
                   if (_showDelete) VerticalDivider(),
                   AnimatedSize(
                     duration: Duration(milliseconds: 120),
@@ -543,90 +594,186 @@ class _CombatTableState extends State<CombatTable> {
               physics: const ClampingScrollPhysics(),
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 12.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
+                child: Column(
                   children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
                       children: [
-                        for (var (i, character)
-                            in widget.combat.characters.indexed)
-                          SizedBox(
-                            width: 48,
-                            height: 48,
-                            child: IconButton(
-                              onPressed: () {
-                                if (_multiDamageMode != 0) {
-                                  return;
-                                }
-                                setState(() {
-                                  widget.combat.currentTurn = character.id;
-                                  widget.combat.activePlayer = character.id;
-                                });
-                              },
-                              icon:
-                                  character.id == widget.combat.currentTurn ||
-                                      _multiDamageSource == character.id
-                                  ? Icon(
-                                      _multiDamageSource == character.id
-                                          ? Icons.workspaces_outline
-                                          : Icons.arrow_forward,
-                                      color:
-                                          character.id ==
-                                                  widget.combat.activePlayer ||
-                                              _multiDamageSource == character.id
-                                          ? Colors.red
-                                          : Colors.lightGreen,
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            for (var (i, character)
+                                in widget.combat.characters
+                                    .where(
+                                      (x) =>
+                                          disableRemoveWhenDead ||
+                                          !x.enableDead ||
+                                          !x.isDead,
                                     )
-                                  : Text(
-                                      (i + 1).toString(),
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium
-                                            ?.color
-                                            ?.withAlpha(100),
-                                      ),
-                                    ),
-                            ),
+                                    .indexed)
+                              SizedBox(
+                                width: 48,
+                                height: 48,
+                                child: IconButton(
+                                  onPressed: () {
+                                    if (_multiDamageMode != 0) {
+                                      return;
+                                    }
+                                    setState(() {
+                                      widget.combat.currentTurn = character.id;
+                                      widget.combat.activePlayer = character.id;
+                                    });
+                                  },
+                                  icon:
+                                      character.id ==
+                                              widget.combat.currentTurn ||
+                                          _multiDamageSource == character.id
+                                      ? Icon(
+                                          _multiDamageSource == character.id
+                                              ? Icons.workspaces_outline
+                                              : Icons.arrow_forward,
+                                          color:
+                                              character.id ==
+                                                      widget
+                                                          .combat
+                                                          .activePlayer ||
+                                                  _multiDamageSource ==
+                                                      character.id
+                                              ? Colors.red
+                                              : Colors.lightGreen,
+                                        )
+                                      : Text(
+                                          (i + 1).toString(),
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium
+                                                ?.color
+                                                ?.withAlpha(100),
+                                          ),
+                                        ),
+                                ),
+                              ),
+                          ],
+                        ),
+                        Expanded(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              for (var character
+                                  in widget.combat.characters.where(
+                                    (x) =>
+                                        disableRemoveWhenDead ||
+                                        !x.enableDead ||
+                                        !x.isDead,
+                                  ))
+                                buildCombatRow(character),
+                            ],
                           ),
+                        ),
                       ],
                     ),
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          for (var character in widget.combat.characters)
-                            CombatRow(
-                              key: ValueKey(character.id),
-                              combat: widget.combat,
-                              character: character,
-                              showDelete: _showDelete,
-                              onDelete: () {
-                                setState(() {
-                                  widget.combat.deleteCharacter(character);
-                                  CampaignManager.instance.saveCampaign();
-                                });
-                              },
-                              changed: changed,
-                              onClick: _multiDamageMode != 0
-                                  ? () => multiDamageCharacterClick(character)
-                                  : null,
-                              selected:
-                                  _multiDamageMode == 2 &&
-                                  _multiDamageTargets.contains(character.id),
-                              hoverColor: switch (_multiDamageMode) {
-                                1 => ColorScheme.of(
-                                  context,
-                                ).primaryContainer.withAlpha(120),
-                                2 => Colors.yellow.withAlpha(120),
-                                _ => null,
-                              },
+                    if (widget.combat.characters.any(
+                      (x) => x.enableDead && x.isDead,
+                    ))
+                      Padding(
+                        padding: const EdgeInsets.only(top: 24.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              CampaignManager
+                                      .instance
+                                      .campaign!
+                                      .options
+                                      .disableRemoveFromInitiativeWhenDead =
+                                  !disableRemoveWhenDead;
+                              changed();
+                            });
+                          },
+                          behavior: HitTestBehavior.opaque,
+                          child: Card(
+                            elevation: 0,
+                            margin: EdgeInsets.zero,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0,
+                                vertical: 4.0,
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "Remove Dead Characters From Initiative",
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.titleMedium,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                                  const Gap(4.0),
+                                  Switch(
+                                    value: !disableRemoveWhenDead,
+                                    onChanged: (bool value) {
+                                      setState(() {
+                                        CampaignManager
+                                                .instance
+                                                .campaign!
+                                                .options
+                                                .disableRemoveFromInitiativeWhenDead =
+                                            !value;
+                                        changed();
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
+                          ),
+                        ),
+                      ),
+                    if (!disableRemoveWhenDead)
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              for (var _ in widget.combat.characters.where(
+                                (x) => x.enableDead && x.isDead,
+                              ))
+                                SizedBox(
+                                  width: 48,
+                                  height: 48,
+                                  child: Center(
+                                    child: FaIcon(
+                                      FontAwesomeIcons.skullCrossbones,
+                                      size: 20,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.color
+                                          ?.withAlpha(100),
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                for (var character
+                                    in widget.combat.characters.where(
+                                      (x) => x.enableDead && x.isDead,
+                                    ))
+                                  buildCombatRow(character),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
-                    ),
                   ],
                 ),
               ),

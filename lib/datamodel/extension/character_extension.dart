@@ -15,6 +15,14 @@ extension CharacterExtension on Character {
 
   int get initiativeInt => initiativeDouble.floor();
 
+  bool get enableDead =>
+      hasInternalValEnabledDead() ? internalValEnabledDead : type != CharacterType.Player;
+  set enableDead(bool val) {
+    internalValEnabledDead = val;
+  }
+
+  bool get isDead => maxLife > 0 && life <= 0;
+
   void setLifeWithTrackedDamage(int newLife, String source) {
     var damageEvent = DamageEvent(
       previousLife: life,

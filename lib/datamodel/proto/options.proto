@@ -8,4 +8,5 @@ message Options {
   repeated CharacterType initiativePriority = 1;
   repeated CustomField customFields = 2;
   bool disableColorCodeLife = 3;
+  bool disableRemoveFromInitiativeWhenDead = 4;
 }

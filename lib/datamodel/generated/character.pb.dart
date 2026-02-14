@@ -32,6 +32,7 @@ class Character extends $pb.GeneratedMessage {
     $core.Iterable<$0.DamageEvent>? damageEvents,
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>?
         customFieldValues,
+    $core.bool? internalValEnabledDead,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -43,6 +44,8 @@ class Character extends $pb.GeneratedMessage {
     if (damageEvents != null) result.damageEvents.addAll(damageEvents);
     if (customFieldValues != null)
       result.customFieldValues.addEntries(customFieldValues);
+    if (internalValEnabledDead != null)
+      result.internalValEnabledDead = internalValEnabledDead;
     return result;
   }
 
@@ -75,6 +78,8 @@ class Character extends $pb.GeneratedMessage {
         keyFieldType: $pb.PbFieldType.OS,
         valueFieldType: $pb.PbFieldType.OS,
         packageName: const $pb.PackageName('combat_tracker'))
+    ..aOB(9, _omitFieldNames ? '' : 'internalValEnabledDead',
+        protoName: 'internalValEnabledDead')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -154,6 +159,15 @@ class Character extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(8)
   $pb.PbMap<$core.String, $core.String> get customFieldValues => $_getMap(7);
+
+  @$pb.TagNumber(9)
+  $core.bool get internalValEnabledDead => $_getBF(8);
+  @$pb.TagNumber(9)
+  set internalValEnabledDead($core.bool value) => $_setBool(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasInternalValEnabledDead() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearInternalValEnabledDead() => $_clearField(9);
 }
 
 const $core.bool _omitFieldNames =

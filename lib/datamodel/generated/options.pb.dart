@@ -24,6 +24,7 @@ class Options extends $pb.GeneratedMessage {
     $core.Iterable<$1.CharacterType>? initiativePriority,
     $core.Iterable<$0.CustomField>? customFields,
     $core.bool? disableColorCodeLife,
+    $core.bool? disableRemoveFromInitiativeWhenDead,
   }) {
     final result = create();
     if (initiativePriority != null)
@@ -31,6 +32,9 @@ class Options extends $pb.GeneratedMessage {
     if (customFields != null) result.customFields.addAll(customFields);
     if (disableColorCodeLife != null)
       result.disableColorCodeLife = disableColorCodeLife;
+    if (disableRemoveFromInitiativeWhenDead != null)
+      result.disableRemoveFromInitiativeWhenDead =
+          disableRemoveFromInitiativeWhenDead;
     return result;
   }
 
@@ -57,6 +61,8 @@ class Options extends $pb.GeneratedMessage {
         protoName: 'customFields', subBuilder: $0.CustomField.create)
     ..aOB(3, _omitFieldNames ? '' : 'disableColorCodeLife',
         protoName: 'disableColorCodeLife')
+    ..aOB(4, _omitFieldNames ? '' : 'disableRemoveFromInitiativeWhenDead',
+        protoName: 'disableRemoveFromInitiativeWhenDead')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -91,6 +97,16 @@ class Options extends $pb.GeneratedMessage {
   $core.bool hasDisableColorCodeLife() => $_has(2);
   @$pb.TagNumber(3)
   void clearDisableColorCodeLife() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.bool get disableRemoveFromInitiativeWhenDead => $_getBF(3);
+  @$pb.TagNumber(4)
+  set disableRemoveFromInitiativeWhenDead($core.bool value) =>
+      $_setBool(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasDisableRemoveFromInitiativeWhenDead() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDisableRemoveFromInitiativeWhenDead() => $_clearField(4);
 }
 
 const $core.bool _omitFieldNames =

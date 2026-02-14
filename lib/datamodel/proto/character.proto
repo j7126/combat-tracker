@@ -12,6 +12,7 @@ message Character {
   int32 initiative = 6;
   repeated DamageEvent damageEvents = 7;
   map<string, string> customFieldValues = 8;
+  optional bool internalValEnabledDead = 9;
 }
 
 enum CharacterType {

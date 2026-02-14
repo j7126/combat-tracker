@@ -42,6 +42,13 @@ const Options$json = {
       '5': 8,
       '10': 'disableColorCodeLife'
     },
+    {
+      '1': 'disableRemoveFromInitiativeWhenDead',
+      '3': 4,
+      '4': 1,
+      '5': 8,
+      '10': 'disableRemoveFromInitiativeWhenDead'
+    },
   ],
 };
 
@@ -50,4 +57,6 @@ final $typed_data.Uint8List optionsDescriptor = $convert.base64Decode(
     'CgdPcHRpb25zEk0KEmluaXRpYXRpdmVQcmlvcml0eRgBIAMoDjIdLmNvbWJhdF90cmFja2VyLk'
     'NoYXJhY3RlclR5cGVSEmluaXRpYXRpdmVQcmlvcml0eRI/CgxjdXN0b21GaWVsZHMYAiADKAsy'
     'Gy5jb21iYXRfdHJhY2tlci5DdXN0b21GaWVsZFIMY3VzdG9tRmllbGRzEjIKFGRpc2FibGVDb2'
-    'xvckNvZGVMaWZlGAMgASgIUhRkaXNhYmxlQ29sb3JDb2RlTGlmZQ==');
+    'xvckNvZGVMaWZlGAMgASgIUhRkaXNhYmxlQ29sb3JDb2RlTGlmZRJQCiNkaXNhYmxlUmVtb3Zl'
+    'RnJvbUluaXRpYXRpdmVXaGVuRGVhZBgEIAEoCFIjZGlzYWJsZVJlbW92ZUZyb21Jbml0aWF0aX'
+    'ZlV2hlbkRlYWQ=');

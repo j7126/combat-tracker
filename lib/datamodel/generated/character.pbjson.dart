@@ -64,8 +64,20 @@ const Character$json = {
       '6': '.combat_tracker.Character.CustomFieldValuesEntry',
       '10': 'customFieldValues'
     },
+    {
+      '1': 'internalValEnabledDead',
+      '3': 9,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'internalValEnabledDead',
+      '17': true
+    },
   ],
   '3': [Character_CustomFieldValuesEntry$json],
+  '8': [
+    {'1': '_internalValEnabledDead'},
+  ],
 };
 
 @$core.Deprecated('Use characterDescriptor instead')
@@ -86,5 +98,6 @@ final $typed_data.Uint8List characterDescriptor = $convert.base64Decode(
     'luaXRpYXRpdmUSPwoMZGFtYWdlRXZlbnRzGAcgAygLMhsuY29tYmF0X3RyYWNrZXIuRGFtYWdl'
     'RXZlbnRSDGRhbWFnZUV2ZW50cxJeChFjdXN0b21GaWVsZFZhbHVlcxgIIAMoCzIwLmNvbWJhdF'
     '90cmFja2VyLkNoYXJhY3Rlci5DdXN0b21GaWVsZFZhbHVlc0VudHJ5UhFjdXN0b21GaWVsZFZh'
-    'bHVlcxpEChZDdXN0b21GaWVsZFZhbHVlc0VudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbH'
-    'VlGAIgASgJUgV2YWx1ZToCOAE=');
+    'bHVlcxI7ChZpbnRlcm5hbFZhbEVuYWJsZWREZWFkGAkgASgISABSFmludGVybmFsVmFsRW5hYm'
+    'xlZERlYWSIAQEaRAoWQ3VzdG9tRmllbGRWYWx1ZXNFbnRyeRIQCgNrZXkYASABKAlSA2tleRIU'
+    'CgV2YWx1ZRgCIAEoCVIFdmFsdWU6AjgBQhkKF19pbnRlcm5hbFZhbEVuYWJsZWREZWFk');

@@ -14,6 +14,7 @@ class OptionsPage extends StatefulWidget {
 class _OptionsPageState extends State<OptionsPage> {
   @override
   Widget build(BuildContext context) {
+    var options = CampaignManager.instance.campaign!.options;
     return Scaffold(
       appBar: AppBar(title: Text("Campaign Options")),
       body: SingleChildScrollView(
@@ -22,46 +23,84 @@ class _OptionsPageState extends State<OptionsPage> {
             constraints: BoxConstraints(maxWidth: 700),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Color Code Life",
-                          style: TextTheme.of(context).titleLarge,
-                        ),
-                        Text(
-                          "Whether the current life should be color coded.",
-                          style: TextTheme.of(context).bodyMedium,
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-                    Switch(
-                      value: !CampaignManager
-                          .instance
-                          .campaign!
-                          .options
-                          .disableColorCodeLife,
-                      onChanged: (value) {
-                        setState(() {
-                          CampaignManager
-                                  .instance
-                                  .campaign!
-                                  .options
-                                  .disableColorCodeLife =
-                              !value;
-                        });
-                      },
-                    ),
-                  ],
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    setState(() {
+                      options.disableColorCodeLife =
+                          !options.disableColorCodeLife;
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Color Code Life",
+                            style: TextTheme.of(context).titleLarge,
+                          ),
+                          Text(
+                            "Whether the current life should be color coded.",
+                            style: TextTheme.of(context).bodyMedium,
+                          ),
+                        ],
+                      ),
+                      Spacer(),
+                      Switch(
+                        value: !options.disableColorCodeLife,
+                        onChanged: (value) {
+                          setState(() {
+                            options.disableColorCodeLife = !value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-                Gap(16.0),
+                Gap(24.0),
                 InitiativePrioritySelector(),
-                Gap(16.0),
+                Gap(24.0),
                 CustomFieldTable(),
+                Gap(24.0),
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    setState(() {
+                      options.disableRemoveFromInitiativeWhenDead =
+                          !options.disableRemoveFromInitiativeWhenDead;
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Remove From Initiative When Dead",
+                            style: TextTheme.of(context).titleLarge,
+                          ),
+                          Text(
+                            "Whether characters that are dead should be removed from the initiative order.",
+                            style: TextTheme.of(context).bodyMedium,
+                          ),
+                        ],
+                      ),
+                      Spacer(),
+                      Switch(
+                        value: !options.disableRemoveFromInitiativeWhenDead,
+                        onChanged: (value) {
+                          setState(() {
+                            options.disableRemoveFromInitiativeWhenDead =
+                                !value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
