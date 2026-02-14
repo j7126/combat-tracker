@@ -1,5 +1,6 @@
 import 'package:combat_tracker/campaign/campaign_manager.dart';
 import 'package:combat_tracker/combat/player_character_selector.dart';
+import 'package:combat_tracker/combat/table/combat_multi_damage_field.dart';
 import 'package:combat_tracker/combat/table/round_tracker.dart';
 import 'package:combat_tracker/datamodel/extension/custom_field_extension.dart';
 import 'package:combat_tracker/datamodel/generated/character.pb.dart';
@@ -26,6 +27,11 @@ class _CombatTableState extends State<CombatTable> {
   bool _enableTargetedDamage = true;
   bool _isShiftDown = false;
   bool _showAddCharacter = true;
+  int _multiDamageMode = 0;
+  String? _multiDamageSource;
+  final Set<String> _multiDamageTargets = {};
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>?
+  _multiDamageSnackbarController;
 
   FocusScopeNode focusScopeNode = FocusScopeNode();
 
@@ -61,6 +67,18 @@ class _CombatTableState extends State<CombatTable> {
         _isShiftDown = true;
       } else if (keyEvent.logicalKey == LogicalKeyboardKey.keyN) {
         nextTurn(goBack: _isShiftDown);
+        return KeyEventResult.handled;
+      } else if (keyEvent.logicalKey == LogicalKeyboardKey.keyM &&
+          _multiDamageMode == 0) {
+        startMultiDamage();
+        return KeyEventResult.handled;
+      } else if (keyEvent.logicalKey == LogicalKeyboardKey.space &&
+          _multiDamageMode == 1) {
+        startMultiDamage();
+        return KeyEventResult.handled;
+      } else if (keyEvent.logicalKey == LogicalKeyboardKey.escape &&
+          _multiDamageMode != 0) {
+        cancelMultiDamage();
         return KeyEventResult.handled;
       }
     } else if (keyEvent is KeyUpEvent) {
@@ -191,8 +209,95 @@ class _CombatTableState extends State<CombatTable> {
     }
   }
 
+  void cancelMultiDamage() {
+    if (!mounted || _multiDamageMode == 0) {
+      return;
+    }
+
+    setState(() {
+      _multiDamageMode = 0;
+      _multiDamageSource = null;
+      _multiDamageTargets.clear();
+      _multiDamageSnackbarController?.close();
+      _multiDamageSnackbarController = null;
+    });
+  }
+
+  void startMultiDamage() {
+    if (_multiDamageMode == 0) {
+      setState(() {
+        _multiDamageMode = 1;
+        _showDelete = false;
+      });
+      if (_enableTargetedDamage) {
+        _multiDamageSnackbarController = ScaffoldMessenger.of(context)
+            .showSnackBar(
+              SnackBar(
+                content: const Text(
+                  'Select Damage Source, or [space] for no source.',
+                ),
+                action: SnackBarAction(
+                  label: 'Cancel',
+                  onPressed: cancelMultiDamage,
+                ),
+              ),
+            );
+      } else {
+        startMultiDamage();
+      }
+    } else if (_multiDamageMode == 1) {
+      setState(() {
+        _multiDamageMode = 2;
+      });
+      _multiDamageSnackbarController?.close();
+      _multiDamageSnackbarController = ScaffoldMessenger.of(context)
+          .showSnackBar(
+            SnackBar(
+              content: const Text('Select damage targets'),
+              action: SnackBarAction(
+                label: 'Cancel',
+                onPressed: cancelMultiDamage,
+              ),
+            ),
+          );
+    }
+  }
+
+  void multiDamageCharacterClick(Character character) {
+    if (_multiDamageMode == 1) {
+      _multiDamageSource = character.id;
+      startMultiDamage();
+    } else if (_multiDamageMode == 2) {
+      setState(() {
+        if (_multiDamageTargets.contains(character.id)) {
+          _multiDamageTargets.remove(character.id);
+        } else {
+          _multiDamageTargets.add(character.id);
+        }
+      });
+    }
+  }
+
+  void submitMultiDamage(int val) {
+    setState(() {
+      for (var target in _multiDamageTargets) {
+        var targetCharacter = widget.combat.characters.firstWhere(
+          (x) => x.id == target,
+        );
+        targetCharacter.setLifeWithTrackedDamage(
+          targetCharacter.life + val,
+          _multiDamageSource ?? "",
+        );
+      }
+    });
+    cancelMultiDamage();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var disableNextTurn =
+        widget.combat.characters.isEmpty || _multiDamageMode != 0;
+
     return FocusScope(
       autofocus: true,
       onKeyEvent: _keyboardCallback,
@@ -205,13 +310,12 @@ class _CombatTableState extends State<CombatTable> {
               children: [
                 Gap(16.0),
                 Tooltip(
-                  message: "Next Turn (n)",
+                  message: "Next Turn [n]",
                   child: OutlinedButton(
-                    onPressed: widget.combat.characters.isNotEmpty
-                        ? nextTurn
-                        : null,
-                    style: widget.combat.characters.isNotEmpty
-                        ? ButtonStyle(
+                    onPressed: disableNextTurn ? null : nextTurn,
+                    style: disableNextTurn
+                        ? null
+                        : ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll(
                               ColorScheme.of(context).primary,
                             ),
@@ -221,26 +325,67 @@ class _CombatTableState extends State<CombatTable> {
                             overlayColor: WidgetStatePropertyAll(
                               ColorScheme.of(context).onPrimary.withAlpha(20),
                             ),
-                          )
-                        : null,
+                          ),
                     child: Icon(Icons.arrow_forward),
                   ),
                 ),
+                Gap(16.0),
+                _multiDamageMode != 0
+                    ? Tooltip(
+                        message: "Cancel Multi Damage [esc]",
+                        child: FilledButton(
+                          onPressed: cancelMultiDamage,
+                          style: ButtonStyle(
+                            backgroundColor: WidgetStatePropertyAll(
+                              Colors.redAccent,
+                            ),
+                            overlayColor: WidgetStatePropertyAll(
+                              Colors.blue.withAlpha(20),
+                            ),
+                            foregroundColor: WidgetStatePropertyAll(
+                              Colors.white,
+                            ),
+                          ),
+                          child: Icon(Icons.close),
+                        ),
+                      )
+                    : Tooltip(
+                        message: "Multi Damage [m]",
+                        child: FilledButton(
+                          onPressed: startMultiDamage,
+                          style: ButtonStyle(
+                            backgroundColor: WidgetStatePropertyAll(
+                              Colors.redAccent,
+                            ),
+                            overlayColor: WidgetStatePropertyAll(
+                              Colors.blue.withAlpha(20),
+                            ),
+                            foregroundColor: WidgetStatePropertyAll(
+                              Colors.white,
+                            ),
+                          ),
+                          child: Icon(Icons.workspaces),
+                        ),
+                      ),
                 Gap(16.0),
                 Tooltip(
                   message: "Enable Sorting",
                   child: Switch(
                     value: _enableSort,
-                    onChanged: (val) {
-                      setState(() {
-                        _enableSort = val;
-                        changed();
-                      });
-                    },
+                    onChanged: _multiDamageMode != 0
+                        ? null
+                        : (val) {
+                            setState(() {
+                              _enableSort = val;
+                              changed();
+                            });
+                          },
                     thumbIcon: WidgetStatePropertyAll(
                       Icon(
                         Icons.arrow_downward,
-                        color: ColorScheme.of(context).onTertiary,
+                        color: _multiDamageMode != 0
+                            ? null
+                            : ColorScheme.of(context).onTertiary,
                       ),
                     ),
                     activeThumbColor: ColorScheme.of(context).tertiary,
@@ -251,40 +396,56 @@ class _CombatTableState extends State<CombatTable> {
                   message: "Track Damage Source",
                   child: Switch(
                     value: _enableTargetedDamage,
-                    onChanged: (val) {
-                      setState(() {
-                        _enableTargetedDamage = val;
-                        if (_enableTargetedDamage) {
-                          widget.combat.activePlayer =
-                              widget.combat.currentTurn;
-                        } else {
-                          widget.combat.activePlayer = "";
-                        }
-                        CampaignManager.instance.saveCampaign();
-                      });
-                    },
+                    onChanged: _multiDamageMode != 0
+                        ? null
+                        : (val) {
+                            setState(() {
+                              _enableTargetedDamage = val;
+                              if (_enableTargetedDamage) {
+                                widget.combat.activePlayer =
+                                    widget.combat.currentTurn;
+                              } else {
+                                widget.combat.activePlayer = "";
+                              }
+                              CampaignManager.instance.saveCampaign();
+                            });
+                          },
                     thumbIcon: WidgetStatePropertyAll(
                       Icon(
                         Icons.track_changes,
-                        color: ColorScheme.of(context).onError,
+                        color: _multiDamageMode != 0
+                            ? null
+                            : ColorScheme.of(context).onError,
                       ),
                     ),
                     activeThumbColor: ColorScheme.of(context).error,
                   ),
                 ),
                 RoundTracker(combat: widget.combat),
+                if (_multiDamageMode == 2)
+                  CombatMultiDamageField(
+                    submit: _multiDamageTargets.isEmpty
+                        ? null
+                        : submitMultiDamage,
+                  ),
                 Spacer(),
                 Tooltip(
                   message: "Select Players",
                   child: FilledButton(
-                    onPressed: selectPlayers,
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(Colors.blue),
-                      overlayColor: WidgetStatePropertyAll(
-                        Colors.blue.withAlpha(20),
-                      ),
-                      foregroundColor: WidgetStatePropertyAll(Colors.white),
-                    ),
+                    onPressed: _multiDamageMode != 0 ? null : selectPlayers,
+                    style: _multiDamageMode != 0
+                        ? null
+                        : ButtonStyle(
+                            backgroundColor: WidgetStatePropertyAll(
+                              Colors.blue,
+                            ),
+                            overlayColor: WidgetStatePropertyAll(
+                              Colors.blue.withAlpha(20),
+                            ),
+                            foregroundColor: WidgetStatePropertyAll(
+                              Colors.white,
+                            ),
+                          ),
                     child: Icon(Icons.person),
                   ),
                 ),
@@ -292,7 +453,7 @@ class _CombatTableState extends State<CombatTable> {
                 Tooltip(
                   message: "Add NPC / Enemy",
                   child: FilledButton(
-                    onPressed: addCharacter,
+                    onPressed: _multiDamageMode != 0 ? null : addCharacter,
                     child: Icon(Icons.add),
                   ),
                 ),
@@ -300,24 +461,30 @@ class _CombatTableState extends State<CombatTable> {
                 Tooltip(
                   message: _showDelete ? "Done" : "Delete",
                   child: OutlinedButton(
-                    onPressed: () {
-                      setState(() {
-                        _showDelete = !_showDelete;
-                      });
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(
-                        _showDelete ? ColorScheme.of(context).error : null,
-                      ),
-                      overlayColor: WidgetStatePropertyAll(
-                        ColorScheme.of(context).error.withAlpha(20),
-                      ),
-                      foregroundColor: WidgetStatePropertyAll(
-                        _showDelete
-                            ? ColorScheme.of(context).onError
-                            : ColorScheme.of(context).error,
-                      ),
-                    ),
+                    onPressed: _multiDamageMode != 0
+                        ? null
+                        : () {
+                            setState(() {
+                              _showDelete = !_showDelete;
+                            });
+                          },
+                    style: _multiDamageMode != 0
+                        ? null
+                        : ButtonStyle(
+                            backgroundColor: WidgetStatePropertyAll(
+                              _showDelete
+                                  ? ColorScheme.of(context).error
+                                  : null,
+                            ),
+                            overlayColor: WidgetStatePropertyAll(
+                              ColorScheme.of(context).error.withAlpha(20),
+                            ),
+                            foregroundColor: WidgetStatePropertyAll(
+                              _showDelete
+                                  ? ColorScheme.of(context).onError
+                                  : ColorScheme.of(context).error,
+                            ),
+                          ),
                     child: Icon(_showDelete ? Icons.check : Icons.delete),
                   ),
                 ),
@@ -389,17 +556,25 @@ class _CombatTableState extends State<CombatTable> {
                             height: 48,
                             child: IconButton(
                               onPressed: () {
+                                if (_multiDamageMode != 0) {
+                                  return;
+                                }
                                 setState(() {
                                   widget.combat.currentTurn = character.id;
                                   widget.combat.activePlayer = character.id;
                                 });
                               },
-                              icon: character.id == widget.combat.currentTurn
+                              icon:
+                                  character.id == widget.combat.currentTurn ||
+                                      _multiDamageSource == character.id
                                   ? Icon(
-                                      Icons.arrow_forward,
+                                      _multiDamageSource == character.id
+                                          ? Icons.workspaces_outline
+                                          : Icons.arrow_forward,
                                       color:
                                           character.id ==
-                                              widget.combat.activePlayer
+                                                  widget.combat.activePlayer ||
+                                              _multiDamageSource == character.id
                                           ? Colors.red
                                           : Colors.lightGreen,
                                     )
@@ -435,6 +610,19 @@ class _CombatTableState extends State<CombatTable> {
                                 });
                               },
                               changed: changed,
+                              onClick: _multiDamageMode != 0
+                                  ? () => multiDamageCharacterClick(character)
+                                  : null,
+                              selected:
+                                  _multiDamageMode == 2 &&
+                                  _multiDamageTargets.contains(character.id),
+                              hoverColor: switch (_multiDamageMode) {
+                                1 => ColorScheme.of(
+                                  context,
+                                ).primaryContainer.withAlpha(120),
+                                2 => Colors.yellow.withAlpha(120),
+                                _ => null,
+                              },
                             ),
                         ],
                       ),

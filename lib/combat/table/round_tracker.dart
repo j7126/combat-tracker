@@ -67,7 +67,7 @@ class _RoundTrackerState extends State<RoundTracker> {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: GestureDetector(
         onTap: () {
           node.requestFocus();
