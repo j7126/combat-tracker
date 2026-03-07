@@ -152,57 +152,63 @@ class _DamageRecievedStatsState extends State<DamageRecievedStats> {
                         ],
                       ),
                     ),
-                  for (var entry in damageTotals.entries.sortedBy(
-                    (x) => x.value,
-                  ))
-                    () {
-                      var sourceCharacter = widget.combat.characters.firstWhere(
-                        (x) => x.id == entry.key,
-                      );
-                      return SizedBox(
-                        width: double.infinity,
-                        height: 64.0,
-                        child: Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  entry.value.toString(),
-                                  style: const TextStyle(fontSize: 22),
-                                ),
-                                Text(
-                                  " total damage by",
-                                  style: const TextStyle(fontSize: 18),
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    sourceCharacter.type.getIcon(),
-                                    Text(
-                                      sourceCharacter.name,
-                                      style: const TextStyle(fontSize: 20),
-                                    ),
-                                    if (sourceCharacter.id ==
-                                        widget.character.id)
-                                      Text(
-                                        " (self)",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          color: TextTheme.of(
-                                            context,
-                                          ).bodyMedium?.color?.withAlpha(80),
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                              ],
+                  for (var (entry, sourceCharacter)
+                      in damageTotals.entries
+                          .map(
+                            (entry) => (
+                              entry,
+                              widget.combat.characters.firstWhereOrNull(
+                                (x) => x.id == entry.key,
+                              ),
                             ),
+                          )
+                          .sortedBy((x) => x.$1.value))
+                    SizedBox(
+                      width: double.infinity,
+                      height: 64.0,
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                entry.value.toString(),
+                                style: const TextStyle(fontSize: 22),
+                              ),
+                              Text(
+                                " total damage by",
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  if (sourceCharacter != null)
+                                    sourceCharacter.type.getIcon(),
+                                  Text(
+                                    sourceCharacter != null
+                                        ? sourceCharacter.name
+                                        : " Unknown",
+                                    style: const TextStyle(fontSize: 20),
+                                  ),
+                                  if (sourceCharacter?.id ==
+                                      widget.character.id)
+                                    Text(
+                                      " (self)",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: TextTheme.of(
+                                          context,
+                                        ).bodyMedium?.color?.withAlpha(80),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      );
-                    }(),
+                      ),
+                    ),
                 ],
               ),
             ),
