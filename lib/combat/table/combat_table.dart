@@ -23,7 +23,7 @@ class CombatTable extends StatefulWidget {
 }
 
 class _CombatTableState extends State<CombatTable> {
-  bool _showDelete = false;
+  bool _editMode = false;
   bool _enableSort = true;
   bool _enableTargetedDamage = true;
   bool _isShiftDown = false;
@@ -249,7 +249,7 @@ class _CombatTableState extends State<CombatTable> {
     if (_multiDamageMode == 0) {
       setState(() {
         _multiDamageMode = 1;
-        _showDelete = false;
+        _editMode = false;
       });
       if (_enableTargetedDamage) {
         _multiDamageSnackbarController = ScaffoldMessenger.of(context)
@@ -329,11 +329,17 @@ class _CombatTableState extends State<CombatTable> {
       key: ValueKey(character.id),
       combat: widget.combat,
       character: character,
-      showDelete: _showDelete,
+      editMode: _editMode,
       onDelete: () {
         setState(() {
           widget.combat.deleteCharacter(character);
           CampaignManager.instance.saveCampaign();
+        });
+      },
+      onDuplicate: () {
+        setState(() {
+          widget.combat.duplicateCharacter(character);
+          changed();
         });
       },
       changed: changed,
@@ -510,33 +516,30 @@ class _CombatTableState extends State<CombatTable> {
                 ),
                 Gap(16.0),
                 Tooltip(
-                  message: _showDelete ? "Done" : "Delete",
+                  message: _editMode ? "Done" : "Edit Mode",
                   child: OutlinedButton(
                     onPressed: _multiDamageMode != 0
                         ? null
                         : () {
                             setState(() {
-                              _showDelete = !_showDelete;
+                              _editMode = !_editMode;
                             });
                           },
                     style: _multiDamageMode != 0
                         ? null
                         : ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll(
-                              _showDelete
-                                  ? ColorScheme.of(context).error
+                              _editMode
+                                  ? ColorScheme.of(context).primary
                                   : null,
                             ),
-                            overlayColor: WidgetStatePropertyAll(
-                              ColorScheme.of(context).error.withAlpha(20),
-                            ),
                             foregroundColor: WidgetStatePropertyAll(
-                              _showDelete
-                                  ? ColorScheme.of(context).onError
-                                  : ColorScheme.of(context).error,
+                              _editMode
+                                  ? ColorScheme.of(context).onPrimary
+                                  : ColorScheme.of(context).primary,
                             ),
                           ),
-                    child: Icon(_showDelete ? Icons.check : Icons.delete),
+                    child: Icon(_editMode ? Icons.check : Icons.edit),
                   ),
                 ),
                 Gap(16.0),
@@ -576,11 +579,11 @@ class _CombatTableState extends State<CombatTable> {
                   ),
                   VerticalDivider(),
                   SizedBox(width: 80),
-                  if (_showDelete) VerticalDivider(),
+                  if (_editMode) VerticalDivider(),
                   AnimatedSize(
                     duration: Duration(milliseconds: 120),
                     child: SizedBox(
-                      width: _showDelete ? 40 : 0,
+                      width: _editMode ? 80 : 0,
                       child: Text("", textAlign: TextAlign.center),
                     ),
                   ),

@@ -18,8 +18,9 @@ class CombatRow extends StatefulWidget {
     super.key,
     required this.combat,
     required this.character,
-    this.showDelete = false,
+    this.editMode = false,
     this.onDelete,
+    this.onDuplicate,
     this.changed,
     this.onClick,
     this.selected = false,
@@ -28,8 +29,9 @@ class CombatRow extends StatefulWidget {
 
   final Combat combat;
   final Character character;
-  final bool showDelete;
+  final bool editMode;
   final Function()? onDelete;
+  final Function()? onDuplicate;
   final Function()? changed;
   final Function()? onClick;
   final bool selected;
@@ -45,9 +47,7 @@ class _CombatRowState extends State<CombatRow> {
   @override
   Widget build(BuildContext context) {
     var row = Opacity(
-      opacity: widget.character.isDead && widget.character.enableDead
-          ? 0.5
-          : 1,
+      opacity: widget.character.isDead && widget.character.enableDead ? 0.5 : 1,
       child: Container(
         decoration: BoxDecoration(
           color: _hovering
@@ -145,17 +145,28 @@ class _CombatRowState extends State<CombatRow> {
               },
               icon: Icon(Icons.settings),
             ),
-            if (widget.showDelete) VerticalDivider(),
+            if (widget.editMode) VerticalDivider(),
             AnimatedSize(
               duration: Duration(milliseconds: 120),
               child: SizedBox(
-                width: widget.showDelete ? 40 : 0,
+                width: widget.editMode ? 80 : 0,
                 child: Opacity(
-                  opacity: widget.showDelete ? 1 : 0,
-                  child: IconButton(
-                    onPressed: widget.onDelete,
-                    icon: Icon(Icons.delete_outline),
-                    color: ColorScheme.of(context).error,
+                  opacity: widget.editMode ? 1 : 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      if (widget.character.type != CharacterType.Player)
+                        IconButton(
+                          onPressed: widget.onDuplicate,
+                          icon: Icon(Icons.copy_outlined),
+                          color: ColorScheme.of(context).primary,
+                        ),
+                      IconButton(
+                        onPressed: widget.onDelete,
+                        icon: Icon(Icons.delete_outline),
+                        color: ColorScheme.of(context).error,
+                      ),
+                    ],
                   ),
                 ),
               ),
