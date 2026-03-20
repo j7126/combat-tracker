@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=Combat Tracker
+Comment=A simple combat tracker app for ttrpg games
+Categories=Games;
+
+Icon=dev.j7126.initiative.combat_tracker
+Exec=combat_tracker
+Terminal=false
+SingleMainWindow=true
+StartupWMClass=combat_tracker

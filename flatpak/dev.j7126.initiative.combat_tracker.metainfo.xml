@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>dev.j7126.initiative.combat_tracker</id>
+
+    <name>Combat Tracker</name>
+    <summary>A simple combat tracker app for ttrpg games</summary>
+    <url type="homepage">https://github.com/j7126/combat-tracker</url>
+    <url type="bugtracker">https://github.com/j7126/combat-tracker/issues</url>
+
+    <metadata_license>MIT</metadata_license>
+    <project_license>AGPL-3.0-or-later</project_license>
+
+    <supports>
+        <control>pointing</control>
+        <control>keyboard</control>
+        <control>touch</control>
+    </supports>
+
+    <description>
+        <p>
+            A combat track with a few useful features
+        </p>
+        <ul>
+            <li>Sort by initiative</li>
+            <li>Track turn and round number</li>
+            <li>Track damage - including who dealt how much damage to each enemy</li>
+            <li>Custom columns</li>
+        </ul>
+    </description>
+
+    <launchable type="desktop-id">dev.j7126.initiative.combat_tracker.desktop</launchable>
+</component>
