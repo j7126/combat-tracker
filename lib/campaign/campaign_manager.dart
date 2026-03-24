@@ -10,6 +10,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:macos_secure_bookmarks/macos_secure_bookmarks.dart';
 import 'package:path/path.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:xxh3/xxh3.dart';
 
 class CampaignManager {
@@ -55,13 +56,37 @@ class CampaignManager {
   }
 
   Future<CampaignFile?> createCampaign() async {
-    closeCampaign();
+    await closeCampaign();
 
-    String? filePath = await FilePicker.platform.saveFile(
-      dialogTitle: 'Create New Campaign',
-      type: FileType.custom,
-      allowedExtensions: [campaignFileExtension],
-    );
+    String? filePath;
+    if (Platform.isLinux) {
+      try {
+        var client = XdgDesktopPortalClient();
+        var result = await client.fileChooser
+            .saveFile(
+              title: 'Create New Campaign',
+              filters: [
+                XdgFileChooserFilter('Combat Tracker Campaign File', [
+                  XdgFileChooserGlobPattern('*.$campaignFileExtension'),
+                ]),
+              ],
+            )
+            .first;
+        filePath = result.uris.firstOrNull;
+        if (filePath != null) {
+          filePath = Uri.parse(filePath).toFilePath();
+        }
+        await client.close();
+      } on XdgPortalRequestCancelledException {
+        filePath = null;
+      }
+    } else {
+      filePath = await FilePicker.platform.saveFile(
+        dialogTitle: 'Create New Campaign',
+        type: FileType.custom,
+        allowedExtensions: [campaignFileExtension],
+      );
+    }
 
     if (filePath == null) {
       return null;
@@ -90,16 +115,41 @@ class CampaignManager {
   }
 
   Future<CampaignFile?> openCampaign({CampaignFile? campaignFile}) async {
-    closeCampaign();
+    await closeCampaign();
 
     if (campaignFile == null) {
-      var result = await FilePicker.platform.pickFiles(
-        allowMultiple: false,
-        type: FileType.custom,
-        allowedExtensions: [campaignFileExtension],
-      );
-      if (result != null && result.files.length == 1) {
-        campaignFile = CampaignFile(path: result.files.single.path);
+      if (Platform.isLinux) {
+        try {
+          var client = XdgDesktopPortalClient();
+          var result = await client.fileChooser
+              .openFile(
+                title: "Open Campaign",
+                filters: [
+                  XdgFileChooserFilter('Combat Tracker Campaign File', [
+                    XdgFileChooserGlobPattern('*.$campaignFileExtension'),
+                  ]),
+                ],
+              )
+              .first;
+          var filePath = result.uris.firstOrNull;
+          if (filePath != null) {
+            filePath = Uri.parse(filePath).toFilePath();
+            campaignFile = CampaignFile(path: filePath);
+          }
+          await client.close();
+        } on XdgPortalRequestCancelledException {
+          campaignFile = null;
+        }
+      } else {
+        var result = await FilePicker.platform.pickFiles(
+          dialogTitle: "Open Campaign",
+          allowMultiple: false,
+          type: FileType.custom,
+          allowedExtensions: [campaignFileExtension],
+        );
+        if (result != null && result.files.length == 1) {
+          campaignFile = CampaignFile(path: result.files.single.path);
+        }
       }
     }
     if (campaignFile != null) {
