@@ -6,13 +6,14 @@
     <summary>A simple combat tracker app for ttrpg games</summary>
     <url type="homepage">https://github.com/j7126/combat-tracker</url>
     <url type="bugtracker">https://github.com/j7126/combat-tracker/issues</url>
+    <url type="vcs-browser">https://github.com/j7126/combat-tracker</url>
 
     <metadata_license>MIT</metadata_license>
     <project_license>AGPL-3.0-or-later</project_license>
 
-    <categories>
-        <category>Game</category>
-    </categories>
+    <developer id="dev.j7126">
+        <name>Jefferey Neuffer</name>
+    </developer>
 
     <supports>
         <control>pointing</control>
@@ -22,7 +23,7 @@
 
     <description>
         <p>
-            A combat track with a few useful features
+            A simple combat tracker app for ttrpg games, with a few useful features
         </p>
         <ul>
             <li>Sort by initiative</li>
@@ -31,6 +32,44 @@
             <li>Custom columns</li>
         </ul>
     </description>
+
+    <branding>
+        <color type="primary" scheme_preference="light">#4c9643</color>
+        <color type="primary" scheme_preference="dark">#35682f</color>
+    </branding>
+
+    <content_rating type="oars-1.1" />
+
+    <screenshots>
+        <screenshot type="default">
+            <image>
+                https://raw.githubusercontent.com/j7126/combat-tracker/f3a1839e7a6188093615942e7ca59a22608181cc/screenshots/Combat_screen.png</image>
+            <caption>Combat Screen</caption>
+        </screenshot>
+        <screenshot>
+            <image>
+                https://raw.githubusercontent.com/j7126/combat-tracker/f3a1839e7a6188093615942e7ca59a22608181cc/screenshots/Campaign_screen.png</image>
+            <caption>Manage Campaign</caption>
+        </screenshot>
+        <screenshot>
+            <image>
+                https://raw.githubusercontent.com/j7126/combat-tracker/f3a1839e7a6188093615942e7ca59a22608181cc/screenshots/Edit_Character_screen.png</image>
+            <caption>Edit Character</caption>
+        </screenshot>
+    </screenshots>
+
+    <releases>
+        <release version="0.8.5" date="2026-03-24">
+            <url type="details">https://github.com/j7126/combat-tracker/releases/tag/v0.8.5</url>
+            <description>
+                <p>v0.8.5</p>
+                <ul>
+                    <li>The first release containing metadata for flathub</li>
+                    <li>Added screenshots to readme</li>
+                </ul>
+            </description>
+        </release>
+    </releases>
 
     <launchable type="desktop-id">dev.j7126.combat_tracker.desktop</launchable>
 </component>
