@@ -6,7 +6,7 @@ Name=Combat Tracker
 Comment=A simple combat tracker app for ttrpg games
 Categories=Games;
 
-Icon=dev.j7126.initiative.combat_tracker
+Icon=dev.j7126.combat_tracker
 Exec=combat_tracker
 Terminal=false
 SingleMainWindow=true

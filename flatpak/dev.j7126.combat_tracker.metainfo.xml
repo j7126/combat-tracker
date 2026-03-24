@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-    <id>dev.j7126.initiative.combat_tracker</id>
+    <id>dev.j7126.combat_tracker</id>
 
     <name>Combat Tracker</name>
     <summary>A simple combat tracker app for ttrpg games</summary>
@@ -32,5 +32,5 @@
         </ul>
     </description>
 
-    <launchable type="desktop-id">dev.j7126.initiative.combat_tracker.desktop</launchable>
+    <launchable type="desktop-id">dev.j7126.combat_tracker.desktop</launchable>
 </component>
