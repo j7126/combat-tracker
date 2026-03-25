@@ -63,6 +63,15 @@
     </screenshots>
 
     <releases>
+        <release version="0.8.7" date="2026-03-25">
+            <url type="details">https://github.com/j7126/combat-tracker/releases/tag/v0.8.7</url>
+            <description>
+                <p>0.8.7</p>
+                <ul>
+                    <li>A few more fixes for flatpak packaging.</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.8.6" date="2026-03-25">
             <url type="details">https://github.com/j7126/combat-tracker/releases/tag/v0.8.6</url>
             <description>
