@@ -7,6 +7,7 @@ import 'package:combat_tracker/datamodel/generated/campaign_file.pb.dart';
 import 'package:combat_tracker/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_xattr/flutter_xattr.dart';
 import 'package:gap/gap.dart';
 import 'package:macos_secure_bookmarks/macos_secure_bookmarks.dart';
 import 'package:path/path.dart';
@@ -41,6 +42,15 @@ class _StartupPageState extends State<StartupPage> {
           continue;
         }
         await SecureBookmarks().startAccessingSecurityScopedResource(file);
+      } else if (Platform.isLinux) {
+        var hostPath = Xattr.getFileAttribute(
+          recentFile.path,
+          "user.document-portal.host-path",
+        );
+        if (hostPath.isNotEmpty) {
+          recentFile.displayPath = hostPath;
+        }
+        file = File(recentFile.path);
       } else {
         file = File(recentFile.path);
       }
@@ -196,7 +206,10 @@ class _StartupPageState extends State<StartupPage> {
                                           ).titleLarge,
                                         ),
                                         Text(
-                                          file.path,
+                                          file.hasDisplayPath() &&
+                                                  file.displayPath.isNotEmpty
+                                              ? file.displayPath
+                                              : file.path,
                                           style: TextTheme.of(context).bodySmall
                                               ?.copyWith(
                                                 color: ColorScheme.of(

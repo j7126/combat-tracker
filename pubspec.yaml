@@ -29,6 +29,8 @@ dependencies:
   window_manager: ^0.5.1
   xdg_desktop_portal: ^0.1.13
   xxh3: ^1.2.0
+  flutter_xattr:
+    git: https://github.com/j7126/flutter_xattr
 
 dev_dependencies:
   flutter_test:

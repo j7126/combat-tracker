@@ -21,10 +21,23 @@ const CampaignFile$json = {
   '2': [
     {'1': 'path', '3': 1, '4': 1, '5': 9, '10': 'path'},
     {'1': 'macosBookmark', '3': 2, '4': 1, '5': 9, '10': 'macosBookmark'},
+    {
+      '1': 'displayPath',
+      '3': 3,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'displayPath',
+      '17': true
+    },
+  ],
+  '8': [
+    {'1': '_displayPath'},
   ],
 };
 
 /// Descriptor for `CampaignFile`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List campaignFileDescriptor = $convert.base64Decode(
     'CgxDYW1wYWlnbkZpbGUSEgoEcGF0aBgBIAEoCVIEcGF0aBIkCg1tYWNvc0Jvb2ttYXJrGAIgAS'
-    'gJUg1tYWNvc0Jvb2ttYXJr');
+    'gJUg1tYWNvc0Jvb2ttYXJrEiUKC2Rpc3BsYXlQYXRoGAMgASgJSABSC2Rpc3BsYXlQYXRoiAEB'
+    'Qg4KDF9kaXNwbGF5UGF0aA==');
