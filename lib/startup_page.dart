@@ -185,7 +185,10 @@ class _StartupPageState extends State<StartupPage> {
         child: Column(
           children: [
             recentFiles == null
-                ? Center(child: CircularProgressIndicator())
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: Center(child: CircularProgressIndicator()),
+                  )
                 : recentFiles!.isEmpty
                 ? Center(child: Text("You don't have any recent campaigns"))
                 : Expanded(
