@@ -32,7 +32,7 @@ dependencies:
   flutter_xattr:
     git:
       url: https://github.com/j7126/flutter_xattr
-      ref: aaf636ab7d873213b286aabc24d63b70f591f043
+      ref: 17900bbe502ad6e4370ffc69089c8606c33c8fde
 
 dev_dependencies:
   flutter_test:

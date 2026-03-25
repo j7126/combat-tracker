@@ -220,8 +220,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: aaf636ab7d873213b286aabc24d63b70f591f043
-      resolved-ref: aaf636ab7d873213b286aabc24d63b70f591f043
+      ref: "17900bbe502ad6e4370ffc69089c8606c33c8fde"
+      resolved-ref: "17900bbe502ad6e4370ffc69089c8606c33c8fde"
       url: "https://github.com/j7126/flutter_xattr"
     source: git
     version: "0.0.1"
