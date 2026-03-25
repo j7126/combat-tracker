@@ -30,7 +30,9 @@ dependencies:
   xdg_desktop_portal: ^0.1.13
   xxh3: ^1.2.0
   flutter_xattr:
-    git: https://github.com/j7126/flutter_xattr
+    git:
+      url: https://github.com/j7126/flutter_xattr
+      ref: aaf636ab7d873213b286aabc24d63b70f591f043
 
 dev_dependencies:
   flutter_test:
