@@ -43,10 +43,15 @@ class _StartupPageState extends State<StartupPage> {
         }
         await SecureBookmarks().startAccessingSecurityScopedResource(file);
       } else if (Platform.isLinux) {
-        var hostPath = Xattr.getFileAttribute(
-          recentFile.path,
-          "user.document-portal.host-path",
-        );
+        String hostPath;
+        try {
+          hostPath = Xattr.getFileAttribute(
+            recentFile.path,
+            "user.document-portal.host-path",
+          );
+        } catch (_) {
+          hostPath = "";
+        }
         if (hostPath.isNotEmpty) {
           recentFile.displayPath = hostPath;
         }

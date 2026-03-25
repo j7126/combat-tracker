@@ -169,10 +169,15 @@ class CampaignManager {
           campaignFile.macosBookmark = await SecureBookmarks().bookmark(file);
         }
       } else if (Platform.isLinux) {
-        var hostPath = Xattr.getFileAttribute(
-          campaignFile.path,
-          "user.document-portal.host-path",
-        );
+        String hostPath;
+        try {
+          hostPath = Xattr.getFileAttribute(
+            campaignFile.path,
+            "user.document-portal.host-path",
+          );
+        } catch (_) {
+          hostPath = "";
+        }
         if (hostPath.isNotEmpty) {
           campaignFile.displayPath = hostPath;
         }
