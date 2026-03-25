@@ -16,7 +16,7 @@
     </developer>
 
     <categories>
-        <category>Games</category>
+        <category>Game</category>
     </categories>
 
     <supports>
@@ -66,7 +66,7 @@
         <release version="0.8.6" date="2026-03-25">
             <url type="details">https://github.com/j7126/combat-tracker/releases/tag/v0.8.6</url>
             <description>
-                <p>v0.8.6</p>
+                <p>0.8.6</p>
                 <ul>
                     <li>A few fixes for flatpak packaging.</li>
                 </ul>
@@ -75,7 +75,7 @@
         <release version="0.8.5" date="2026-03-24">
             <url type="details">https://github.com/j7126/combat-tracker/releases/tag/v0.8.5</url>
             <description>
-                <p>v0.8.5</p>
+                <p>0.8.5</p>
                 <ul>
                     <li>The first release containing metadata for flathub</li>
                     <li>Added screenshots to readme</li>
