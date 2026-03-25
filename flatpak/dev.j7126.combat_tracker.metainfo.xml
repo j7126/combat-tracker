@@ -15,6 +15,10 @@
         <name>Jefferey Neuffer</name>
     </developer>
 
+    <categories>
+        <category>Games</category>
+    </categories>
+
     <supports>
         <control>pointing</control>
         <control>keyboard</control>
