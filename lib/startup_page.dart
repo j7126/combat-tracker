@@ -29,6 +29,9 @@ class _StartupPageState extends State<StartupPage> {
   }
 
   void _checkCampaignFiles() async {
+    await Future.delayed(
+      Duration(milliseconds: 500),
+    ); // prevent a race condition
     List<CampaignFile> files = [];
     for (var data in SettingsService.instance.conf_recentFiles) {
       var recentFile = CampaignFile.fromJson(data);
@@ -182,7 +185,7 @@ class _StartupPageState extends State<StartupPage> {
         child: Column(
           children: [
             recentFiles == null
-                ? CircularProgressIndicator()
+                ? Center(child: CircularProgressIndicator())
                 : recentFiles!.isEmpty
                 ? Center(child: Text("You don't have any recent campaigns"))
                 : Expanded(
