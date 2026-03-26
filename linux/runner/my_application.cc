@@ -7,6 +7,8 @@
 
 #include "flutter/generated_plugin_registrant.h"
 
+#include <libgen.h>
+
 struct _MyApplication {
   GtkApplication parent_instance;
   char** dart_entrypoint_arguments;
@@ -32,6 +34,19 @@ static void my_application_activate(GApplication* application) {
   g_autoptr(FlDartProject) project = fl_dart_project_new();
   fl_dart_project_set_dart_entrypoint_arguments(
       project, self->dart_entrypoint_arguments);
+
+  // set the assets path
+  char exe_path[PATH_MAX];
+  ssize_t exePathLen = readlink("/proc/self/exe", exe_path, sizeof(exe_path) - 1);
+  if (exePathLen) {
+    exe_path[exePathLen] = '\0';
+    char* exe_dir = dirname(exe_path);
+
+    // set the path to libapp.so
+    char aot_path[PATH_MAX];
+    snprintf(aot_path, sizeof(aot_path), "%s/../../lib/%s/libapp.so", exe_dir, APPLICATION_ID);
+    fl_dart_project_set_aot_library_path(project, aot_path);
+  }
 
   FlView* view = fl_view_new(project);
   GdkRGBA background_color;
