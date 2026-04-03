@@ -43,6 +43,9 @@ class _CombatInitiativeFieldState extends State<CombatInitiativeField> {
 
     textValue = controller.text;
     var doubleValue = double.tryParse(textValue);
+    if (doubleValue == null && textValue.isEmpty) {
+      doubleValue = 0;
+    }
     if (doubleValue != null) {
       if (textValue.startsWith(RegExp(r'[\-+]'))) {
         widget.character.initiativeDouble += doubleValue;
